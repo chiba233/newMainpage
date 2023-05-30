@@ -1,8 +1,7 @@
 <template>
   <div class="background">
     <div class="content">
-      <Title></Title>
-      <Details></Details>
+      <I18n></I18n>
     </div>
   </div>
 </template>
@@ -10,7 +9,7 @@
 <script setup lang="ts">
 import Title from "@/components/title.vue";
 import Details from "@/components/detail.vue";
-
+import I18n from "@/components/i18n.vue";
 </script>
 
 <style lang="scss">
