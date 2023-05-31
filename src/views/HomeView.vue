@@ -32,6 +32,9 @@ import MyFriends from "@/components/myFriends.vue";
   z-index: -1;
   position: absolute;
   background-image: url("../img/background.jpg");
+  @media (max-width: 420px) {
+    height: 135%;
+  }
 }
 
 .content {

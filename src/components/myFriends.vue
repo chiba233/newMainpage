@@ -59,6 +59,7 @@ function openURL(url: string) {
   display: flex;
   background-color: rgba(225, 225, 225, 0.2);
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   transition: all 3s;
   flex-direction: column;
   align-items: center;
@@ -76,9 +77,6 @@ function openURL(url: string) {
     height: 10em;
     padding: 1em 0.5em 1em 0.5em;
     margin-bottom: 1em;
-  }
-  @media (max-height: 830px) {
-    margin-bottom: 4em;
   }
 
   .friendName {
