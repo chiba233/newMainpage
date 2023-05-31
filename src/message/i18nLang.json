@@ -1,8 +1,10 @@
-{
-  "label": [
-    ""
-  ],
-  "value": [
-    ""
-  ]
-}
+[
+  {
+    "label": "中文",
+    "value":"zh"
+  },
+  {
+    "label": "English",
+    "value": "en"
+  }
+]

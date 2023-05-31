@@ -1,7 +1,10 @@
 <template>
   <div class="background">
-    <div class="content">
+    <div class="i18">
       <I18n></I18n>
+    </div>
+    <div class="content">
+      <Title></Title>
     </div>
   </div>
 </template>
@@ -22,7 +25,6 @@ import I18n from "@/components/i18n.vue";
   position: absolute;
   background-image: url("../img/background.jpg");
 }
-
 .content {
   width: 100%;
   display: flex;
@@ -31,5 +33,10 @@ import I18n from "@/components/i18n.vue";
   z-index: 1;
   position: absolute;
   flex-wrap: wrap;
+}
+.i18{
+z-index: 1;
+  position: absolute;
+  align-content: end;
 }
 </style>
