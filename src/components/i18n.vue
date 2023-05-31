@@ -1,12 +1,12 @@
 <template>
-  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click">
-    <n-button round color="#d3a579">
+  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click" @click="click">
+    <n-button round color="#d3a579" class="button">
       <template #icon>
         <n-icon>
-          <LangIcon />
+          <LangIcon/>
         </n-icon>
       </template>
-      {{i18nLang.find(it=>it.value===lang).label}}
+      {{ i18nLang.find(it => it.value === lang).label }}
     </n-button>
   </n-popselect>
 </template>
@@ -14,16 +14,17 @@
 <script setup lang="ts">
 import LangIcon from '../icons/langIcon.svg'
 import {NButton, NIcon, NPopselect} from "naive-ui"
-import {useStorage} from '@vueuse/core'
 import i18nLang from "../message/i18nLang.json"
-import {ref} from "vue";
+import lang from "@/assets/useStoage";
 
-const lang = useStorage("useLang", "zh")
-console.log(lang.value)
-console.log(i18nLang[0])
+function click() {
+  location.reload();
+}
+
 </script>
 
 <style lang="scss">
-.langIcon {
+.button {
+  margin: 1em;
 }
 </style>
