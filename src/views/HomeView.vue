@@ -5,7 +5,9 @@
   <div class="background">
     <div class="content">
       <Title></Title>
+      <div class="detailsDIV">
       <Details></Details>
+      </div>
       <Contacts></Contacts>
       <MyFriends></MyFriends>
     </div>
@@ -40,6 +42,11 @@ import MyFriends from "@/components/myFriends.vue";
   z-index: 1;
   position: absolute;
   flex-wrap: wrap;
+  .detailsDIV{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .i18 {

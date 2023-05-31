@@ -30,7 +30,7 @@ let dTextEN:string[]=introduction.introductionMessageEN
   background-color: rgba(225, 225, 225, 0.2);
   backdrop-filter: blur(15px);
   transition: all 3s;
-  @media (min-width:420px ) {
+    @media (min-width:420px ) {
     width: 50em;
     border-radius: 15px;
     margin: 1em;

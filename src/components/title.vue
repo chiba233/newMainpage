@@ -27,13 +27,14 @@ import {zh, en} from "@/assets/decideLang"
 <style lang="scss">
 .dashboardTitle {
   display: flex;
-  margin-top: 2em;
   margin-bottom: 1em;
   @media (min-width: 420px) {
+    margin-top: 2em;
     flex-direction: row;
     justify-content: center;
   }
   @media (max-width: 420px) {
+    margin-top: 1.5em;
     flex-direction: column;
     justify-content: center;
     align-items: center;
