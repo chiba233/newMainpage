@@ -5,6 +5,8 @@
   <div class="background">
     <div class="content">
       <Title></Title>
+      <Details></Details>
+      <Contacts></Contacts>
     </div>
   </div>
 </template>
@@ -13,6 +15,7 @@
 import Title from "@/components/title.vue";
 import Details from "@/components/detail.vue";
 import I18n from "@/components/i18n.vue";
+import Contacts from "@/components/contacts.vue";
 </script>
 
 <style lang="scss">
@@ -35,6 +38,8 @@ import I18n from "@/components/i18n.vue";
   z-index: 1;
   position: absolute;
   flex-wrap: wrap;
+  .title{
+  }
 }
 
 .i18 {

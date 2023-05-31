@@ -4,8 +4,14 @@
       from: 'rgb(7,7,7)',
       to: 'rgb(93,92,92)'
     }" class="detailText">
-      {{dText[0]}} <br>
-      {{dText[1]}}
+      <a v-if="zh">
+      {{dTextZH[0]}} <br>
+      {{dTextZH[1]}}
+      </a>
+      <a v-if="en">
+        {{dTextEN[0]}}<br>
+        {{dTextEN[1]}}
+      </a>
     </n-gradient-text>
   </div>
 </template>
@@ -13,25 +19,32 @@
 <script setup lang="ts">
 import {NGradientText} from "naive-ui"
 import introduction from '../message/introduction.json'
-let dText:string[] = introduction.introductionMessage
-console.log(dText)
+import {zh,en} from "@/assets/decideLang";
+let dTextZH:string[] = introduction.introductionMessageZH
+let dTextEN:string[]=introduction.introductionMessageEN
 </script>
 
 <style lang="scss">
 .textBox {
   display: flex;
-  height: 10em;
-  width: 50em;
   background-color: rgba(225, 225, 225, 0.2);
   backdrop-filter: blur(15px);
-  border-radius: 15px;
-  margin: 1em;
   transition: all 3s;
+  @media (min-width:420px ) {
+    width: 50em;
+    border-radius: 15px;
+    margin: 1em;
+  }
+  @media (max-width: 420px) {
+    width: 95%;
+    border-radius:8px;
+    margin: 0.5em;
+  }
 
   .detailText {
     padding: 0.8em;
     display: block;
-    word-wrap: break-word;
+    word-break:break-word;
     white-space: pre-wrap;
 
   }
