@@ -1,17 +1,17 @@
 [
   {
     "url": "https://clansty.com/",
-    "icon": "/src/icons/clansty.jpg",
+    "icon": "/clansty.jpg",
     "name": "凌莞"
   },
   {
     "url": "https://misaka.org/",
-    "icon": "/src/icons/misaka.jpg",
+    "icon": "/misaka.jpg",
     "name": "御坂云见"
   },
   {
     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "icon": "/src/icons/rickroll.png",
+    "icon": "/rickroll.png",
     "name": "来骗来偷袭"
   }
 ]
