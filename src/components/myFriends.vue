@@ -30,8 +30,6 @@ function openURL(url: string) {
   window.open(url)
 }
 
-console.log(friends)
-
 
 </script>
 
