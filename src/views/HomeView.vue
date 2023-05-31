@@ -7,6 +7,7 @@
       <Title></Title>
       <Details></Details>
       <Contacts></Contacts>
+      <MyFriends></MyFriends>
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ import Title from "@/components/title.vue";
 import Details from "@/components/detail.vue";
 import I18n from "@/components/i18n.vue";
 import Contacts from "@/components/contacts.vue";
+import MyFriends from "@/components/myFriends.vue";
 </script>
 
 <style lang="scss">
@@ -38,8 +40,6 @@ import Contacts from "@/components/contacts.vue";
   z-index: 1;
   position: absolute;
   flex-wrap: wrap;
-  .title{
-  }
 }
 
 .i18 {

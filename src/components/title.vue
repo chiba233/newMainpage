@@ -48,8 +48,8 @@ import {zh, en} from "@/assets/decideLang"
       margin-left: 1.5em;
     }
     @media (max-width: 420px) {
-      padding-top: 1em;
-      font-size: 1.5em;
+      padding-top: 0.5em;
+      font-size: 1.7em;
     }
   }
 

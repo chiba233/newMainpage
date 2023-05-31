@@ -38,7 +38,7 @@ let dTextEN:string[]=introduction.introductionMessageEN
   @media (max-width: 420px) {
     width: 95%;
     border-radius:8px;
-    margin: 0.5em;
+    margin: 0.3em;
   }
 
   .detailText {
@@ -46,7 +46,12 @@ let dTextEN:string[]=introduction.introductionMessageEN
     display: block;
     word-break:break-word;
     white-space: pre-wrap;
+    @media (max-width: 420px) {
 
+    }
+    @media (min-width: 420px) {
+
+    }
   }
 }
 </style>
