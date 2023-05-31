@@ -5,15 +5,15 @@
     <a v-if="en">{{ friendsMessage.titleEN }}</a>
   </a>
   <div class="allFriends">
-    <div class="friendBox" v-for="{index,icon,name,url} in friends" :key="index" @click="openURL(url)">
-      <n-avatar :src="icon" :key="index" :size="100" round bordered></n-avatar>
+    <div class="friendBox" v-for="{icon,name,url} in friends" @click="openURL(url)">
+      <n-avatar :src="icon" :size="100" round bordered></n-avatar>
       <n-gradient-text
           class="friendName"
           :gradient="{
       deg: 180,
       from: 'rgb(77,77,77)',
       to: 'rgb(170, 170, 170)'
-    }" :key="index">
+    }">
         {{ name }}
       </n-gradient-text>
     </div>

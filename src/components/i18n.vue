@@ -6,7 +6,7 @@
           <LangIcon/>
         </n-icon>
       </template>
-      {{ i18nLang.find(it => it.value === lang).label }}
+      {{ i18nLang.find(it => it.value === lang)?.label }}
     </n-button>
   </n-popselect>
 </template>
