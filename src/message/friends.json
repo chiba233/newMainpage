@@ -1,17 +1,17 @@
 [
   {
-    "url": "www.baidu.com",
-    "icon": "https://pbs.twimg.com/profile_images/1450716535987736577/-hUgipQz_400x400.jpg",
-    "name": "测试"
+    "url": "https://clansty.com/",
+    "icon": "/src/icons/clansty.jpg",
+    "name": "凌莞"
   },
   {
-    "url": "www.google.com",
-    "icon": "https://pbs.twimg.com/profile_images/1450716535987736577/-hUgipQz_400x400.jpg",
-    "name": "测试2"
+    "url": "https://misaka.org/",
+    "icon": "/src/icons/misaka.jpg",
+    "name": "御坂云见"
   },
   {
-    "url": "www.bilibili.com",
-    "icon": "https://pbs.twimg.com/profile_images/1450716535987736577/-hUgipQz_400x400.jpg",
-    "name": "测试3"
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "icon": "/src/icons/rickroll.png",
+    "name": "来骗来偷袭"
   }
 ]

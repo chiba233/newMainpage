@@ -1,14 +1,9 @@
 <template>
-  <n-gradient-text
-      class="titleText"
-      :gradient="{
-        deg: 180,
-        from: 'rgb(185,183,183)',
-        to: 'rgb(77,77,77)',
-      }"
+  <a
+      class="friendTitle"
   ><a v-if="zh">{{ friendsMessage.titleZH }}</a>
     <a v-if="en">{{ friendsMessage.titleEN }}</a>
-  </n-gradient-text>
+  </a>
   <div class="allFriends">
     <div class="friendBox" v-for="{index,icon,name,url} in friends" :key="index" @click="openURL(url)">
       <n-avatar :src="icon" :key="index" :size="100" round bordered></n-avatar>
@@ -31,7 +26,7 @@ import friends from "@/message/friends.json"
 import friendsMessage from "@/message/friendsMessage.json"
 import {zh, en} from "@/assets/decideLang"
 
-function openURL(url:string){
+function openURL(url: string) {
   window.open(url)
 }
 
@@ -41,7 +36,8 @@ console.log(friends)
 </script>
 
 <style lang="scss">
-.titleText {
+.friendTitle {
+  color: white;
   display: flex;
   justify-content: center;
   @media (max-width: 420px) {
@@ -83,8 +79,8 @@ console.log(friends)
     padding: 1em 0.5em 1em 0.5em;
     margin-bottom: 1em;
   }
-  @media (max-width: 380px) {
-    margin-bottom: 2em;
+  @media (max-height: 830px) {
+    margin-bottom: 4em;
   }
 
   .friendName {

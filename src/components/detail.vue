@@ -1,9 +1,6 @@
 <template>
   <div class="textBox">
-    <n-gradient-text :size="15" :gradient="{
-      from: 'rgb(7,7,7)',
-      to: 'rgb(93,92,92)'
-    }" class="detailText">
+    <a class="detailText">
       <a v-if="zh">
       {{dTextZH[0]}} <br>
       {{dTextZH[1]}}
@@ -12,12 +9,11 @@
         {{dTextEN[0]}}<br>
         {{dTextEN[1]}}
       </a>
-    </n-gradient-text>
+    </a>
   </div>
 </template>
 
 <script setup lang="ts">
-import {NGradientText} from "naive-ui"
 import introduction from '../message/introduction.json'
 import {zh,en} from "@/assets/decideLang";
 let dTextZH:string[] = introduction.introductionMessageZH
@@ -42,6 +38,7 @@ let dTextEN:string[]=introduction.introductionMessageEN
   }
 
   .detailText {
+    color: white;
     padding: 0.8em;
     display: block;
     word-break:break-word;
