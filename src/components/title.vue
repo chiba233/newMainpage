@@ -5,8 +5,8 @@
         class="titleText"
         :gradient="{
         deg: 180,
-        from: 'rgb(104,104,104)',
-        to: 'rgb(248,247,247)',
+        from: 'rgb(144,144,144)',
+        to: 'rgb(49,49,49)',
       }"
     ><a v-if="zh">{{ titleMessage.titleZH }}</a>
       <a v-if="en">{{ titleMessage.titleEN }}</a>
@@ -36,22 +36,39 @@ if (lang.value == "en") {
 <style lang="scss">
 .dashboardTitle {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   margin-top: 2em;
   margin-bottom: 1em;
+  @media (max-width: 420px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (min-width: 420px) {
+    flex-direction: row;
+  }
+
 
   .titleText {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    font-size: 2em;
+    @media (min-width: 420px) {
+      font-size: 2em;
+    }
+    @media (max-width: 420px){
+      padding-top: 1em;
+      font-size: 1.5em;
+
+    }
   }
 
   .titleIcon {
+    display: flex;
     width: 80px;
     height: 80px;
-    margin-right: 2em;
+    @media (min-width: 420px) {
+      margin-right: 2em;
+    }
   }
 }
 </style>
