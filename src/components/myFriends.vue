@@ -1,8 +1,8 @@
 <template>
   <a
       class="friendTitle"
-  ><a v-if="zh">{{ friendsMessage.titleZH }}</a>
-    <a v-if="en">{{ friendsMessage.titleEN }}</a>
+  ><a v-if="lang==='zh'">{{ friendsMessage.titleZH }}</a>
+    <a v-if="lang==='en'">{{ friendsMessage.titleEN }}</a>
   </a>
   <div class="allFriends">
     <div class="friendBox" v-for="{icon,name,url} in friends" @click="openURL(url)">
@@ -24,7 +24,7 @@
 import {NAvatar, NGradientText} from "naive-ui";
 import friends from "@/message/friends.json"
 import friendsMessage from "@/message/friendsMessage.json"
-import {zh, en} from "@/assets/decideLang"
+import lang from "@/components/ts/useStoage";
 
 function openURL(url: string) {
   window.open(url)
@@ -77,9 +77,6 @@ function openURL(url: string) {
     height: 10em;
     padding: 1em 0.5em 1em 0.5em;
     margin-bottom: 1em;
-  }
-
-  .friendName {
   }
 
   .n-avatar {

@@ -8,8 +8,8 @@
         from: 'rgb(185,183,183)',
         to: 'rgb(77,77,77)',
       }"
-    ><a v-if="zh">{{ titleMessage.titleZH }}</a>
-      <a v-if="en">{{ titleMessage.titleEN }}</a>
+    ><a v-if="lang==='zh'">{{ titleMessage.titleZH }}</a>
+      <a v-if="lang==='en'">{{ titleMessage.titleEN }}</a>
     </n-gradient-text>
     <div class="a"></div>
   </div>
@@ -19,8 +19,7 @@
 import {NAvatar, NGradientText} from "naive-ui";
 import icon from "../icons/icon.jpg";
 import titleMessage from "../message/titleMessage.json"
-import {zh, en} from "@/assets/decideLang"
-
+import lang from "@/components/ts/useStoage";
 
 </script>
 

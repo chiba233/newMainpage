@@ -1,5 +1,5 @@
 <template>
-  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click" @click="click">
+  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click" >
     <n-button round color="#d3a579" class="button">
       <template #icon>
         <n-icon>
@@ -15,7 +15,7 @@
 import LangIcon from '../icons/langIcon.svg'
 import {NButton, NIcon, NPopselect} from "naive-ui"
 import i18nLang from "../message/i18nLang.json"
-import lang from "@/assets/useStoage";
+import lang from "@/components/ts/useStoage";
 
 function click() {
   location.reload();

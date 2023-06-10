@@ -1,11 +1,11 @@
 <template>
   <div class="textBox">
     <a class="detailText">
-      <a v-if="zh">
+      <a v-if="lang==='zh'">
         {{ dTextZH[0] }} <br>
         {{ dTextZH[1] }}
       </a>
-      <a v-if="en">
+      <a v-if="lang==='en'">
         {{ dTextEN[0] }}<br>
         {{ dTextEN[1] }}
       </a>
@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import introduction from '../message/introduction.json'
-import {zh, en} from "@/assets/decideLang";
+import lang from "@/components/ts/useStoage";
 
 let dTextZH: string[] = introduction.introductionMessageZH
 let dTextEN: string[] = introduction.introductionMessageEN
