@@ -24,7 +24,7 @@ let dTextEN: string[] = introduction.introductionMessageEN
 <style lang="scss">
 .textBox {
   display: flex;
-  background-color: rgba(225, 225, 225, 0.2);
+  background-color: rgba(199,176,192, 0.5);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   transition: all 3s;

@@ -2,11 +2,15 @@
   <div class="i18">
     <I18n></I18n>
   </div>
+  <div class="fromTime">
+    <from-now-time></from-now-time>
+  </div>
+
   <div class="background">
     <div class="content">
       <Title></Title>
       <div class="detailsDIV">
-      <Details></Details>
+        <Details></Details>
       </div>
       <Contacts></Contacts>
       <MyFriends></MyFriends>
@@ -20,6 +24,7 @@ import Details from "@/components/detail.vue";
 import I18n from "@/components/i18n.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
+import FromNowTime from "@/components/fromNowTime.vue";
 </script>
 
 <style lang="scss">
@@ -32,8 +37,14 @@ import MyFriends from "@/components/myFriends.vue";
   z-index: -1;
   position: absolute;
   background-image: url("../img/background.jpg");
-  @media (max-width: 420px) {
-    height: 135%;
+  @media (max-width: 630px) {
+    height: 150%;
+  }
+  @media (max-width: 430px) {
+    height: 130%;
+  }
+  @media (max-width: 400px) {
+    height: 140%;
   }
 }
 
@@ -45,11 +56,19 @@ import MyFriends from "@/components/myFriends.vue";
   z-index: 1;
   position: absolute;
   flex-wrap: wrap;
-  .detailsDIV{
+
+  .detailsDIV {
     width: 100%;
     display: flex;
     justify-content: center;
   }
+}
+
+.fromTime {
+  display: flex;
+  justify-content: start;
+  z-index: 1;
+  position: absolute;
 }
 
 .i18 {

@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <n-button round color="#d3a579" class="button" @click="twitter">
+    <n-button round color="#C7B0C0" class="cButton" @click="twitter">
       <template #icon>
         <n-icon size="23">
           <TwitterIcon/>
@@ -8,7 +8,7 @@
       </template>
       <a>Twitter</a>
     </n-button>
-    <n-button round color="#d3a579" class="button" @click="telegram">
+    <n-button round color="#C7B0C0" class="cButton" @click="telegram">
       <template #icon>
         <n-icon size="23">
           <TelegramIcon></TelegramIcon>
@@ -16,7 +16,7 @@
       </template>
       <a>Telegram</a>
     </n-button>
-    <n-button round color="#d3a579" class="button" @click="tron">
+    <n-button round color="#C7B0C0" class="cButton" @click="tron">
       <template #icon>
         <n-icon size="23">
           <Tron></Tron>
@@ -24,7 +24,7 @@
       </template>
       <a>Tron</a>
     </n-button>
-    <n-button round color="#d3a579" class="button" @click="eth">
+    <n-button round color="#C7B0C0" class="cButton" @click="eth">
       <template #icon>
         <n-icon size="23">
           <Eth></Eth>
@@ -67,8 +67,10 @@ function telegram() {
   display: flex;
   justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
 
   .n-button {
+    margin: 1em;
     @media (min-width: 420px) {
       width: 9em;
     }

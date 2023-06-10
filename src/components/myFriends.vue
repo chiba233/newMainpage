@@ -7,15 +7,9 @@
   <div class="allFriends">
     <div class="friendBox" v-for="{icon,name,url} in friends" @click="openURL(url)">
       <n-avatar :src="icon" :size="100" round bordered></n-avatar>
-      <n-gradient-text
-          class="friendName"
-          :gradient="{
-      deg: 180,
-      from: 'rgb(77,77,77)',
-      to: 'rgb(170, 170, 170)'
-    }">
+      <a class="friendName">
         {{ name }}
-      </n-gradient-text>
+      </a>
     </div>
   </div>
 </template>)
@@ -57,7 +51,7 @@ function openURL(url: string) {
 
 .friendBox {
   display: flex;
-  background-color: rgba(225, 225, 225, 0.2);
+  background-color: rgba(199, 176, 192, 0.5);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   transition: all 3s;
@@ -89,9 +83,10 @@ function openURL(url: string) {
       margin-bottom: 2em;
     }
   }
-
-  @media (max-width: 420px) {
+  .friendName{
+    color: white;
   }
+
 }
 
 </style>
