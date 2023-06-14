@@ -12,5 +12,4 @@ if (browserLang != "zh" && "en") {
 moment.locale(browserLang)
 
 const lang: any = useStorage("useLang", browserLang)
-console.log(lang)
 export default lang
