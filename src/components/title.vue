@@ -4,6 +4,7 @@
     <a class="titleText">
       <a v-if="lang==='zh'">{{ titleMessage.titleZH }}</a>
       <a v-if="lang==='en'">{{ titleMessage.titleEN }}</a>
+      <a v-if="lang==='other'">{{titleMessage.titleOther}}</a>
     </a>
     <div class="a"></div>
   </div>

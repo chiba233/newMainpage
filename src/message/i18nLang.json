@@ -6,5 +6,9 @@
   {
     "label": "English",
     "value": "en"
+  },
+  {
+    "label": "Other",
+    "value": "other"
   }
 ]

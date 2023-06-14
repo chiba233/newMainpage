@@ -1,10 +1,14 @@
 {
   "introductionMessageZH": [
-    " Ohhh！天哪，你从哪里看到我这个垃圾，竟然还对我的主页感兴趣，那我得好好介绍我自己。",
-    "是个MTF，术后.喜欢网络相关？或者是arm64的PC or server。生于2003Oct6。雌二醇计数2000天+。比较喜欢变异，所以名字可能是小草莓/小绿莓/小蓝莓。曾用名为千叶/西木野韭菜收割机。"
+    " 你从哪里看到我这个傻逼，竟然还对我的主页感兴趣。",
+    "是个MTF，术后 武装直升机，喜欢网络相关及灵车，五只猫咪的妈。生于2003十月6。雌二醇计数2000天+。比较喜欢变异，所以名字可能是小草莓/小绿莓/小蓝莓。曾用名为千叶/西木野韭菜收割机。"
   ],
   "introductionMessageEN": [
-    "OMG!where did you find me here",
-    "I'm a MTF,SRS operation Finished.Like many cool things,like be about network?Or arm64PC or Server.Birthday at 2003 October 6.E2 count 2000 days+.Sometimes I like change my name,So my name maybe strawberry or blue strawberry.Ever used name Chiba.."
+    "WoCao!where did you find me here?",
+    "MTF, also 'air cargo helicopter', SRS operation Finished. have four 只 cat. Like about network and 灵车. Birthday at 2003 October 6. E2 count 2000 days+. Sometimes like change my name, So my name maybe strawberry or blue strawberry. Ever used name Chiba.."
+  ],
+  "introductionMessageOther": [
+    "请使用edge 或 chrome Firefox 以使用页面translate。",
+    "ページ翻訳を使用するには、edge または chrome Firefox を使用してください。 Bitte verwenden Sie Edge oder Chrome Firefox, um die Seitenübersetzung zu verwenden.  Sila gunakan edge atau chrome Firefox untuk menggunakan menterjemah halaman.  "
   ]
 }

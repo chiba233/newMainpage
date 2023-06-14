@@ -8,6 +8,7 @@
       </template>
       <a v-if="lang==='en'">{{ fromNowI18.en.button }}</a>
       <a v-if="lang==='zh'">{{ fromNowI18.zh.button }}</a>
+      <a v-if="lang==='other'">{{fromNowI18.other.button}}</a>
     </n-button>
     <n-modal v-model:show="showModal">
       <n-card
@@ -24,12 +25,13 @@
           </n-button>
         </template>
         <div class="allTimeCard">
-          <div class="timeCard" v-for="{nameZH,nameEN,time} in fromNow">
+          <div class="timeCard" v-for="{nameZH,nameEN,time,nameOther} in fromNow">
             <n-icon size="25">
 
             </n-icon>
             <a v-if="lang==='zh'">{{ nameZH }}</a>
             <a v-if="lang==='en'">{{ nameEN }}</a>
+            <a v-if="lang==='other'">{{nameOther}}</a>
             <a>{{ moment(time).fromNow() }}</a>
           </div>
           <a>先更新一下，还没更新完，你先别急</a>
@@ -55,9 +57,10 @@ const clickMemory = () => {
   showModal.value = true
   if (lang.value === "zh") {
     boxTitle.value = fromNowI18.zh.title
-    console.log("Test")
   } else if (lang.value === "en") {
     boxTitle.value = fromNowI18.en.title
+  }else if(lang.value === "other"){
+    boxTitle.value = fromNowI18.other.title
   }
 }
 

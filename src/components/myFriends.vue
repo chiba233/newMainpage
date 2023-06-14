@@ -3,6 +3,7 @@
       class="friendTitle"
   ><a v-if="lang==='zh'">{{ friendsMessage.titleZH }}</a>
     <a v-if="lang==='en'">{{ friendsMessage.titleEN }}</a>
+    <a v-if="lang==='other'">{{friendsMessage.titleOther}}</a>
   </a>
   <div class="allFriends">
     <div class="friendBox" v-for="{icon,name,url} in friends" @click="openURL(url)">
