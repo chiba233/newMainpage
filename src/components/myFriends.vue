@@ -52,9 +52,9 @@ function openURL(url: string) {
 
 .friendBox {
   display: flex;
-  background-color: rgba(199, 176, 192, 0.5);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.17);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: all 3s;
   flex-direction: column;
   align-items: center;

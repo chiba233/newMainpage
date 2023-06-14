@@ -29,9 +29,9 @@ let dTextOther:string[]= introduction.introductionMessageOther
 <style lang="scss">
 .textBox {
   display: flex;
-  background-color: rgba(199,176,192, 0.5);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.17);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: all 3s;
   @media (min-width: 420px) {
     width: 50em;
@@ -50,12 +50,6 @@ let dTextOther:string[]= introduction.introductionMessageOther
     display: block;
     word-break: break-word;
     white-space: pre-wrap;
-    @media (max-width: 420px) {
-
-    }
-    @media (min-width: 420px) {
-
-    }
   }
 }
 </style>
