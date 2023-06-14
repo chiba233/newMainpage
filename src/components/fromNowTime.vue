@@ -8,7 +8,7 @@
       </template>
       <a v-if="lang==='en'">{{ fromNowI18.en.button }}</a>
       <a v-if="lang==='zh'">{{ fromNowI18.zh.button }}</a>
-      <a v-if="lang==='other'">{{fromNowI18.other.button}}</a>
+      <a v-if="lang==='other'">{{ fromNowI18.other.button }}</a>
     </n-button>
     <n-modal v-model:show="showModal">
       <n-card
@@ -26,13 +26,15 @@
         </template>
         <div class="allTimeCard">
           <div class="timeCard" v-for="{nameZH,nameEN,time,nameOther} in fromNow">
-            <n-icon size="25">
-
-            </n-icon>
+            <div class="thatDay">
+              <a>{{ time.substring(0, 4) }} - {{ time.substring(4, 6) }} - {{ time.substring(6, 8) }}</a>
+            </div>
             <a v-if="lang==='zh'">{{ nameZH }}</a>
             <a v-if="lang==='en'">{{ nameEN }}</a>
-            <a v-if="lang==='other'">{{nameOther}}</a>
+            <a v-if="lang==='other'">{{ nameOther }}</a>
+            <div>
             <a>{{ moment(time).fromNow() }}</a>
+            </div>
           </div>
           <a>先更新一下，还没更新完，你先别急</a>
         </div>
@@ -59,7 +61,7 @@ const clickMemory = () => {
     boxTitle.value = fromNowI18.zh.title
   } else if (lang.value === "en") {
     boxTitle.value = fromNowI18.en.title
-  }else if(lang.value === "other"){
+  } else if (lang.value === "other") {
     boxTitle.value = fromNowI18.other.title
   }
 }
@@ -84,12 +86,17 @@ const showModal = ref(false)
   @media (max-width: 420px) {
     width: 100%;
   }
-  .allTimeCard{
+
+  .allTimeCard {
     display: flex;
     flex-direction: column;
   }
 
   .timeCard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     background-color: rgba(89, 89, 89, 0.5);
     padding: 0.3em;
     margin-bottom: 0.3em;
