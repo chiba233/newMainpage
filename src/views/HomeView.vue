@@ -6,15 +6,13 @@
     <from-now-time></from-now-time>
   </div>
 
-  <div class="background">
-    <div class="content">
-      <Title></Title>
-      <div class="detailsDIV">
-        <Details></Details>
-      </div>
-      <Contacts></Contacts>
-      <MyFriends></MyFriends>
+  <div class="content">
+    <Title></Title>
+    <div class="detailsDIV">
+      <Details></Details>
     </div>
+    <Contacts></Contacts>
+    <MyFriends></MyFriends>
   </div>
 </template>
 
@@ -28,33 +26,11 @@ import FromNowTime from "@/components/fromNowTime.vue";
 </script>
 
 <style lang="scss">
-.background {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-  position: absolute;
-  background-image: url("../img/background.jpg");
-  @media (max-width: 630px) {
-    height: 150%;
-  }
-  @media (max-width: 430px) {
-    height: 130%;
-  }
-  @media (max-width: 400px) {
-    height: 140%;
-  }
-}
-
 .content {
   width: 100%;
   display: flex;
   align-content: center;
   flex-direction: column;
-  z-index: 1;
-  position: absolute;
   flex-wrap: wrap;
 
   .detailsDIV {
@@ -67,7 +43,6 @@ import FromNowTime from "@/components/fromNowTime.vue";
 .fromTime {
   display: flex;
   justify-content: start;
-  z-index: 1;
   position: absolute;
 }
 
@@ -75,7 +50,6 @@ import FromNowTime from "@/components/fromNowTime.vue";
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  z-index: 1;
   position: absolute;
 }
 </style>
