@@ -32,7 +32,22 @@
       </template>
       <a>Ethereum</a>
     </n-button>
-
+    <n-button round color="#C7B0C0" class="cButton" @click="email">
+      <template #icon>
+        <n-icon size="23">
+          <Email></Email>
+        </n-icon>
+      </template>
+      <a>E-Mail</a>
+    </n-button>
+    <n-button round color="#C7B0C0" class="cButton" @click="github">
+      <template #icon>
+        <n-icon size="23">
+          <Github></Github>
+        </n-icon>
+      </template>
+      <a>GitHub</a>
+    </n-button>
 
   </div>
 
@@ -44,6 +59,8 @@ import TelegramIcon from "@/icons/telegram.svg"
 import {NIcon, NButton} from "naive-ui";
 import Tron from "@/icons/tron.svg"
 import Eth from "@/icons/eth.svg"
+import Email from "@/icons/Email.svg"
+import Github from "@/icons/LogoGithub.svg"
 
 function twitter() {
   window.open("https://twitter.com/strawberry960")
@@ -59,6 +76,13 @@ function eth() {
 
 function telegram() {
   window.open("https://t.me/chiba2333")
+}
+
+function email() {
+  window.open("mailto:qwq@qwwq@org")
+}
+function github() {
+  window.open("https://github.com/chiba233")
 }
 </script>
 
