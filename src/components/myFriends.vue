@@ -3,13 +3,16 @@
       class="friendTitle"
   ><a v-if="lang==='zh'">{{ friendsMessage.titleZH }}</a>
     <a v-if="lang==='en'">{{ friendsMessage.titleEN }}</a>
-    <a v-if="lang==='other'">{{friendsMessage.titleOther}}</a>
+    <a v-if="lang==='other'">{{ friendsMessage.titleOther }}</a>
   </a>
   <div class="allFriends">
-    <div class="friendBox" v-for="{icon,name,url} in friends" @click="openURL(url)">
+    <div class="friendBox" v-for="{icon,name,url,aliasEN} in friends" @click="openURL(url)">
       <n-avatar :src="icon" :size="100" round bordered></n-avatar>
-      <a class="friendName">
+      <a class="friendName" v-if="lang==='zh'">
         {{ name }}
+      </a>
+      <a class="friendName" v-if="lang !='zh'">
+        {{ aliasEN }}
       </a>
     </div>
   </div>
@@ -20,6 +23,7 @@ import {NAvatar} from "naive-ui";
 import friends from "@/message/friends.json"
 import friendsMessage from "@/message/friendsMessage.json"
 import {lang} from "@/components/ts/useStoage";
+
 function openURL(url: string) {
   window.open(url)
 }
@@ -85,8 +89,11 @@ function openURL(url: string) {
       margin-bottom: 2em;
     }
   }
-  .friendName{
+
+  .friendName {
     color: white;
+    white-space:nowrap;
+
   }
 
 }

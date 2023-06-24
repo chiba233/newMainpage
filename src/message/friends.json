@@ -2,26 +2,32 @@
   {
     "url": "https://clansty.com/",
     "icon": "/clansty.jpg",
-    "name": "凌莞"
+    "name": "凌莞",
+    "aliasEN":"Clansty Icaria"
   },
   {
     "url": "https://misaka.org/",
     "icon": "/misaka.jpg",
-    "name": "御坂云见"
+    "name": "御坂云见",
+    "aliasEN":"Misaka Kumomi"
   },
   {
     "url": "http://www.shuizilong.com/house/",
     "icon": "/dao.jpg",
-    "name": "小島みなこ"
+    "name": "小島みなこ",
+    "aliasEN": "Minakokojima"
+
   },
   {
     "url": "https://www.luoling.moe",
     "icon": "/luoling.jpg",
-    "name": "RainbowBird"
+    "name": "小洛灵",
+    "aliasEN":"RainbowBird"
   },
   {
     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "icon": "/rickroll.png",
-    "name": "来骗来偷袭"
+    "name": "来骗来偷袭",
+    "aliasEN": "Rick Roll"
   }
 ]
