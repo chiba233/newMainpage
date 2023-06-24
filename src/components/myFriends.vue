@@ -63,31 +63,29 @@ function openURL(url: string) {
   align-items: center;
   cursor: pointer;
   @media (min-width: 420px) {
-    width: 7em;
+    width: 7.5em;
     height: 11em;
-    padding: 2em;
-    margin-right: 1em;
-    margin-bottom: 1em;
+    padding: 2em 1.7em 2em 1.7em;
+    margin-left: 0.65em;
+    margin-right: 0.65em;
+    margin-bottom: 1.3em;
     border-radius: 15px;
   }
   @media (max-width: 420px) {
-    margin-right: 1em;
-    width: 8em;
-    height: 10em;
-    padding: 1em 0.5em 1em 0.5em;
-    margin-bottom: 1em;
+    width: 9em;
+    height: 11em;
+    padding: 1.2em 1em 1.2em 1em;
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+    margin-bottom: 1.5em;
     border-radius: 8px;
   }
 
   .n-avatar {
     width: 7em;
     height: 7em;
-    @media (max-width: 420px) {
-      margin-bottom: 0.5em;
-    }
-    @media (min-width: 420px) {
-      margin-bottom: 2em;
-    }
+    margin-bottom: 1.3em;
+    margin-top: 0.08em;
   }
 
   .friendName {
