@@ -65,6 +65,7 @@ function openURL(url: string) {
     padding: 2em;
     margin-right: 1em;
     margin-bottom: 1em;
+    border-radius: 15px;
   }
   @media (max-width: 420px) {
     margin-right: 1em;
@@ -72,6 +73,7 @@ function openURL(url: string) {
     height: 10em;
     padding: 1em 0.5em 1em 0.5em;
     margin-bottom: 1em;
+    border-radius: 8px;
   }
 
   .n-avatar {
