@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import introduction from '../message/introduction.json'
-import lang from "@/components/ts/useStoage";
+import {lang} from "@/components/ts/useStoage";
 
 let dTextZH: string[] = introduction.introductionMessageZH
 let dTextEN: string[] = introduction.introductionMessageEN

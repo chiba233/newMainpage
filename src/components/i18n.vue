@@ -15,7 +15,7 @@
 import LangIcon from '../icons/langIcon.svg'
 import {NButton, NIcon, NPopselect} from "naive-ui"
 import i18nLang from "../message/i18nLang.json"
-import lang from "@/components/ts/useStoage";
+import {lang} from "@/components/ts/useStoage";
 
 
 </script>

@@ -16,11 +16,10 @@
 </template>)
 
 <script setup lang="ts">
-import {NAvatar, NGradientText} from "naive-ui";
+import {NAvatar} from "naive-ui";
 import friends from "@/message/friends.json"
 import friendsMessage from "@/message/friendsMessage.json"
-import lang from "@/components/ts/useStoage";
-
+import {lang} from "@/components/ts/useStoage";
 function openURL(url: string) {
   window.open(url)
 }

@@ -11,5 +11,4 @@ if (browserLang != "zh" && "en") {
 
 moment.locale(browserLang)
 
-const lang: any = useStorage("useLang", browserLang)
-export default lang
+export const lang: any = useStorage("useLang", browserLang)

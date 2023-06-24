@@ -23,6 +23,7 @@ import I18n from "@/components/i18n.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
 import FromNowTime from "@/components/fromNowTime.vue";
+
 </script>
 
 <style lang="scss">

@@ -48,7 +48,7 @@ import {NModal, NButton, NIcon, NCard} from "naive-ui";
 import Clock from "../icons/clock.svg";
 import {ref} from "vue";
 import Cancel from "../icons/cancel.svg"
-import lang from "@/components/ts/useStoage";
+import {lang} from "@/components/ts/useStoage";
 import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
 import moment from "moment";

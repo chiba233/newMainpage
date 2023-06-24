@@ -4,7 +4,7 @@
     <a class="titleText">
       <a v-if="lang==='zh'">{{ titleMessage.titleZH }}</a>
       <a v-if="lang==='en'">{{ titleMessage.titleEN }}</a>
-      <a v-if="lang==='other'">{{titleMessage.titleOther}}</a>
+      <a v-if="lang==='other'">{{ titleMessage.titleOther }}</a>
     </a>
     <div class="a"></div>
   </div>
@@ -14,7 +14,7 @@
 import {NAvatar} from "naive-ui";
 import icon from "../icons/icon.jpg";
 import titleMessage from "../message/titleMessage.json"
-import lang from "@/components/ts/useStoage";
+import {lang} from "@/components/ts/useStoage";
 
 </script>
 
