@@ -23,6 +23,10 @@ import I18n from "@/components/i18n.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
 import FromNowTime from "@/components/fromNowTime.vue";
+import colorData from "@/message/colorData.json"
+import {themeColor} from "@/components/ts/useStoage";
+
+themeColor.value = colorData.purple
 
 </script>
 

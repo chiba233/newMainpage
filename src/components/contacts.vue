@@ -1,6 +1,6 @@
 <template>
   <div class="contacts">
-    <n-button round color="#C7B0C0" class="cButton" @click="twitter">
+    <n-button round :color="themeColor" class="cButton" @click="twitter">
       <template #icon>
         <n-icon size="23">
           <TwitterIcon/>
@@ -8,7 +8,7 @@
       </template>
       <a>Twitter</a>
     </n-button>
-    <n-button round color="#C7B0C0" class="cButton" @click="telegram">
+    <n-button round :color="themeColor" class="cButton" @click="telegram">
       <template #icon>
         <n-icon size="23">
           <TelegramIcon></TelegramIcon>
@@ -16,7 +16,7 @@
       </template>
       <a>Telegram</a>
     </n-button>
-    <n-button round color="#C7B0C0" class="cButton" @click="tron">
+    <n-button round :color="themeColor" class="cButton" @click="tron">
       <template #icon>
         <n-icon size="23">
           <Tron></Tron>
@@ -24,7 +24,7 @@
       </template>
       <a>Tron</a>
     </n-button>
-    <n-button round color="#C7B0C0" class="cButton" @click="eth">
+    <n-button round :color="themeColor" class="cButton" @click="eth">
       <template #icon>
         <n-icon size="23">
           <Eth></Eth>
@@ -32,7 +32,7 @@
       </template>
       <a>Ethereum</a>
     </n-button>
-    <n-button round color="#C7B0C0" class="cButton" @click="email">
+    <n-button round :color="themeColor" class="cButton" @click="email">
       <template #icon>
         <n-icon size="23">
           <Email></Email>
@@ -40,7 +40,7 @@
       </template>
       <a>E-Mail</a>
     </n-button>
-    <n-button round color="#C7B0C0" class="cButton" @click="github">
+    <n-button round :color="themeColor" class="cButton" @click="github">
       <template #icon>
         <n-icon size="23">
           <Github></Github>
@@ -61,6 +61,7 @@ import Tron from "@/icons/tron.svg"
 import Eth from "@/icons/eth.svg"
 import Email from "@/icons/Email.svg"
 import Github from "@/icons/LogoGithub.svg"
+import {themeColor} from "@/components/ts/useStoage";
 
 function twitter() {
   window.open("https://twitter.com/strawberry960")

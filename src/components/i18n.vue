@@ -1,6 +1,6 @@
 <template>
   <n-popselect v-model:value="lang" :options="i18nLang" trigger="click" >
-    <n-button round color="#C7B0C0" class="buttonI18">
+    <n-button round :color="themeColor" class="buttonI18">
       <template #icon>
         <n-icon>
           <LangIcon/>
@@ -16,6 +16,7 @@ import LangIcon from '../icons/langIcon.svg'
 import {NButton, NIcon, NPopselect} from "naive-ui"
 import i18nLang from "../message/i18nLang.json"
 import {lang} from "@/components/ts/useStoage";
+import {themeColor} from "@/components/ts/useStoage";
 
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-button @click="clickMemory" round color="#C7B0C0" class="buttonClock">
+    <n-button @click="clickMemory" round :color="themeColor" class="buttonClock">
       <template #icon>
         <n-icon>
           <Clock></Clock>
@@ -52,6 +52,7 @@ import {lang} from "@/components/ts/useStoage";
 import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
 import moment from "moment";
+import {themeColor} from "@/components/ts/useStoage";
 
 
 const boxTitle = ref()
