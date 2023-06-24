@@ -56,6 +56,7 @@ import {lang} from "@/components/ts/useStoage";
   }
 
   .a {
+    display: none;
     @media (min-width: 730px) {
       width: 6em;
       height: 6em;
