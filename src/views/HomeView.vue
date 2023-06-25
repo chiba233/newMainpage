@@ -26,7 +26,24 @@ import FromNowTime from "@/components/fromNowTime.vue";
 import colorData from "@/message/colorData.json"
 import {themeColor} from "@/components/ts/useStoage";
 
-themeColor.value = colorData.purple
+
+let randomTheme: number = Math.floor(Math.random() * 4);
+if (randomTheme===0){
+  document.body.style.backgroundImage="url(background.jpg)"
+  themeColor.value = colorData.background0
+}
+if (randomTheme===1){
+  document.body.style.backgroundImage="url(background1.jpg)"
+  themeColor.value = colorData.background1
+}
+if (randomTheme===2){
+  document.body.style.backgroundImage="url(background2.jpg)"
+  themeColor.value = colorData.background2
+}
+if (randomTheme===3){
+  document.body.style.backgroundImage="url(background3.jpg)"
+  themeColor.value = colorData.background3
+}
 
 </script>
 
