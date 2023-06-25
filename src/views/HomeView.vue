@@ -30,19 +30,23 @@ import {themeColor} from "@/components/ts/useStoage";
 let randomTheme: number = Math.floor(Math.random() * 4);
 if (randomTheme===0){
   document.body.style.backgroundImage="url(background.jpg)"
+  document.body.style.backgroundColor=colorData.background0
   themeColor.value = colorData.background0
 }
 if (randomTheme===1){
   document.body.style.backgroundImage="url(background1.jpg)"
   themeColor.value = colorData.background1
+  document.body.style.backgroundColor=colorData.background1
 }
 if (randomTheme===2){
   document.body.style.backgroundImage="url(background2.jpg)"
+  document.body.style.backgroundColor=colorData.background2
   themeColor.value = colorData.background2
 }
 if (randomTheme===3){
   document.body.style.backgroundImage="url(background3.jpg)"
   themeColor.value = colorData.background3
+  document.body.style.backgroundColor=colorData.background3
 }
 
 </script>
