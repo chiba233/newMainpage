@@ -36,7 +36,6 @@
             <a>{{ moment(time).fromNow() }}</a>
             </div>
           </div>
-          <a>先更新一下，还没更新完，你先别急</a>
         </div>
       </n-card>
     </n-modal>
@@ -97,10 +96,11 @@ const showModal = ref(false)
     width: 100%;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
     text-align: center;
-    background-color: rgba(89, 89, 89, 0.5);
+    background-color: rgba(89, 89, 89, 0.1);
     padding: 0.3em;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.6em;
   }
 }
 </style>
