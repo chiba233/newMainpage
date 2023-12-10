@@ -33,7 +33,7 @@
             <a v-if="lang==='en'">{{ nameEN }}</a>
             <a v-if="lang==='other'">{{ nameOther }}</a>
             <div>
-            <a>{{ moment(time).fromNow() }}</a>
+              <a>{{ moment(time).fromNow() }}</a>
             </div>
           </div>
         </div>
@@ -51,8 +51,6 @@ import {lang} from "@/components/ts/useStoage";
 import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
 import moment from "moment";
-import en from 'moment/locale/es-us'
-import zh from 'moment/locale/zh-cn'
 import {themeColor} from "@/components/ts/useStoage";
 
 
@@ -60,14 +58,14 @@ const boxTitle = ref()
 const clickMemory = () => {
   showModal.value = true
   if (lang.value === "zh") {
-    moment.lang("zh")
+    moment.locale("zh")
     boxTitle.value = fromNowI18.zh.title
   } else if (lang.value === "en") {
-    moment.lang("en")
+    moment.locale("en")
     boxTitle.value = fromNowI18.en.title
   } else if (lang.value === "other") {
     boxTitle.value = fromNowI18.other.title
-    moment.lang("en")
+    moment.locale("en")
   }
 }
 
