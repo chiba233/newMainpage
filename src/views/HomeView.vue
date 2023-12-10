@@ -11,7 +11,9 @@
     <div class="detailsDIV">
       <Details></Details>
     </div>
-    <Contacts></Contacts>
+    <div class="contactsDIV">
+      <Contacts></Contacts>
+    </div>
     <MyFriends></MyFriends>
   </div>
 </template>
@@ -28,25 +30,25 @@ import {themeColor} from "@/components/ts/useStoage";
 
 
 let randomTheme: number = Math.floor(Math.random() * 4);
-if (randomTheme===0){
-  document.body.style.backgroundImage="url(background.jpg)"
-  document.body.style.backgroundColor=colorData.background0
+if (randomTheme === 0) {
+  document.body.style.backgroundImage = "url(background.jpg)"
+  document.body.style.backgroundColor = colorData.background0
   themeColor.value = colorData.background0
 }
-if (randomTheme===1){
-  document.body.style.backgroundImage="url(background1.jpg)"
+if (randomTheme === 1) {
+  document.body.style.backgroundImage = "url(background1.jpg)"
   themeColor.value = colorData.background1
-  document.body.style.backgroundColor=colorData.background1
+  document.body.style.backgroundColor = colorData.background1
 }
-if (randomTheme===2){
-  document.body.style.backgroundImage="url(background2.jpg)"
-  document.body.style.backgroundColor=colorData.background2
+if (randomTheme === 2) {
+  document.body.style.backgroundImage = "url(background2.jpg)"
+  document.body.style.backgroundColor = colorData.background2
   themeColor.value = colorData.background2
 }
-if (randomTheme===3){
-  document.body.style.backgroundImage="url(background3.jpg)"
+if (randomTheme === 3) {
+  document.body.style.backgroundImage = "url(background3.jpg)"
   themeColor.value = colorData.background3
-  document.body.style.backgroundColor=colorData.background3
+  document.body.style.backgroundColor = colorData.background3
 }
 
 </script>
@@ -59,10 +61,14 @@ if (randomTheme===3){
   flex-direction: column;
   flex-wrap: wrap;
 
+
   .detailsDIV {
     width: 100%;
     display: flex;
     justify-content: center;
+    @media (min-width: 730px){
+      margin-top: 1em;
+    }
   }
 }
 
@@ -77,5 +83,11 @@ if (randomTheme===3){
   display: flex;
   justify-content: flex-end;
   position: absolute;
+}
+
+.contactsDIV {
+  @media (min-width: 730px) {
+    margin: 0.95em;
+  }
 }
 </style>

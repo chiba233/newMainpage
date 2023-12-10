@@ -10,8 +10,8 @@
         {{ dTextEN[1] }}
       </a>
       <a v-if="lang==='other'">
-        {{dTextOther[0]}}<br>
-        {{dTextOther[1]}}
+        {{ dTextOther[0] }}<br>
+        {{ dTextOther[1] }}
       </a>
     </a>
   </div>
@@ -23,7 +23,7 @@ import {lang} from "@/components/ts/useStoage";
 
 let dTextZH: string[] = introduction.introductionMessageZH
 let dTextEN: string[] = introduction.introductionMessageEN
-let dTextOther:string[]= introduction.introductionMessageOther
+let dTextOther: string[] = introduction.introductionMessageOther
 </script>
 
 <style lang="scss">
@@ -33,23 +33,30 @@ let dTextOther:string[]= introduction.introductionMessageOther
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: all 3s;
+  padding: 0.8em;
   @media (min-width: 420px) {
-    width: 50em;
+    width: 48em;
     border-radius: 15px;
     margin: 1em;
   }
   @media (max-width: 420px) {
-    width: 95%;
     border-radius: 8px;
     margin: 0.3em;
   }
 
   .detailText {
     color: white;
-    padding: 0.8em;
+    text-align: center;
     display: block;
     word-break: break-word;
     white-space: pre-wrap;
+    @media (min-width: 420px) {
+      font-size: 1.15em;
+    }
+    @media (max-width: 420px) {
+      font-size: 1em;
+
+    }
   }
 }
 </style>

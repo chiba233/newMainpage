@@ -23,11 +23,17 @@ import {lang} from "@/components/ts/useStoage";
   display: flex;
   margin-bottom: 1em;
   @media (min-width: 730px) {
-    margin-top: 2em;
+    margin-top: 3.5em;
     flex-direction: row;
     justify-content: center;
   }
   @media (max-width: 730px) {
+    margin-top: 1.5em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 430px) {
     margin-top: 1.5em;
     flex-direction: column;
     justify-content: center;
@@ -50,9 +56,17 @@ import {lang} from "@/components/ts/useStoage";
   }
 
   .titleIcon {
-    display: flex;
-    width: 6em;
-    height: 6em;
+    @media (min-width: 380px) {
+      display: flex;
+      width: 6em;
+      height: 6em;
+    }
+    @media (max-width: 380px) {
+      display: flex;
+      width: 4em;
+      height: 4em;
+    }
+
   }
 
   .a {

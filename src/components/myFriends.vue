@@ -36,13 +36,17 @@ function openURL(url: string) {
   color: white;
   display: flex;
   justify-content: center;
-  @media (max-width: 420px) {
-    font-size: 1.7em;
-    padding: 0.4em;
+  @media (min-width: 730px) {
+    font-size: 1.9em;
+    padding-bottom: 1em;
   }
-  @media (min-width: 420px) {
-    font-size: 2em;
-    padding: 0.5em;
+  @media (max-width: 730px) {
+    font-size: 1.7em;
+    padding-bottom: 0.4em;
+  }
+  @media (max-width: 420px) {
+    font-size: 1.55em;
+    padding-bottom: 0.4em;
   }
 }
 
@@ -90,7 +94,7 @@ function openURL(url: string) {
 
   .friendName {
     color: white;
-    white-space:nowrap;
+    white-space: nowrap;
 
   }
 
