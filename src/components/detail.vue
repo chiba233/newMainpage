@@ -51,7 +51,7 @@ let dTextOther: string[] = introduction.introductionMessageOther
     word-break: break-word;
     white-space: pre-wrap;
     @media (min-width: 420px) {
-      font-size: 1.15em;
+      font-size: 1.1em;
     }
     @media (max-width: 420px) {
       font-size: 1em;

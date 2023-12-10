@@ -23,7 +23,7 @@ import {lang} from "@/components/ts/useStoage";
   display: flex;
   margin-bottom: 1em;
   @media (min-width: 730px) {
-    margin-top: 3.5em;
+    margin-top: 3.2em;
     flex-direction: row;
     justify-content: center;
   }
