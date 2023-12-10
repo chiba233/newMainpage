@@ -95,11 +95,12 @@ function github() {
   flex-wrap: wrap;
 
   .n-button {
-    margin: 1em;
     @media (min-width: 420px) {
       width: 9em;
+      margin: 0.85em;
     }
     @media (max-width: 420px) {
+      margin: 0.68em;
       .n-icon {
         margin-left: 6px;
       }
