@@ -4,3 +4,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#app {
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}

@@ -2,7 +2,7 @@
   <div>
     <n-button @click="clickMemory" round :color="themeColor" class="buttonClock">
       <template #icon>
-        <n-icon>
+        <n-icon size="20">
           <Clock></Clock>
         </n-icon>
       </template>
@@ -79,6 +79,15 @@ const showModal = ref(false)
 <style lang="scss">
 .buttonClock {
   margin: 1em;
+  @media (max-width: 390px) {
+    .n-icon {
+      margin-left: 6px;
+    }}
+  a{@media (max-width: 390px) {
+    display: none;
+  }
+
+  }
 }
 
 .fromTimeCard {

@@ -1,12 +1,12 @@
 <template>
-  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click" >
+  <n-popselect v-model:value="lang" :options="i18nLang" trigger="click">
     <n-button round :color="themeColor" class="buttonI18">
       <template #icon>
-        <n-icon>
+        <n-icon size="20">
           <LangIcon/>
         </n-icon>
       </template>
-      {{ i18nLang.find(it => it.value === lang)?.label }}
+      <a> {{ i18nLang.find(it => it.value === lang)?.label }}</a>
     </n-button>
   </n-popselect>
 </template>
@@ -24,5 +24,17 @@ import {themeColor} from "@/components/ts/useStoage";
 <style lang="scss">
 .buttonI18 {
   margin: 1em;
+  @media (max-width: 390px) {
+    .n-icon {
+      margin-left: 6px;
+    }
+  }
+
+  a {
+    @media (max-width: 390px) {
+      display: none;
+    }
+  }
+
 }
 </style>
