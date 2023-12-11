@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import {NAvatar} from "naive-ui";
-import icon from "../icons/icon.jpg";
+import icon from "../icons/icon.webp";
 import titleMessage from "../message/titleMessage.json"
 import {lang} from "@/components/ts/useStoage";
 
