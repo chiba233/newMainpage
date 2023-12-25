@@ -1,20 +1,23 @@
 <template>
-  <div class="i18">
-    <I18n></I18n>
-  </div>
-  <div class="fromTime">
-    <from-now-time></from-now-time>
-  </div>
-
-  <div class="content">
-    <Title></Title>
-    <div class="detailsDIV">
-      <Details></Details>
+  <div class="toolAnimation">
+    <div class="i18">
+      <I18n></I18n>
     </div>
-    <div class="contactsDIV">
-      <Contacts></Contacts>
+    <div class="fromTime">
+      <from-now-time></from-now-time>
     </div>
-    <MyFriends></MyFriends>
+  </div>
+  <div class="mainAnimation">
+    <div class="content">
+      <Title></Title>
+      <div class="detailsDIV">
+        <Details></Details>
+      </div>
+      <div class="contactsDIV">
+        <Contacts></Contacts>
+      </div>
+      <MyFriends></MyFriends>
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,14 @@ if (randomTheme === 4) {
 </script>
 
 <style lang="scss">
+.toolAnimation {
+  animation: YToolIn 0.5s linear 0s 1;
+}
+
+.mainAnimation {
+  animation: YMainIn 0.5s linear 0s 1;
+}
+
 .content {
   width: 100%;
   display: flex;
@@ -71,7 +82,7 @@ if (randomTheme === 4) {
     width: 100%;
     display: flex;
     justify-content: center;
-    @media (min-width: 730px){
+    @media (min-width: 730px) {
       margin-top: 1em;
     }
   }
@@ -95,4 +106,24 @@ if (randomTheme === 4) {
     margin: 0.95em;
   }
 }
+
+@keyframes YToolIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes YMainIn {
+  from {
+    transform: translateY(3em);
+  }
+
+  to {
+    transform: none;
+  }
+
+}
+
 </style>
