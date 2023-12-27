@@ -64,7 +64,7 @@ import Github from "@/icons/LogoGithub.svg"
 import {themeColor} from "@/components/ts/useStoage";
 
 function twitter() {
-  window.open("https://twitter.com/strawberry960")
+  window.open("https://x.com/strawberry960")
 }
 
 function tron() {
