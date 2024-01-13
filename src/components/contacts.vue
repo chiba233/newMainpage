@@ -17,43 +17,43 @@
         <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
           <n-collapse-item :title="maiMainI18" name="1">
             <div class="maiCardDiv">
-              <a>{{ dxName }}</a> <a>:</a> <a>{{ useMaiData.userName }}</a>
+              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ useMaiData.userName }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxRatingName }}</a> <a>:</a> <a>{{ useMaiData.playerRating }}</a>
+              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ useMaiData.playerRating }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxLastPlay }}</a> <a>:</a> <a>{{ useMaiData.lastPlayDate }}</a>
+              <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastPlayDate }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxVersion }}</a> <a>:</a> <a>{{ useMaiData.lastDataVersion }}</a>
+              <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastDataVersion }}</a>
             </div>
           </n-collapse-item>
           <n-collapse-item :title="maiOtherI18" name="2">
             <div class="maiCardDiv">
               <div class="maiCardDiv">
-                <a>{{ basicDeluxscore }}</a> <a>:</a> <a>{{ useMaiData.totalBasicDeluxscore }}</a>
+                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalBasicDeluxscore }}</a>
               </div>
             </div>
             <div class="maiCardDiv">
-              <a>{{ advancedDeluxscore }}</a> <a>:</a> <a>{{ useMaiData.totalAdvancedDeluxscore }}</a>
+              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalAdvancedDeluxscore }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ expertDeluxscore }}</a> <a>:</a> <a>{{ useMaiData.totalExpertDeluxscore }}</a>
+              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{ useMaiData.totalExpertDeluxscore }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ masterDeluxscore }}</a> <a>:</a> <a>{{ useMaiData.totalMasterDeluxscore }}</a>
+              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalMasterDeluxscore }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ reMasterDeluxscore }}</a> <a>:</a> <a>{{ useMaiData.totalReMasterDeluxscore }}</a>
+              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a> <a>{{ useMaiData.totalReMasterDeluxscore }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ totelDeluxScore }}</a> <a>:</a> <a>{{ useMaiData.totalDeluxscore }}</a>
+              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalDeluxscore }}</a>
             </div>
           </n-collapse-item>
           <n-collapse-item :title="maiHistoryI18" name="3">
             <div class="maiCardDiv">
-              <a>{{ highestRating }}</a> <a>:</a> <a>{{ useMaiData.highestRating }}</a>
+              <a>{{ highestRating }}</a> <a class="connecter">:</a> <a>{{ useMaiData.highestRating }}</a>
             </div>
           </n-collapse-item>
         </n-collapse>
@@ -227,9 +227,11 @@ const clickMai = () => {
     width: 100%;
   }
 
-  a {
+  .connecter {
     padding-right: 1em;
-    padding-top: 1em;
+  }
+  a{
+    padding-bottom: 1em;
   }
 
   .maiCardDiv {
