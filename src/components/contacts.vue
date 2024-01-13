@@ -1,62 +1,4 @@
 <template>
-  <div class="contacts">
-    <n-button round :color="themeColor" class="cButton" @click="twitter">
-      <template #icon>
-        <n-icon size="23">
-          <TwitterIcon/>
-        </n-icon>
-      </template>
-      <a>Twitter</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="telegram">
-      <template #icon>
-        <n-icon size="23">
-          <TelegramIcon></TelegramIcon>
-        </n-icon>
-      </template>
-      <a>Telegram</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="tron">
-      <template #icon>
-        <n-icon size="23">
-          <Tron></Tron>
-        </n-icon>
-      </template>
-      <a>Tron</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="eth">
-      <template #icon>
-        <n-icon size="23">
-          <Eth></Eth>
-        </n-icon>
-      </template>
-      <a>Ethereum</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="email">
-      <template #icon>
-        <n-icon size="23">
-          <Email></Email>
-        </n-icon>
-      </template>
-      <a>E-Mail</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="github">
-      <template #icon>
-        <n-icon size="23">
-          <Github></Github>
-        </n-icon>
-      </template>
-      <a>GitHub</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="clickMai">
-      <template #icon>
-        <n-icon size="23">
-          <MaiTrans></MaiTrans>
-        </n-icon>
-      </template>
-      <a> DX {{ useMaiData.playerRating }}</a>
-    </n-button>
-  </div>
   <div>
     <n-modal v-model:show="showMaiModal">
       <n-card
@@ -117,6 +59,64 @@
         </n-collapse>
       </n-card>
     </n-modal>
+  </div>
+  <div class="contacts">
+    <n-button round :color="themeColor" class="cButton" @click="twitter">
+      <template #icon>
+        <n-icon size="23">
+          <TwitterIcon/>
+        </n-icon>
+      </template>
+      <a>Twitter</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="telegram">
+      <template #icon>
+        <n-icon size="23">
+          <TelegramIcon></TelegramIcon>
+        </n-icon>
+      </template>
+      <a>Telegram</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="tron">
+      <template #icon>
+        <n-icon size="23">
+          <Tron></Tron>
+        </n-icon>
+      </template>
+      <a>Tron</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="eth">
+      <template #icon>
+        <n-icon size="23">
+          <Eth></Eth>
+        </n-icon>
+      </template>
+      <a>Ethereum</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="email">
+      <template #icon>
+        <n-icon size="23">
+          <Email></Email>
+        </n-icon>
+      </template>
+      <a>E-Mail</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="github">
+      <template #icon>
+        <n-icon size="23">
+          <Github></Github>
+        </n-icon>
+      </template>
+      <a>GitHub</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="clickMai">
+      <template #icon>
+        <n-icon size="23">
+          <MaiTrans></MaiTrans>
+        </n-icon>
+      </template>
+      <a> DX {{ useMaiData.playerRating }}</a>
+    </n-button>
   </div>
 </template>
 

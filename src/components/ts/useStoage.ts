@@ -3,7 +3,7 @@ import moment from "moment/moment";
 import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
 import {getMaiMaiData} from "@/components/ts/maimaiScore";
-import type {Ref} from "vue";
+import {ref, type Ref} from "vue";
 
 let browserLang: string = navigator.language.substring(0, 2)
 if (browserLang != "zh" && "en") {
@@ -57,8 +57,10 @@ interface UserData {
     totalMasterAchievement: number; // 334866298
     totalReMasterAchievement: number; // 28204684
 }
+const firstData =ref("")
 getMaiMaiData().then(data => {
     useMaiData.value = data
+    firstData.value =data
 });
 
 moment.locale(browserLang)
@@ -66,4 +68,4 @@ moment.locale(browserLang)
 export const lang: Ref<string> = useStorage("useLang", browserLang)
 export const themeColor: Ref<string> = useStorage("setColor", "")
 
-export const useMaiData: Ref = useStorage("setMaiScore", "")
+export const useMaiData: Ref = useStorage("setMaiScore",firstData)
