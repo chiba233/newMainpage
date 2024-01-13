@@ -221,7 +221,7 @@ const clickMai = () => {
 .maiCard {
   display: flex;
   @media (min-width: 420px) {
-    width: 50%;
+    width: 65%;
   }
   @media (max-width: 420px) {
     width: 100%;
