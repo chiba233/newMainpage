@@ -155,7 +155,7 @@ const reMasterDeluxscore = ref("")
 const totelDeluxScore = ref("")
 const highestRating = ref("")
 const dxPlayCount =ref("")
-const maiError =ref("获取失败")
+const maiError =ref("获取失败！")
 
 
 function twitter() {
@@ -218,7 +218,7 @@ const clickMai = () => {
     reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreEN
     totelDeluxScore.value = maiI18nData.totalDeluxscoreEN
     highestRating.value = maiI18nData.highestRatingEN
-    dxPlayCount.value=maiI18nData.dxPlayCountZH
+    dxPlayCount.value=maiI18nData.dxPlayCountEN
   }
   showMaiModal.value = true
 }
@@ -236,7 +236,8 @@ const clickMai = () => {
   }
 
   .connecter {
-    padding-right: 1em;
+    padding-right: 0.6em;
+    padding-left: 0.2em;
   }
   a{
     padding-bottom: 1em;
