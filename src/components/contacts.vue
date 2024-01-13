@@ -17,46 +17,46 @@
         <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
           <n-collapse-item :title="maiMainI18" name="1">
             <div class="maiCardDiv">
-              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ useMaiData.userName  ?? maiError }}</a>
+              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName  ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ useMaiData.playerRating  ?? maiError}}</a>
+              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating  ?? maiError}}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastPlayDate ?? maiError }}</a>
+              <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ data.lastPlayDate ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ useMaiData.playCount  ?? maiError}}</a>
+              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount  ?? maiError}}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastDataVersion ?? maiError }}</a>
+              <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ data.lastDataVersion ?? maiError }}</a>
             </div>
           </n-collapse-item>
           <n-collapse-item :title="maiOtherI18" name="2">
             <div class="maiCardDiv">
               <div class="maiCardDiv">
-                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalBasicDeluxscore ?? maiError }}</a>
+                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalBasicDeluxscore ?? maiError }}</a>
               </div>
             </div>
             <div class="maiCardDiv">
-              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalAdvancedDeluxscore  ?? maiError}}</a>
+              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalAdvancedDeluxscore  ?? maiError}}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{ useMaiData.totalExpertDeluxscore ?? maiError }}</a>
+              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{ data.totalExpertDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalMasterDeluxscore ?? maiError }}</a>
+              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalMasterDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a> <a>{{ useMaiData.totalReMasterDeluxscore  ?? maiError}}</a>
+              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a> <a>{{ data.totalReMasterDeluxscore  ?? maiError}}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ useMaiData.totalDeluxscore  ?? maiError}}</a>
+              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ data.totalDeluxscore  ?? maiError}}</a>
             </div>
           </n-collapse-item>
           <n-collapse-item :title="maiHistoryI18" name="3">
             <div class="maiCardDiv">
-              <a>{{ highestRating  }}</a> <a class="connecter">:</a> <a>{{ useMaiData.highestRating  ?? maiError}}</a>
+              <a>{{ highestRating  }}</a> <a class="connecter">:</a> <a>{{ data.highestRating  ?? maiError}}</a>
             </div>
           </n-collapse-item>
         </n-collapse>
@@ -118,7 +118,7 @@
           <MaiTrans></MaiTrans>
         </n-icon>
       </template>
-      <a> DX {{ useMaiData.playerRating ??maiError}}</a>
+      <a> DX {{ data.playerRating ??maiError}}</a>
     </n-button>
   </div>
 </template>
@@ -133,10 +133,12 @@ import Eth from "@/icons/eth.svg"
 import Email from "@/icons/Email.svg"
 import Github from "@/icons/LogoGithub.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
-import {useMaiData} from "@/components/ts/maimaiScore";
+import {maiUrl, UserDataType} from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
 import {ref} from "vue";
-import maiI18nData from "@/message/maiI18n.json"
+import maiI18nData from "@/message/maiI18n.json";
+import axios from "axios";
+import {useAsyncState} from "@vueuse/core";
 
 const maiBoxTitle = ref("")
 const maiMainI18 = ref("")
@@ -155,8 +157,9 @@ const reMasterDeluxscore = ref("")
 const totelDeluxScore = ref("")
 const highestRating = ref("")
 const dxPlayCount =ref("")
-const maiError =ref("获取失败！")
+const maiError = ref("获取失败！")
 
+const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
 
 function twitter() {
   window.open("https://twitter.com/strawberry960")
@@ -221,7 +224,9 @@ const clickMai = () => {
     dxPlayCount.value=maiI18nData.dxPlayCountEN
   }
   showMaiModal.value = true
+  return { data }
 }
+
 
 </script>
 
