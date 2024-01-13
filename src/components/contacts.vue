@@ -130,7 +130,7 @@ import Eth from "@/icons/eth.svg"
 import Email from "@/icons/Email.svg"
 import Github from "@/icons/LogoGithub.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
-import {useMaiData} from "@/components/ts/useStoage";
+import {useMaiData} from "@/components/ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
 import {ref} from "vue";
 import maiI18nData from "@/message/maiI18n.json"
