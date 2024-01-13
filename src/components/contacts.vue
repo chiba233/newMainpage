@@ -26,6 +26,9 @@
               <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastPlayDate }}</a>
             </div>
             <div class="maiCardDiv">
+              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ useMaiData.playCount }}</a>
+            </div>
+            <div class="maiCardDiv">
               <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ useMaiData.lastDataVersion }}</a>
             </div>
           </n-collapse-item>
@@ -151,6 +154,7 @@ const masterDeluxscore = ref("")
 const reMasterDeluxscore = ref("")
 const totelDeluxScore = ref("")
 const highestRating = ref("")
+const dxPlayCount =ref("")
 
 
 function twitter() {
@@ -194,6 +198,7 @@ const clickMai = () => {
     reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreZH
     totelDeluxScore.value = maiI18nData.totalDeluxscoreZH
     highestRating.value = maiI18nData.highestRatingZH
+    dxPlayCount.value=maiI18nData.dxPlayCountZH
 
 
   } else if (lang.value !== "zh") {
@@ -202,6 +207,7 @@ const clickMai = () => {
     maiOtherI18.value = maiI18nData.otherInfoEN
     maiHistoryI18.value = maiI18nData.historyInfoEN
     dxRatingName.value = maiI18nData.dxRatingNameEN
+    dxName.value = maiI18nData.dxNameEN
     dxLastPlay.value = maiI18nData.dxLastPlayEN
     dxVersion.value = maiI18nData.dxVersionEN
     basicDeluxscore.value = maiI18nData.BasicDeluxscoreEN
@@ -211,6 +217,7 @@ const clickMai = () => {
     reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreEN
     totelDeluxScore.value = maiI18nData.totalDeluxscoreEN
     highestRating.value = maiI18nData.highestRatingEN
+    dxPlayCount.value=maiI18nData.dxPlayCountZH
   }
   showMaiModal.value = true
 }

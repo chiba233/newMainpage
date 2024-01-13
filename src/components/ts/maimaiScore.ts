@@ -66,7 +66,7 @@ export async function getMaiMaiData() {
 }
 
 export const useMaiData: Ref = useStorage("setMaiScore", firstData)
-getMaiMaiData().then(data => {
+await getMaiMaiData().then(data => {
     useMaiData.value = data
     firstData.value = data
 });
