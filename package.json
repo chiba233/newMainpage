@@ -11,13 +11,14 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@vueuse/core": "^10.1.2",
+    "@vueuse/core": "^10.7.2",
     "axios": "^1.6.5",
     "moment": "^2.29.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@babel/types": "^7.23.6",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
