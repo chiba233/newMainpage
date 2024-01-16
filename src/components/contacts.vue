@@ -25,7 +25,7 @@
     <n-modal v-model:show="showMaiModal">
       <n-card
           class="maiCard"
-          :title="catMemory"
+          :title="maiBoxTitle"
           size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showMaiModal = false">
@@ -293,7 +293,7 @@ const clickMai = () => {
       height: 275px;
     }
     @media (max-width: 440px) {
-      height: 205px;
+      height: 220px;
     }
 
     img {
