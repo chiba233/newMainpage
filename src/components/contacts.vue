@@ -156,7 +156,10 @@
           <Cat></Cat>
         </n-icon>
       </template>
-      <a>{{ catMemory }}</a>
+      <a v-if="lang==='zh'">
+        {{ commonI18n.catZH }}</a>
+      <a v-if="lang==='en'">
+        {{ commonI18n.catEN }}</a>
     </n-button>
   </div>
 </template>
@@ -228,13 +231,13 @@ function github() {
   window.open("https://github.com/chiba233")
 }
 
-if (lang.value === "zh") {
-  catMemory.value = commonI18n.catZH
-} else if (lang.value !== "zh") {
-  catMemory.value = commonI18n.catEN
-}
 const clickCatMemory = () => {
   showCatModel.value = true
+  if (lang.value === "zh") {
+    catMemory.value = commonI18n.catZH
+  } else if (lang.value !== "zh") {
+    catMemory.value = commonI18n.catEN
+  }
 }
 const clickMai = () => {
   if (lang.value === "zh") {
@@ -284,22 +287,22 @@ const clickMai = () => {
 <style lang="scss">
 .catCard {
   @media (min-width: 440px) {
-    width: 30em
+    width: 35em
   }
   @media (max-width: 440px) {
     width: 100%;
   }
 
   .catImgCard {
-    object-fit: cover;
     @media (min-width: 440px) {
-      height: 200px;
+      height: 240px;
     }
     @media (max-width: 440px) {
       height: 170px;
     }
 
     img {
+      object-fit: cover;
       width: 100%;
       height: 100%;
     }
