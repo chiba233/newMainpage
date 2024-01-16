@@ -158,7 +158,7 @@
       </template>
       <a v-if="lang==='zh'">
         {{ commonI18n.catZH }}</a>
-      <a v-if="lang==='en'">
+      <a v-if="lang!=='zh'">
         {{ commonI18n.catEN }}</a>
     </n-button>
   </div>
@@ -286,19 +286,14 @@ const clickMai = () => {
 
 <style lang="scss">
 .catCard {
-  @media (min-width: 440px) {
-    width: 35em
-  }
-  @media (max-width: 440px) {
-    width: 100%;
-  }
+  width: 40em;
 
   .catImgCard {
     @media (min-width: 440px) {
-      height: 240px;
+      height: 275px;
     }
     @media (max-width: 440px) {
-      height: 170px;
+      height: 205px;
     }
 
     img {
@@ -312,12 +307,7 @@ const clickMai = () => {
 
 .maiCard {
   display: flex;
-  @media (min-width: 420px) {
-    width: 42em;
-  }
-  @media (max-width: 420px) {
-    width: 100%;
-  }
+  width: 42em;
 
   .connecter {
     padding-right: 0.6em;

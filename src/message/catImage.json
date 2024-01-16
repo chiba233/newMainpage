@@ -1,26 +1,26 @@
 [
   {
-    "catImg": "/cat/橘猫.jpg",
+    "catImg": "/cat/橘猫.webp",
     "imgName": "躺着的橘猫"
   },
   {
-    "catImg": "/cat/奶子.jpg",
+    "catImg": "/cat/奶子.webp",
     "imgName": "奶子"
   },
   {
-    "catImg": "/cat/大狗.jpg",
+    "catImg": "/cat/大狗.webp",
     "imgName": "大狗"
   },
   {
-    "catImg": "/cat/三花.jpg",
+    "catImg": "/cat/三花.webp",
     "imgName": "三花"
   },
   {
-    "catImg": "/cat/布偶.jpg",
+    "catImg": "/cat/布偶.webp",
     "imgName": "布偶"
   },
   {
-    "catImg": "/cat/全家福2.jpg",
+    "catImg": "/cat/全家福.webp",
     "imgName": "全家福一群猫"
   }
 ]
