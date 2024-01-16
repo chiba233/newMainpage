@@ -157,7 +157,7 @@ const reMasterDeluxscore = ref("")
 const totelDeluxScore = ref("")
 const highestRating = ref("")
 const dxPlayCount =ref("")
-const maiError = ref("获取失败！")
+const maiError = ref("获取失败")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
 

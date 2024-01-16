@@ -32,7 +32,7 @@ import colorData from "@/message/colorData.json"
 import {themeColor} from "@/components/ts/useStoage";
 
 
-let randomTheme: number = Math.floor(Math.random() * 6);
+let randomTheme: number = Math.floor(Math.random() * 7);
 if (randomTheme === 0) {
   document.body.style.backgroundImage = "url(background.webp)"
   document.body.style.backgroundColor = colorData.background0
@@ -62,6 +62,10 @@ if (randomTheme === 5) {
   document.body.style.backgroundImage = "url(background5.webp)"
   themeColor.value = colorData.background5
   document.body.style.backgroundColor = colorData.background5
+}if (randomTheme === 6) {
+  document.body.style.backgroundImage = "url(background6.webp)"
+  themeColor.value = colorData.background6
+  document.body.style.backgroundColor = colorData.background6
 }
 
 </script>
