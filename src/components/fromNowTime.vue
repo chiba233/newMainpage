@@ -93,7 +93,7 @@ const showModal = ref(false)
 .fromTimeCard {
   display: flex;
   @media (min-width: 420px) {
-    width: 50%;
+    width: 35em;
   }
   @media (max-width: 420px) {
     width: 100%;
