@@ -1,9 +1,31 @@
 <template>
   <div>
+    <n-modal v-model:show="showCatModel">
+      <n-card
+          class="catCard"
+          :title="catMemory"
+          size="huge">
+        <template #header-extra>
+          <n-button tertiary circle @click="showCatModel = false">
+            <template #icon>
+              <n-icon size="20">
+                <Cancel></Cancel>
+              </n-icon>
+            </template>
+          </n-button>
+        </template>
+        <div>
+          <n-carousel class="catImgCard" show-arrow mousewheel>
+            <img v-for="{catImg,imgName} in catImage" :src="catImg" :alt="imgName">
+          </n-carousel>
+        </div>
+      </n-card>
+    </n-modal>
+
     <n-modal v-model:show="showMaiModal">
       <n-card
           class="maiCard"
-          :title="maiBoxTitle"
+          :title="catMemory"
           size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showMaiModal = false">
@@ -17,16 +39,16 @@
         <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
           <n-collapse-item :title="maiMainI18" name="1">
             <div class="maiCardDiv">
-              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName  ?? maiError }}</a>
+              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating  ?? maiError}}</a>
+              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
               <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ data.lastPlayDate ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount  ?? maiError}}</a>
+              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
               <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ data.lastDataVersion ?? maiError }}</a>
@@ -35,28 +57,36 @@
           <n-collapse-item :title="maiOtherI18" name="2">
             <div class="maiCardDiv">
               <div class="maiCardDiv">
-                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalBasicDeluxscore ?? maiError }}</a>
+                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{
+                  data.totalBasicDeluxscore ?? maiError
+                }}</a>
               </div>
             </div>
             <div class="maiCardDiv">
-              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalAdvancedDeluxscore  ?? maiError}}</a>
+              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a>
+              <a>{{ data.totalAdvancedDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{ data.totalExpertDeluxscore ?? maiError }}</a>
+              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{
+                data.totalExpertDeluxscore ?? maiError
+              }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{ data.totalMasterDeluxscore ?? maiError }}</a>
+              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{
+                data.totalMasterDeluxscore ?? maiError
+              }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a> <a>{{ data.totalReMasterDeluxscore  ?? maiError}}</a>
+              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a>
+              <a>{{ data.totalReMasterDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ data.totalDeluxscore  ?? maiError}}</a>
+              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ data.totalDeluxscore ?? maiError }}</a>
             </div>
           </n-collapse-item>
           <n-collapse-item :title="maiHistoryI18" name="3">
             <div class="maiCardDiv">
-              <a>{{ highestRating  }}</a> <a class="connecter">:</a> <a>{{ data.highestRating  ?? maiError}}</a>
+              <a>{{ highestRating }}</a> <a class="connecter">:</a> <a>{{ data.highestRating ?? maiError }}</a>
             </div>
           </n-collapse-item>
         </n-collapse>
@@ -118,15 +148,26 @@
           <MaiTrans></MaiTrans>
         </n-icon>
       </template>
-      <a> DX {{ data.playerRating ??maiError}}</a>
+      <a> DX {{ data.playerRating ?? maiError }}</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="clickCatMemory">
+      <template #icon>
+        <n-icon size="23">
+          <Cat></Cat>
+        </n-icon>
+      </template>
+      <a>{{ catMemory }}</a>
     </n-button>
   </div>
 </template>
 
 <script setup lang="ts">
+import catImage from "@/message/catImage.json"
+import commonI18n from "@/message/commonI18n.json"
+import Cat from "@/icons/cat.svg"
 import TwitterIcon from "@/icons/twitter.svg"
 import TelegramIcon from "@/icons/telegram.svg"
-import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem} from "naive-ui";
+import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem, NCarousel} from "naive-ui";
 import MaiTrans from "@/icons/maitrans.svg"
 import Tron from "@/icons/tron.svg"
 import Eth from "@/icons/eth.svg"
@@ -140,11 +181,13 @@ import maiI18nData from "@/message/maiI18n.json";
 import axios from "axios";
 import {useAsyncState} from "@vueuse/core";
 
+const showCatModel = ref<boolean>(false)
+const showMaiModal = ref<boolean>(false)
+const catMemory = ref("")
 const maiBoxTitle = ref("")
 const maiMainI18 = ref("")
 const maiOtherI18 = ref("")
 const maiHistoryI18 = ref("")
-const showMaiModal = ref(false)
 const dxRatingName = ref("")
 const dxName = ref("")
 const dxVersion = ref("")
@@ -156,7 +199,7 @@ const masterDeluxscore = ref("")
 const reMasterDeluxscore = ref("")
 const totelDeluxScore = ref("")
 const highestRating = ref("")
-const dxPlayCount =ref("")
+const dxPlayCount = ref("")
 const maiError = ref("获取失败")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
@@ -185,6 +228,14 @@ function github() {
   window.open("https://github.com/chiba233")
 }
 
+if (lang.value === "zh") {
+  catMemory.value = commonI18n.catZH
+} else if (lang.value !== "zh") {
+  catMemory.value = commonI18n.catEN
+}
+const clickCatMemory = () => {
+  showCatModel.value = true
+}
 const clickMai = () => {
   if (lang.value === "zh") {
     maiBoxTitle.value = maiI18nData.titleNameZH
@@ -202,7 +253,7 @@ const clickMai = () => {
     reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreZH
     totelDeluxScore.value = maiI18nData.totalDeluxscoreZH
     highestRating.value = maiI18nData.highestRatingZH
-    dxPlayCount.value=maiI18nData.dxPlayCountZH
+    dxPlayCount.value = maiI18nData.dxPlayCountZH
 
 
   } else if (lang.value !== "zh") {
@@ -221,16 +272,41 @@ const clickMai = () => {
     reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreEN
     totelDeluxScore.value = maiI18nData.totalDeluxscoreEN
     highestRating.value = maiI18nData.highestRatingEN
-    dxPlayCount.value=maiI18nData.dxPlayCountEN
+    dxPlayCount.value = maiI18nData.dxPlayCountEN
   }
   showMaiModal.value = true
-  return { data }
+  return {data}
 }
 
 
 </script>
 
 <style lang="scss">
+.catCard {
+  @media (min-width: 440px) {
+    width: 30em
+  }
+  @media (max-width: 440px) {
+    width: 100%;
+  }
+
+  .catImgCard {
+    object-fit: cover;
+    @media (min-width: 440px) {
+      height: 200px;
+    }
+    @media (max-width: 440px) {
+      height: 170px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+}
+
 .maiCard {
   display: flex;
   @media (min-width: 420px) {
@@ -244,17 +320,18 @@ const clickMai = () => {
     padding-right: 0.6em;
     padding-left: 0.2em;
   }
-  a{
+
+  a {
     padding-bottom: 1em;
   }
 
   .maiCardDiv {
     display: flex;
     justify-content: center;
+    height: auto;
+    object-fit: scale-down;
   }
 
-  .maiCollapse {
-  }
 }
 
 .contacts {
