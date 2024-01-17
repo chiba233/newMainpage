@@ -1,26 +1,32 @@
 [
   {
-    "catImg": "/cat/橘猫.webp",
+    "catImgError": "/cat/橘猫.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E6%A9%98%E7%8C%AB.webp",
     "imgName": "躺着的橘猫"
   },
   {
-    "catImg": "/cat/奶子.webp",
+    "catImgError": "/cat/奶子.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E5%A5%B6%E5%AD%90.webp",
     "imgName": "奶子"
   },
   {
-    "catImg": "/cat/大狗.webp",
+    "catImgError": "/cat/大狗.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E5%A4%A7%E7%8B%97.webp",
     "imgName": "大狗"
   },
   {
-    "catImg": "/cat/三花.webp",
+    "catImgError": "/cat/三花.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E4%B8%89%E8%8A%B1.webp",
     "imgName": "三花"
   },
   {
-    "catImg": "/cat/布偶.webp",
+    "catImgError": "/cat/布偶.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E5%B8%83%E5%81%B6.webp",
     "imgName": "布偶"
   },
   {
-    "catImg": "/cat/全家福.webp",
+    "catImgError": "/cat/全家福.webp",
+    "catImg": "https://raw.githubusercontent.com/chiba233/newMainpage/master/public/cat/%E5%85%A8%E5%AE%B6%E7%A6%8F.webp",
     "imgName": "全家福一群猫"
   }
 ]

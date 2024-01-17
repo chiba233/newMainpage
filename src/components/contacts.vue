@@ -3,7 +3,7 @@
     <n-modal v-model:show="showCatModel">
       <n-card
           class="catCard"
-          :title="catMemory"
+          :title="catMemoryTitle"
           size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showCatModel = false">
@@ -204,6 +204,7 @@ const totelDeluxScore = ref("")
 const highestRating = ref("")
 const dxPlayCount = ref("")
 const maiError = ref("获取失败")
+const catMemoryTitle =ref<string>("")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
 
@@ -235,8 +236,11 @@ const clickCatMemory = () => {
   showCatModel.value = true
   if (lang.value === "zh") {
     catMemory.value = commonI18n.catZH
+    catMemoryTitle.value=commonI18n.catMemoryTitleZH
   } else if (lang.value !== "zh") {
     catMemory.value = commonI18n.catEN
+    catMemoryTitle.value=commonI18n.catMemoryTitleEN
+
   }
 }
 const clickMai = () => {
