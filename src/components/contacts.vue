@@ -124,7 +124,7 @@
           <Eth></Eth>
         </n-icon>
       </template>
-      <a>Ethereum</a>
+      <a>ETH-ARB</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="email">
       <template #icon>
@@ -217,7 +217,7 @@ function tron() {
 }
 
 function eth() {
-  window.open("https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
+  window.open("https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
 
 function telegram() {
