@@ -124,7 +124,31 @@
           <Eth></Eth>
         </n-icon>
       </template>
-      <a>ETH-ARB</a>
+      <a>Ethereum</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="areth">
+      <template #icon>
+        <n-icon size="23">
+          <Arbitrum></Arbitrum>
+        </n-icon>
+      </template>
+      <a>Arbitrum</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="bsc">
+      <template #icon>
+        <n-icon size="23">
+          <Bsc></Bsc>
+        </n-icon>
+      </template>
+      <a>BSC-BNB</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="polygon">
+      <template #icon>
+        <n-icon size="23">
+          <Polygon></Polygon>
+        </n-icon>
+      </template>
+      <a>Polygon</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="email">
       <template #icon>
@@ -174,8 +198,11 @@ import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem, NCarousel} from
 import MaiTrans from "@/icons/maitrans.svg"
 import Tron from "@/icons/tron.svg"
 import Eth from "@/icons/eth.svg"
+import Bsc from "@/icons/binance-coin-bnb-seeklogo.svg"
 import Email from "@/icons/Email.svg"
 import Github from "@/icons/LogoGithub.svg"
+import Polygon from "@/icons/polygon-matic-logo.svg"
+import Arbitrum from "@/icons/arb.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
 import {maiUrl, UserDataType} from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
@@ -216,10 +243,18 @@ function tron() {
   window.open("https://tronscan.org/#/address/TVB16jV3Jx2HTn9U1KjyBSN1u9MQ29FArs")
 }
 
-function eth() {
+function areth() {
   window.open("https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
-
+function eth() {
+  window.open("https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
+}
+function polygon() {
+  window.open("https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
+}
+function bsc() {
+  window.open("https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
+}
 function telegram() {
   window.open("https://t.me/chiba2333")
 }

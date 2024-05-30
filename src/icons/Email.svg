@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="24px"
-   height="240px"
-   viewBox="0 0 24 24"
+   width="23"
+   height="23"
+   viewBox="0 0 23 2.3"
    version="1.1"
    id="svg1"
    sodipodi:docname="Email.svg"
@@ -22,9 +22,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="3.525"
-     inkscape:cx="12.056738"
-     inkscape:cy="120.14184"
+     inkscape:zoom="9.9702056"
+     inkscape:cx="7.9737573"
+     inkscape:cy="28.835915"
      inkscape:window-width="1920"
      inkscape:window-height="1111"
      inkscape:window-x="-9"
@@ -33,10 +33,11 @@
      inkscape:current-layer="svg1" />
   <g
      id="surface1"
-     style="fill:#ffffff">
+     style="fill:#ffffff"
+     transform="matrix(1.0952381,0,0,1.0666667,-1.6428571,-11.65)">
     <path
-       style="stroke:none;fill-rule:nonzero;fill:#ffffff;fill-opacity:1"
-       d="M 21 4.5 L 3 4.5 C 2.171875 4.5 1.5 5.171875 1.5 6 L 1.5 18 C 1.5 18.828125 2.171875 19.5 3 19.5 L 21 19.5 C 21.828125 19.5 22.5 18.828125 22.5 18 L 22.5 6 C 22.5 5.171875 21.828125 4.5 21 4.5 Z M 19.351562 6 L 12 11.085938 L 4.648438 6 Z M 3 18 L 3 6.683594 L 11.574219 12.613281 C 11.828125 12.792969 12.171875 12.792969 12.425781 12.613281 L 21 6.683594 L 21 18 Z M 3 18 "
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       d="M 21,4.5 H 3 C 2.171875,4.5 1.5,5.171875 1.5,6 v 12 c 0,0.828125 0.671875,1.5 1.5,1.5 h 18 c 0.828125,0 1.5,-0.671875 1.5,-1.5 V 6 C 22.5,5.171875 21.828125,4.5 21,4.5 Z M 19.351562,6 12,11.085938 4.648438,6 Z M 3,18 V 6.683594 l 8.574219,5.929687 c 0.253906,0.179688 0.597656,0.179688 0.851562,0 L 21,6.683594 V 18 Z m 0,0"
        id="path1" />
   </g>
 </svg>
