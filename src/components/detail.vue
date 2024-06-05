@@ -33,14 +33,14 @@ let dTextOther: string[] = introduction.introductionMessageOther
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: all 3s;
-  padding: 0.8em;
+  padding: 0.9em;
   @media (min-width: 420px) {
-    width: 48em;
+    width: 50em;
     border-radius: 15px;
     margin: 1em;
   }
   @media (max-width: 420px) {
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 0.3em;
   }
 

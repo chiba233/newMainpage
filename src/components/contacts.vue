@@ -110,6 +110,22 @@
       </template>
       <a>Telegram</a>
     </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="github">
+      <template #icon>
+        <n-icon size="23">
+          <Github></Github>
+        </n-icon>
+      </template>
+      <a>GitHub</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="email">
+      <template #icon>
+        <n-icon size="23">
+          <Email></Email>
+        </n-icon>
+      </template>
+      <a>E-Mail</a>
+    </n-button>
     <n-button round :color="themeColor" class="cButton" @click="tron">
       <template #icon>
         <n-icon size="23">
@@ -157,22 +173,6 @@
         </n-icon>
       </template>
       <a>Solana</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="email">
-      <template #icon>
-        <n-icon size="23">
-          <Email></Email>
-        </n-icon>
-      </template>
-      <a>E-Mail</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="github">
-      <template #icon>
-        <n-icon size="23">
-          <Github></Github>
-        </n-icon>
-      </template>
-      <a>GitHub</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="clickMai">
       <template #icon>
@@ -389,7 +389,7 @@ const clickMai = () => {
   .n-button {
     @media (min-width: 420px) {
       width: 9em;
-      margin: 0.85em;
+      margin: 0.55em;
     }
     @media (max-width: 420px) {
       margin: 0.68em;
