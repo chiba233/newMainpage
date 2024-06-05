@@ -150,6 +150,14 @@
       </template>
       <a>Polygon</a>
     </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="solana">
+      <template #icon>
+        <n-icon size="23">
+          <Solana></Solana>
+        </n-icon>
+      </template>
+      <a>Solana</a>
+    </n-button>
     <n-button round :color="themeColor" class="cButton" @click="email">
       <template #icon>
         <n-icon size="23">
@@ -189,6 +197,7 @@
 </template>
 
 <script setup lang="ts">
+import Solana from "@/icons/solanaLogoMark.svg"
 import catImage from "@/message/catImage.json"
 import commonI18n from "@/message/commonI18n.json"
 import Cat from "@/icons/cat.svg"
@@ -255,6 +264,10 @@ function polygon() {
 function bsc() {
   window.open("https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
+function solana() {
+  window.open("https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V")
+}
+
 function telegram() {
   window.open("https://t.me/chiba2333")
 }
