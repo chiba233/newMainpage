@@ -6,7 +6,7 @@
           <LangIcon/>
         </n-icon>
       </template>
-      <a> {{ i18nLang.find(it => it.value === lang)?.label }}</a>
+      <a> {{ i18nLang.find((it :LangItem ) => it.value === lang)?.label }}</a>
     </n-button>
   </n-popselect>
 </template>
@@ -18,6 +18,10 @@ import i18nLang from "../message/i18nLang.json"
 import {lang} from "@/components/ts/useStoage";
 import {themeColor} from "@/components/ts/useStoage";
 
+type LangItem = {
+  label: string
+  value: string
+}
 
 </script>
 
