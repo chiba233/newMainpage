@@ -6,9 +6,7 @@
           <Clock></Clock>
         </n-icon>
       </template>
-      <a v-if="lang==='en'">{{ fromNowI18.en.button }}</a>
-      <a v-if="lang==='zh'">{{ fromNowI18.zh.button }}</a>
-      <a v-if="lang==='other'">{{ fromNowI18.other.button }}</a>
+      <a>{{ getName("button") }}</a>
     </n-button>
     <n-modal v-model:show="showModal">
       <n-card
@@ -25,13 +23,11 @@
           </n-button>
         </template>
         <div class="allTimeCard">
-          <div class="timeCard" v-for="{nameZH,nameEN,time,nameOther} in fromNow">
+          <div class="timeCard" v-for="{time} in fromNow">
             <div class="thatDay">
               <a>{{ time.substring(0, 4) }} - {{ time.substring(4, 6) }} - {{ time.substring(6, 8) }}</a>
             </div>
-            <a v-if="lang==='zh'">{{ nameZH }}</a>
-            <a v-if="lang==='en'">{{ nameEN }}</a>
-            <a v-if="lang==='other'">{{ nameOther }}</a>
+            <a>{{ getName("title") }}</a>
             <div>
               <a>{{ moment(time).fromNow() }}</a>
             </div>
@@ -52,6 +48,23 @@ import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
 import moment from "moment";
 import {themeColor} from "@/components/ts/useStoage";
+import {LangKey} from "@/components/ts/useStoage";
+
+
+const getName = (type: number) => {
+  // 1. 确定当前语言
+  const currentLang = (lang.value as LangKey) || 'other';
+
+  // 2. 获取该语言对应的文案对象 (包含 title 和 button)
+  const content = fromNowI18[currentLang];
+
+  const map: Record<string | number, string> = {
+    "title": content.title,
+    "button": content.button
+  };
+
+  return map[type] || "未知内容";// 兜底返回空字符串
+};
 
 
 const boxTitle = ref()
@@ -79,7 +92,7 @@ const showModal = ref(false)
 <style lang="scss">
 .buttonClock {
   margin-left: 1em;
-  height: 2.5em;
+  height: 2.2em;
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;

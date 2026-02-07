@@ -54,7 +54,7 @@ themeColor.value = selectedColor;
   position: relative;
   -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
   .main {
-    height: 96dvh;
+    height: 100dvh;
     animation: slide-fwd-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     .content {
@@ -93,12 +93,14 @@ themeColor.value = selectedColor;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 4dvh;
+  height: 2.2em;
   position: absolute;
   animation: downToUp 0.5s linear 0s 1;
-  bottom: calc(0.6em + env(safe-area-inset-bottom));
+  z-index: 9999;
+  bottom: calc(0.4em + env(safe-area-inset-bottom));
 
   .copyrightText {
+    position: absolute;
     font-size: 1.1em;
     color: #343131;
 

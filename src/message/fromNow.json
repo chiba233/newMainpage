@@ -1,7 +1,8 @@
 [
   {
-    "nameZH": "第一次吃药",
+    "nameZH": "第一次吃雌二醇",
     "nameEN": "Fist time take medicine",
+    "nameJP": "初めてE２を飲んだの日",
     "nameOther": "踏入新世界大门",
     "photo": "",
     "time": "20161225"
@@ -9,13 +10,15 @@
   {
     "nameZH": "SRS手术",
     "nameEN": "SRS Operation",
-    "nameOther": "这是我的重生",
+    "nameJP": "SRS 手術を終えたの日",
+    "nameOther": "srs",
     "photo": "",
     "time": "20220816"
   },
   {
     "nameZH": "来到泰国",
-    "nameEN": "Come to タイ",
+    "nameEN": "Come to Thailand",
+    "nameJP": "タイに引っ越すの日",
     "nameOther": "也许是一种全新开始",
     "photo": "",
     "time": "20241115"
@@ -24,6 +27,7 @@
     "nameZH": "布偶猫去世",
     "nameEN": "I lost my child.",
     "nameOther": "哎，她才不到三岁啊。",
+    "nameJP": "布偶猫に死んだの日",
     "photo": "",
     "time": "20240227"
   }

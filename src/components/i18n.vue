@@ -17,18 +17,27 @@ import {NButton, NIcon, NPopselect} from "naive-ui"
 import i18nLang from "../message/i18nLang.json"
 import {lang} from "@/components/ts/useStoage";
 import {themeColor} from "@/components/ts/useStoage";
+import {watch} from "vue";
+import webTitle from "../message/webTitle.json"
+
+const newWebTitle: Record<string, string> = webTitle;
 
 type LangItem = {
   label: string
   value: string
 }
 
+watch(lang, (val: string) => {
+  document.documentElement.lang = val;
+  document.title = newWebTitle[val] || 'Strawberry Pages';
+}, { immediate: true });
+
 </script>
 
 <style lang="scss">
 .buttonI18 {
   margin-right: 1em;
-  height: 2.5em;
+  height: 2.2em;
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;

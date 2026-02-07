@@ -1,9 +1,6 @@
 <template>
-  <a
-      class="friendTitle"
-  ><a v-if="lang==='zh'">{{ friendsMessage.titleZH }}</a>
-    <a v-if="lang==='en'">{{ friendsMessage.titleEN }}</a>
-    <a v-if="lang==='other'">{{ friendsMessage.titleOther }}</a>
+  <a class="friendTitle">
+    <a>{{ friendsMessage[`title${lang === 'zh' ? 'ZH' : lang === 'en' ? 'EN' :lang === 'jp' ? 'JP' : 'Other'}`] }}</a>
   </a>
   <div class="allFriends">
     <div class="friendBox" v-for="{icon,name,url,aliasEN} in friends" @click="openURL(url)">
@@ -57,6 +54,7 @@ function openURL(url: string) {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 2.2em;
 }
 
 .friendBox {

@@ -8,6 +8,10 @@
     "value": "en"
   },
   {
+    "label": "日本語",
+    "value":"jp"
+  },
+  {
     "label": "Other",
     "value": "other"
   }

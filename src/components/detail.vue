@@ -9,6 +9,10 @@
         {{ dTextEN[0] }}<br>
         {{ dTextEN[1] }}
       </a>
+      <a v-if="lang==='jp'">
+        {{ dTextJP[0] }}<br>
+        {{ dTextJP[1] }}
+      </a>
       <a v-if="lang==='other'">
         {{ dTextOther[0] }}<br>
         {{ dTextOther[1] }}
@@ -23,7 +27,9 @@ import {lang} from "@/components/ts/useStoage";
 
 let dTextZH: string[] = introduction.introductionMessageZH
 let dTextEN: string[] = introduction.introductionMessageEN
+let dTextJP: string[] = introduction.introductionMessageJP
 let dTextOther: string[] = introduction.introductionMessageOther
+
 </script>
 
 <style lang="scss">

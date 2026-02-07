@@ -7,6 +7,10 @@
     "title": "我的记忆日",
     "button": "记忆日"
   },
+  "jp": {
+    "title": "私のメモリー",
+    "button": "記念日"
+  },
   "other": {
     "title": "edge",
     "button": "chrome"

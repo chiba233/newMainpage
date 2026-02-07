@@ -2,9 +2,7 @@
   <div class="dashboardTitle">
     <n-avatar round class="titleIcon" bordered :src="icon"></n-avatar>
     <a class="titleText">
-      <a v-if="lang==='zh'">{{ titleMessage.titleZH }}</a>
-      <a v-if="lang==='en'">{{ titleMessage.titleEN }}</a>
-      <a v-if="lang==='other'">{{ titleMessage.titleOther }}</a>
+      {{ displayTitle }}
     </a>
     <div class="a"></div>
   </div>
@@ -15,6 +13,18 @@ import {NAvatar} from "naive-ui";
 import icon from "../icons/icon.webp";
 import titleMessage from "../message/titleMessage.json"
 import {lang} from "@/components/ts/useStoage";
+import {computed} from "vue";
+
+const displayTitle = computed(() => {
+  const map: Record<string, string> = {
+    zh: titleMessage.titleZH,
+    en: titleMessage.titleEN,
+    jp: titleMessage.titleJP,
+    other: titleMessage.titleOther
+  };
+  // 也可以加一个 fallback，防止 lang 匹配不到时报错
+  return map[lang.value] || titleMessage.titleOther;
+});
 
 </script>
 

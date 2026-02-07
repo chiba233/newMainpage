@@ -16,13 +16,15 @@ import I18n from "@/components/i18n.vue";
 
 <style scoped lang="scss">
 .overlay{
+  justify-content: center;
+  text-align: center;
   z-index: 9999;
   left: 0.6em;
   right: 0.6em;
   top: 0.6em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  height: 2.5em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  height: 2.2em;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius:1.5em;

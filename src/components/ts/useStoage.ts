@@ -5,10 +5,11 @@ import 'moment/dist/locale/zh-cn.js';
 import type {Ref} from "vue";
 
 let browserLang: string = navigator.language.substring(0, 2)
-if (browserLang != "zh" && "en") {
+if (browserLang != "zh" && "en" && "jp") {
     browserLang = "en"
 }
 
+export type LangKey = 'zh' | 'en' | 'jp' | 'other';
 
 moment.locale(browserLang)
 

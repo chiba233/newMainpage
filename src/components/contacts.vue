@@ -3,7 +3,7 @@
     <n-modal v-model:show="showCatModel">
       <n-card
           class="catCard"
-          :title="catMemoryTitle"
+          :title="catMemoryTitle.catMemory"
           size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showCatModel = false">
@@ -25,7 +25,7 @@
     <n-modal v-model:show="showMaiModal">
       <n-card
           class="maiCard"
-          :title="maiBoxTitle"
+          :title="maiDisplay.title"
           size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showMaiModal = false">
@@ -37,56 +37,60 @@
           </n-button>
         </template>
         <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
-          <n-collapse-item :title="maiMainI18" name="1">
+          <n-collapse-item :title="maiDisplay.mainInfo" name="1">
             <div class="maiCardDiv">
-              <a>{{ dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName ?? maiError }}</a>
+              <a>{{ maiDisplay.dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating ?? maiError }}</a>
+              <a>{{ maiDisplay.dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ data.lastPlayDate ?? maiError }}</a>
+              <a>{{ maiDisplay.dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ data.lastPlayDate ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxPlayCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount ?? maiError }}</a>
+              <a>{{ maiDisplay.playCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ dxVersion }}</a> <a class="connecter">:</a> <a>{{ data.lastDataVersion ?? maiError }}</a>
+              <a>{{ maiDisplay.dxVersion }}</a> <a class="connecter">:</a> <a>{{ data.lastDataVersion ?? maiError }}</a>
             </div>
           </n-collapse-item>
-          <n-collapse-item :title="maiOtherI18" name="2">
+          <n-collapse-item :title="maiDisplay.otherInfo" name="2">
             <div class="maiCardDiv">
               <div class="maiCardDiv">
-                <a>{{ basicDeluxscore }}</a> <a class="connecter">:</a> <a>{{
+                <a>{{ maiDisplay.basicScore }}</a> <a class="connecter">:</a> <a>{{
                   data.totalBasicDeluxscore ?? maiError
                 }}</a>
               </div>
             </div>
             <div class="maiCardDiv">
-              <a>{{ advancedDeluxscore }}</a> <a class="connecter">:</a>
+              <a>{{ maiDisplay.advancedScore }}</a> <a class="connecter">:</a>
               <a>{{ data.totalAdvancedDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ expertDeluxscore }}</a><a class="connecter">:</a> <a>{{
+              <a>{{ maiDisplay.expertScore }}</a><a class="connecter">:</a> <a>{{
                 data.totalExpertDeluxscore ?? maiError
               }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ masterDeluxscore }}</a> <a class="connecter">:</a> <a>{{
+              <a>{{ maiDisplay.masterScore }}</a> <a class="connecter">:</a> <a>{{
                 data.totalMasterDeluxscore ?? maiError
               }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ reMasterDeluxscore }}</a><a class="connecter">:</a>
+              <a>{{ maiDisplay.reMasterScore }}</a><a class="connecter">:</a>
               <a>{{ data.totalReMasterDeluxscore ?? maiError }}</a>
             </div>
             <div class="maiCardDiv">
-              <a>{{ totelDeluxScore }}</a> <a class="connecter">:</a> <a>{{ data.totalDeluxscore ?? maiError }}</a>
+              <a>{{ maiDisplay.totalScore }}</a> <a class="connecter">:</a> <a>{{
+                data.totalDeluxscore ?? maiError
+              }}</a>
             </div>
           </n-collapse-item>
-          <n-collapse-item :title="maiHistoryI18" name="3">
+          <n-collapse-item :title="maiDisplay.historyInfo" name="3">
             <div class="maiCardDiv">
-              <a>{{ highestRating }}</a> <a class="connecter">:</a> <a>{{ data.highestRating ?? maiError }}</a>
+              <a>{{ maiDisplay.highestRating }}</a> <a class="connecter">:</a> <a>{{
+                data.highestRating ?? maiError
+              }}</a>
             </div>
           </n-collapse-item>
         </n-collapse>
@@ -188,10 +192,7 @@
           <Cat></Cat>
         </n-icon>
       </template>
-      <a v-if="lang==='zh'">
-        {{ commonI18n.catZH }}</a>
-      <a v-if="lang!=='zh'">
-        {{ commonI18n.catEN }}</a>
+      <a>{{ catMemoryTitle.cat }}</a>
     </n-button>
   </div>
 </template>
@@ -215,32 +216,14 @@ import Arbitrum from "@/icons/arb.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
 import {maiUrl, UserDataType} from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import maiI18nData from "@/message/maiI18n.json";
 import axios from "axios";
 import {useAsyncState} from "@vueuse/core";
 
 const showCatModel = ref<boolean>(false)
 const showMaiModal = ref<boolean>(false)
-const catMemory = ref("")
-const maiBoxTitle = ref("")
-const maiMainI18 = ref("")
-const maiOtherI18 = ref("")
-const maiHistoryI18 = ref("")
-const dxRatingName = ref("")
-const dxName = ref("")
-const dxVersion = ref("")
-const dxLastPlay = ref("")
-const basicDeluxscore = ref("")
-const advancedDeluxscore = ref("")
-const expertDeluxscore = ref("")
-const masterDeluxscore = ref("")
-const reMasterDeluxscore = ref("")
-const totelDeluxScore = ref("")
-const highestRating = ref("")
-const dxPlayCount = ref("")
 const maiError = ref("获取失败")
-const catMemoryTitle =ref<string>("")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
 
@@ -255,15 +238,19 @@ function tron() {
 function areth() {
   window.open("https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
+
 function eth() {
   window.open("https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
+
 function polygon() {
   window.open("https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
+
 function bsc() {
   window.open("https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
 }
+
 function solana() {
   window.open("https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V")
 }
@@ -280,59 +267,47 @@ function github() {
   window.open("https://github.com/chiba233")
 }
 
+const catMemoryTitle = computed(() => {
+  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'jp' ? 'JP' : 'JP';
+  const getField = (prefix: string) => (commonI18n as any)[`${prefix}${suffix}`];
+  return {
+    catMemory: getField('catMemoryTitle'),
+    cat: getField('cat'),
+  }
+});
+
 const clickCatMemory = () => {
   showCatModel.value = true
-  if (lang.value === "zh") {
-    catMemory.value = commonI18n.catZH
-    catMemoryTitle.value=commonI18n.catMemoryTitleZH
-  } else if (lang.value !== "zh") {
-    catMemory.value = commonI18n.catEN
-    catMemoryTitle.value=commonI18n.catMemoryTitleEN
-
-  }
 }
+
+const maiDisplay = computed(() => {
+  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'jp' ? 'JP' : 'JP';
+  const getField = (prefix: string) => (maiI18nData as any)[`${prefix}${suffix}`];
+
+  return {
+    title: getField('titleName'),
+    mainInfo: getField('mainInfo'),
+    otherInfo: getField('otherInfo'),
+    historyInfo: getField('historyInfo'),
+    dxRatingName: getField('dxRatingName'),
+    dxName: getField('dxName'),
+    dxLastPlay: getField('dxLastPlay'),
+    dxVersion: getField('dxVersion'),
+    basicScore: getField('BasicDeluxscore'),
+    advancedScore: getField('AdvancedDeluxscore'),
+    expertScore: getField('ExpertDeluxscore'),
+    masterScore: getField('MasterDeluxscore'),
+    reMasterScore: getField('ReMasterDeluxscore'),
+    totalScore: getField('totalDeluxscore'),
+    highestRating: getField('highestRating'),
+    playCount: getField('dxPlayCount')
+  };
+
+});
+
 const clickMai = () => {
-  if (lang.value === "zh") {
-    maiBoxTitle.value = maiI18nData.titleNameZH
-    maiMainI18.value = maiI18nData.mainInfoZH
-    maiOtherI18.value = maiI18nData.otherInfoZH
-    maiHistoryI18.value = maiI18nData.historyInfoZH
-    dxRatingName.value = maiI18nData.dxRatingNameZH
-    dxName.value = maiI18nData.dxNameZH
-    dxLastPlay.value = maiI18nData.dxLastPlayZH
-    dxVersion.value = maiI18nData.dxVersionZH
-    basicDeluxscore.value = maiI18nData.BasicDeluxscoreZH
-    advancedDeluxscore.value = maiI18nData.AdvancedDeluxscoreZH
-    expertDeluxscore.value = maiI18nData.ExpertDeluxscoreZH
-    masterDeluxscore.value = maiI18nData.MasterDeluxscoreZH
-    reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreZH
-    totelDeluxScore.value = maiI18nData.totalDeluxscoreZH
-    highestRating.value = maiI18nData.highestRatingZH
-    dxPlayCount.value = maiI18nData.dxPlayCountZH
-
-
-  } else if (lang.value !== "zh") {
-    maiBoxTitle.value = maiI18nData.titleNameEN
-    maiMainI18.value = maiI18nData.mainInfoEN
-    maiOtherI18.value = maiI18nData.otherInfoEN
-    maiHistoryI18.value = maiI18nData.historyInfoEN
-    dxRatingName.value = maiI18nData.dxRatingNameEN
-    dxName.value = maiI18nData.dxNameEN
-    dxLastPlay.value = maiI18nData.dxLastPlayEN
-    dxVersion.value = maiI18nData.dxVersionEN
-    basicDeluxscore.value = maiI18nData.BasicDeluxscoreEN
-    advancedDeluxscore.value = maiI18nData.AdvancedDeluxscoreEN
-    expertDeluxscore.value = maiI18nData.ExpertDeluxscoreEN
-    masterDeluxscore.value = maiI18nData.MasterDeluxscoreEN
-    reMasterDeluxscore.value = maiI18nData.ReMasterDeluxscoreEN
-    totelDeluxScore.value = maiI18nData.totalDeluxscoreEN
-    highestRating.value = maiI18nData.highestRatingEN
-    dxPlayCount.value = maiI18nData.dxPlayCountEN
-  }
-  showMaiModal.value = true
-  return {data}
-}
-
+  showMaiModal.value = true;
+};
 
 </script>
 
@@ -387,11 +362,13 @@ const clickMai = () => {
 
 
   .n-button {
+    height: 2.2em;
 
-    a{
+    a {
       color: #343131;
       margin-left: 4px;
     }
+
     @media (min-width: 420px) {
       width: 8.6em;
       margin: 0.55em;
