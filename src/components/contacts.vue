@@ -387,8 +387,13 @@ const clickMai = () => {
 
 
   .n-button {
+
+    a{
+      color: #343131;
+      margin-left: 4px;
+    }
     @media (min-width: 420px) {
-      width: 9em;
+      width: 8.6em;
       margin: 0.55em;
     }
     @media (max-width: 420px) {

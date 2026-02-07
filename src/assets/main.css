@@ -6,7 +6,11 @@ body {
 }
 
 #app {
-    height: 100vh;
-    overflow-y: auto;
-    position: relative;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+html, body {
+    /* 锁定 body，不让它动 */
+    overflow: hidden;
 }

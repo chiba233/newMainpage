@@ -22,19 +22,17 @@ import {lang} from "@/components/ts/useStoage";
 .dashboardTitle {
   display: flex;
   margin-bottom: 1em;
-  @media (min-width: 730px) {
-    margin-top: 3.2em;
+  margin-top: 4.8em;
+  @media (min-width: 840px) {
     flex-direction: row;
     justify-content: center;
   }
-  @media (max-width: 730px) {
-    margin-top: 1.5em;
+  @media (max-width: 840px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
   @media (max-width: 430px) {
-    margin-top: 1.5em;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -45,8 +43,10 @@ import {lang} from "@/components/ts/useStoage";
     flex-wrap: wrap;
     align-content: center;
     color: white;
+    text-shadow: #383838 1px 0 0, #383838 0 1px 0, #383838 -1px 0 0, #383838 0 -1px 0;
+    font-weight: lighter;
     @media (min-width: 730px) {
-      font-size: 2em;
+      font-size: 1.9em;
       margin-left: 1.5em;
     }
     @media (max-width: 730px) {

@@ -27,7 +27,8 @@ type LangItem = {
 
 <style lang="scss">
 .buttonI18 {
-  margin: 1em;
+  margin-right: 1em;
+  height: 2.5em;
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;
@@ -35,6 +36,7 @@ type LangItem = {
   }
 
   a {
+    color: #343131;
     @media (max-width: 390px) {
       display: none;
     }

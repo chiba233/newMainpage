@@ -78,21 +78,26 @@ const showModal = ref(false)
 
 <style lang="scss">
 .buttonClock {
-  margin: 1em;
+  margin-left: 1em;
+  height: 2.5em;
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;
-    }}
-  a{@media (max-width: 390px) {
-    display: none;
+    }
   }
+
+  a {
+    color: #343131;
+    @media (max-width: 390px) {
+      display: none;
+    }
 
   }
 }
 
 .fromTimeCard {
   display: flex;
-    width: 35em;
+  width: 35em;
 
   .allTimeCard {
     display: flex;

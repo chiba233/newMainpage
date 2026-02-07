@@ -32,6 +32,7 @@ let dTextOther: string[] = introduction.introductionMessageOther
   background-color: rgba(255, 255, 255, 0.17);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  justify-content: center;
   transition: all 3s;
   padding: 0.9em;
   @media (min-width: 420px) {
@@ -45,7 +46,7 @@ let dTextOther: string[] = introduction.introductionMessageOther
   }
 
   .detailText {
-    color: white;
+    color: #343131;
     text-align: center;
     display: block;
     word-break: break-word;

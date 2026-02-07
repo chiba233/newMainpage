@@ -34,7 +34,9 @@ function openURL(url: string) {
 <style lang="scss">
 .friendTitle {
   color: white;
+  font-weight: lighter;
   display: flex;
+  text-shadow: #383838 1px 0 0, #383838 0 1px 0, #383838 -1px 0 0, #383838 0 -1px 0;
   justify-content: center;
   @media (min-width: 730px) {
     font-size: 1.9em;
@@ -93,7 +95,7 @@ function openURL(url: string) {
   }
 
   .friendName {
-    color: white;
+    color: #343131;
     white-space: nowrap;
 
   }
