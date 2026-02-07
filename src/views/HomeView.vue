@@ -1,13 +1,15 @@
 <template>
-  <div class="toolAnimation">
-    <div class="i18">
-      <I18n></I18n>
+  <div style="overflow: hidden">
+  <div class="viewport">
+    <div class="overlay">
+      <div class="i18">
+        <I18n></I18n>
+      </div>
+      <div class="fromTime">
+        <from-now-time></from-now-time>
+      </div>
     </div>
-    <div class="fromTime">
-      <from-now-time></from-now-time>
-    </div>
-  </div>
-  <div class="mainAnimation">
+    <div class="main">
     <div class="content">
       <Title></Title>
       <div class="detailsDIV">
@@ -18,6 +20,11 @@
       </div>
       <MyFriends></MyFriends>
     </div>
+  </div>
+  </div>
+  <div class="copyright">
+    <a class="copyrightText">2026 ニャーニャ！ザコザコ！</a>
+  </div>
   </div>
 </template>
 
@@ -32,89 +39,87 @@ import colorData from "@/message/colorData.json"
 import {themeColor} from "@/components/ts/useStoage";
 
 
-let randomTheme: number = Math.floor(Math.random() * 7);
-if (randomTheme === 0) {
-  document.body.style.backgroundImage = "url(background.webp)"
-  document.body.style.backgroundColor = colorData.background0
-  themeColor.value = colorData.background0
-}
-if (randomTheme === 1) {
-  document.body.style.backgroundImage = "url(background1.webp)"
-  themeColor.value = colorData.background1
-  document.body.style.backgroundColor = colorData.background1
-}
-if (randomTheme === 2) {
-  document.body.style.backgroundImage = "url(background2.webp)"
-  document.body.style.backgroundColor = colorData.background2
-  themeColor.value = colorData.background2
-}
-if (randomTheme === 3) {
-  document.body.style.backgroundImage = "url(background3.webp)"
-  themeColor.value = colorData.background3
-  document.body.style.backgroundColor = colorData.background3
-}
-if (randomTheme === 4) {
-  document.body.style.backgroundImage = "url(background4.webp)"
-  themeColor.value = colorData.background4
-  document.body.style.backgroundColor = colorData.background4
-}
-if (randomTheme === 5) {
-  document.body.style.backgroundImage = "url(background5.webp)"
-  themeColor.value = colorData.background5
-  document.body.style.backgroundColor = colorData.background5
-}if (randomTheme === 6) {
-  document.body.style.backgroundImage = "url(background6.webp)"
-  themeColor.value = colorData.background6
-  document.body.style.backgroundColor = colorData.background6
-}
+const randomTheme = Math.floor(Math.random() * 7);
+const colorKey = `background${randomTheme}` as keyof typeof colorData;
+const selectedColor = colorData[colorKey];
+
+// 动态设置样式
+document.body.style.backgroundImage = `url(background${randomTheme === 0 ? '' : randomTheme}.webp)`;
+document.body.style.backgroundColor = selectedColor;
+themeColor.value = selectedColor;
+
+
 
 </script>
 
 <style lang="scss">
-.toolAnimation {
-  animation: YToolIn 0.5s linear 0s 1;
-}
 
-.mainAnimation {
-  animation: YMainIn 0.5s linear 0s 1;
-}
-
-.content {
-  width: 100%;
+.viewport{
   display: flex;
-  align-content: center;
   flex-direction: column;
-  flex-wrap: wrap;
+  overflow-y: auto;      // ✅ 唯一滚动区
+  position: relative;
+  -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
+  .overlay{
+    animation: YToolIn 0.5s linear 0s 1;
+    .fromTime {
+      display: flex;
+      justify-content: start;
+      position: absolute;
+      pointer-events: auto;
 
-
-  .detailsDIV {
-    width: 100%;
-    display: flex;
+    }
+    .i18 {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      position: absolute;
+      pointer-events: auto;
+    }
+  }
+  .main{
+    height: 96vh;
     justify-content: center;
-    @media (min-width: 730px) {
-      margin-top: 1em;
+    align-content: center;
+    .content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      animation: YMainIn 0.5s linear 0s 1;
+
+      .contactsDIV {
+        @media (min-width: 730px) {
+          margin: 0.95em;
+        }
+      }
+      .detailsDIV {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        @media (min-width: 730px) {
+          margin-top: 1em;
+        }
+      }
     }
   }
 }
 
-.fromTime {
-  display: flex;
-  justify-content: start;
-  position: absolute;
-}
-
-.i18 {
+.copyright{
+  justify-content: center;
+  text-align: center;
+  align-content: center;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  position: absolute;
-}
-
-.contactsDIV {
-  @media (min-width: 730px) {
-    margin: 0.95em;
+  animation: YToolIn 0.5s linear 0s 1;
+  height: 3.5vh;
+  position: fixed;
+  .copyrightText{
+    font-weight: lighter;
+    font-size: 1.1em;
+    color: aliceblue;
   }
 }
+
 
 @keyframes YToolIn {
   from {
