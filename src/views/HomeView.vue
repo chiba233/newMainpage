@@ -55,7 +55,7 @@ themeColor.value = selectedColor;
   -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
   .main {
     height: 96dvh;
-    animation: slide-fwd-center 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-fwd-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     .content {
       width: 100%;
