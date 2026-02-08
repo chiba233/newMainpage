@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-console.log(moment.locales())
 import {NModal, NButton, NIcon, NCard} from "naive-ui";
 import Clock from "../icons/clock.svg";
 import {ref} from "vue";
