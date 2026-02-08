@@ -35,7 +35,7 @@
             <a v-if="lang==='ja'">{{ nameJP }}</a>
             <a v-if="lang==='other'">{{ nameOther }}</a>
             <div>
-              <a>{{ moment(time).fromNow() }}</a>
+              <a>{{ formatTime(time) }}</a>
             </div>
           </div>
         </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+console.log(moment.locales())
 import {NModal, NButton, NIcon, NCard} from "naive-ui";
 import Clock from "../icons/clock.svg";
 import {ref} from "vue";
@@ -54,6 +55,7 @@ import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
 import moment from "moment";
 import {themeColor} from "@/components/ts/useStoage";
+import {formatTime} from "@/components/ts/useStoage";
 
 
 const boxTitle = ref()
