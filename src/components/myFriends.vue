@@ -1,7 +1,5 @@
 <template>
-  <a class="friendTitle">
-    <a>{{ friendsMessage[`title${lang === 'zh' ? 'ZH' : lang === 'en' ? 'EN' :lang === 'jp' ? 'JP' : 'Other'}`] }}</a>
-  </a>
+  <a class="friendTitle">{{ friendsMessage[`title${lang === 'zh' ? 'ZH' : lang === 'en' ? 'EN' :lang === 'ja' ? 'JP' : 'Other'}`] }}</a>
   <div class="allFriends">
     <div class="friendBox" v-for="{icon,name,url,aliasEN} in friends" @click="openURL(url)">
       <n-avatar :src="icon" :size="100" round bordered></n-avatar>
@@ -30,11 +28,12 @@ function openURL(url: string) {
 
 <style lang="scss">
 .friendTitle {
+  left: 0;
+  right: 0;
   color: white;
   font-weight: lighter;
-  display: flex;
+  text-align: center;
   text-shadow: #383838 1px 0 0, #383838 0 1px 0, #383838 -1px 0 0, #383838 0 -1px 0;
-  justify-content: center;
   @media (min-width: 730px) {
     font-size: 1.9em;
     padding-bottom: 1em;

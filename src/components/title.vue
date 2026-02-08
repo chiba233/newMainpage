@@ -19,7 +19,7 @@ const displayTitle = computed(() => {
   const map: Record<string, string> = {
     zh: titleMessage.titleZH,
     en: titleMessage.titleEN,
-    jp: titleMessage.titleJP,
+    ja: titleMessage.titleJP,
     other: titleMessage.titleOther
   };
   // 也可以加一个 fallback，防止 lang 匹配不到时报错

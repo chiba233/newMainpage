@@ -268,7 +268,7 @@ function github() {
 }
 
 const catMemoryTitle = computed(() => {
-  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'jp' ? 'JP' : 'JP';
+  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'ja' ? 'JP' : 'JP';
   const getField = (prefix: string) => (commonI18n as any)[`${prefix}${suffix}`];
   return {
     catMemory: getField('catMemoryTitle'),
@@ -281,7 +281,7 @@ const clickCatMemory = () => {
 }
 
 const maiDisplay = computed(() => {
-  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'jp' ? 'JP' : 'JP';
+  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'ja' ? 'JP' : 'JP';
   const getField = (prefix: string) => (maiI18nData as any)[`${prefix}${suffix}`];
 
   return {

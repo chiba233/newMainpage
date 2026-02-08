@@ -9,7 +9,7 @@
         {{ dTextEN[0] }}<br>
         {{ dTextEN[1] }}
       </a>
-      <a v-if="lang==='jp'">
+      <a v-if="lang==='ja'">
         {{ dTextJP[0] }}<br>
         {{ dTextJP[1] }}
       </a>

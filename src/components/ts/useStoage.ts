@@ -4,13 +4,13 @@ import 'moment/dist/locale/en-au.js';
 import 'moment/dist/locale/zh-cn.js';
 import type {Ref} from "vue";
 
-let browserLang: string = navigator.language.substring(0, 2)
-if (browserLang != "zh" && "en" && "jp") {
-    browserLang = "en"
-}
+const rawLang = navigator.language.substring(0, 2);
+// 如果 rawLang 是 zh/en/jp，就用它；否则统一降级为 en
+const browserLang = ["zh", "en", "ja"].includes(rawLang) ? rawLang : "en";
 
-export type LangKey = 'zh' | 'en' | 'jp' | 'other';
+export type LangKey = 'zh' | 'en' | 'ja' | 'other';
 
+const fullLang = navigator.language;
 moment.locale(browserLang)
 
 export const lang: Ref<string> = useStorage("useLang", browserLang)
