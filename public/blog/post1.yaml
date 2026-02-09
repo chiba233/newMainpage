@@ -1,0 +1,8 @@
+layout: "common"
+time: "20220816"
+title: "哎 好无聊"
+introduction: "曼谷今天雨很大"
+introductionPic: ""
+blocks:
+  - type: "text"
+    content: "曼谷今天雨很大..."

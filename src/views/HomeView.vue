@@ -1,8 +1,11 @@
 <template>
   <top-bar class="topBar"></top-bar>
-  <div class="viewport" v-show="cardSelect">
+  <div class="viewport">
     <div class="main">
-      <div class="content">
+      <div class="blog" v-show="!cardSelect">
+        <BlogView></BlogView>
+      </div>
+      <div class="content" v-show="cardSelect">
         <Title></Title>
         <div class="detailsDIV">
           <Details></Details>
@@ -47,15 +50,19 @@ import {themeColor, lang} from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
 import {AnimalRabbit28Regular, Home12Regular} from '@vicons/fluent'
 import {NButton, NIcon} from "naive-ui";
-import {computed, ref} from "vue";
+import {ref} from "vue";
+import BlogView from "@/views/BlogView.vue";
 
-const cardSelect = ref(true)
+const cardSelect = ref(false)
 
 
-function cardChange(e:string) {
-  if (e === 'a') cardSelect.value = false
-  if (e === 'b') cardSelect.value = true
+function cardChange(e: string) {
+  if (e === 'a') {
+    cardSelect.value = false;
+  }
+  if (e === 'b') cardSelect.value = true;
 }
+
 const home = {
   zh: "主页",
   ja: "ホーム",
