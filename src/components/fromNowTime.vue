@@ -6,7 +6,7 @@
           <Clock></Clock>
         </n-icon>
       </template>
-      <a>{{ fromNowI18[lang]?.button || fromNowI18.zh.button }}</a>
+      <a>{{ fromNowI18[lang as keyof typeof fromNowI18]?.button || fromNowI18.zh.button }}</a>
     </n-button>
     <n-modal v-model:show="showModal">
       <n-card
