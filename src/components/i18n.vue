@@ -6,7 +6,7 @@
           <LangIcon/>
         </n-icon>
       </template>
-      <a> {{ i18nLang.find((it :LangItem ) => it.value === lang)?.label }}</a>
+      <a> {{ i18nLang.find((it: LangItem) => it.value === lang)?.label }}</a>
     </n-button>
   </n-popselect>
 </template>
@@ -17,7 +17,7 @@ import {NButton, NIcon, NPopselect} from "naive-ui"
 import i18nLang from "../message/i18nLang.json"
 import {lang} from "@/components/ts/useStoage";
 import {themeColor} from "@/components/ts/useStoage";
-import {watch} from "vue";
+import {watchEffect} from "vue";
 import webTitle from "../message/webTitle.json"
 
 const newWebTitle: Record<string, string> = webTitle;
@@ -27,10 +27,11 @@ type LangItem = {
   value: string
 }
 
-watch(lang, (val: string) => {
-  document.documentElement.lang = val;
-  document.title = newWebTitle[val] || 'Strawberry Pages';
-}, { immediate: true });
+watchEffect(() => {
+  document.documentElement.lang = lang.value;
+  // 2. 修改网页标题（同样使用 fallback 逻辑）
+  document.title = newWebTitle[lang.value] || 'Strawberry Pages';
+});
 
 </script>
 

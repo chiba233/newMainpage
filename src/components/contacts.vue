@@ -98,7 +98,7 @@
     </n-modal>
   </div>
   <div class="contacts">
-    <n-button round :color="themeColor" class="cButton" @click="twitter">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('twitter')">
       <template #icon>
         <n-icon size="23">
           <TwitterIcon/>
@@ -106,7 +106,7 @@
       </template>
       <a>Twitter</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="telegram">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('telegram')">
       <template #icon>
         <n-icon size="23">
           <TelegramIcon></TelegramIcon>
@@ -114,7 +114,7 @@
       </template>
       <a>Telegram</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="github">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('github')">
       <template #icon>
         <n-icon size="23">
           <Github></Github>
@@ -122,7 +122,7 @@
       </template>
       <a>GitHub</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="email">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('email')">
       <template #icon>
         <n-icon size="23">
           <Email></Email>
@@ -130,7 +130,7 @@
       </template>
       <a>E-Mail</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="tron">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('tron')">
       <template #icon>
         <n-icon size="23">
           <Tron></Tron>
@@ -138,7 +138,7 @@
       </template>
       <a>Tron</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="eth">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('eth')">
       <template #icon>
         <n-icon size="23">
           <Eth></Eth>
@@ -146,7 +146,7 @@
       </template>
       <a>Ethereum</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="areth">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('areth')">
       <template #icon>
         <n-icon size="23">
           <Arbitrum></Arbitrum>
@@ -154,7 +154,7 @@
       </template>
       <a>Arbitrum</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="bsc">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('bsc')">
       <template #icon>
         <n-icon size="23">
           <Bsc></Bsc>
@@ -162,7 +162,7 @@
       </template>
       <a>BSC-BNB</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="polygon">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('polygon')">
       <template #icon>
         <n-icon size="23">
           <Polygon></Polygon>
@@ -170,7 +170,7 @@
       </template>
       <a>Polygon</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="solana">
+    <n-button round :color="themeColor" class="cButton" @click="openLink('solana')">
       <template #icon>
         <n-icon size="23">
           <Solana></Solana>
@@ -227,44 +227,27 @@ const maiError = ref("获取失败")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
 
-function twitter() {
-  window.open("https://twitter.com/strawberry960")
-}
+const socialLinks = {
+  twitter: "https://x.com/HoshinoYumeka2",
+  tron: "https://tronscan.org/#/address/TVB16jV3Jx2HTn9U1KjyBSN1u9MQ29FArs",
+  areth: "https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
+  eth: "https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
+  polygon: "https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
+  bsc: "https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
+  solana: "https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V",
+  telegram: "https://t.me/chiba2333",
+  email: "mailto:qwq@qwwq@org",
+  github: "https://github.com/chiba233"
+} as const;
+type SocialType = keyof typeof socialLinks;
 
-function tron() {
-  window.open("https://tronscan.org/#/address/TVB16jV3Jx2HTn9U1KjyBSN1u9MQ29FArs")
-}
-
-function areth() {
-  window.open("https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
-}
-
-function eth() {
-  window.open("https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6")
-}
-
-function polygon() {
-  window.open("https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
-}
-
-function bsc() {
-  window.open("https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6")
-}
-
-function solana() {
-  window.open("https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V")
-}
-
-function telegram() {
-  window.open("https://t.me/chiba2333")
-}
-
-function email() {
-  window.open("mailto:qwq@qwwq@org")
-}
-
-function github() {
-  window.open("https://github.com/chiba233")
+function openLink(type: SocialType) {
+  const url = socialLinks[type];
+  if (url) {
+    window.open(url);
+  } else {
+    console.error("未定义的跳转类型:", type);
+  }
 }
 
 const catMemoryTitle = computed(() => {
@@ -275,10 +258,6 @@ const catMemoryTitle = computed(() => {
     cat: getField('cat'),
   }
 });
-
-const clickCatMemory = () => {
-  showCatModel.value = true
-}
 
 const maiDisplay = computed(() => {
   const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'ja' ? 'JP' : 'JP';
@@ -309,6 +288,9 @@ const clickMai = () => {
   showMaiModal.value = true;
 };
 
+const clickCatMemory = () => {
+  showCatModel.value = true
+}
 </script>
 
 <style lang="scss">

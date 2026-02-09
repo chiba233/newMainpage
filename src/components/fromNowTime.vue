@@ -6,10 +6,7 @@
           <Clock></Clock>
         </n-icon>
       </template>
-      <a v-if="lang==='en'">{{ fromNowI18.en.button }}</a>
-      <a v-if="lang==='ja'">{{ fromNowI18.ja.button }}</a>
-      <a v-if="lang==='zh'">{{ fromNowI18.zh.button }}</a>
-      <a v-if="lang==='other'">{{ fromNowI18.other.button }}</a>
+      <a>{{ fromNowI18[lang]?.button || fromNowI18.zh.button }}</a>
     </n-button>
     <n-modal v-model:show="showModal">
       <n-card
@@ -25,18 +22,15 @@
             </template>
           </n-button>
         </template>
-        <div class="allTimeCard">
-          <div class="timeCard" v-for="{nameZH,nameEN,nameJP,nameOther,time} in fromNow">
-            <div class="thatDay">
-              <a>{{ time.substring(0, 4) }} - {{ time.substring(4, 6) }} - {{ time.substring(6, 8) }}</a>
-            </div>
-            <a v-if="lang==='zh'">{{ nameZH }}</a>
-            <a v-if="lang==='en'">{{ nameEN }}</a>
-            <a v-if="lang==='ja'">{{ nameJP }}</a>
-            <a v-if="lang==='other'">{{ nameOther }}</a>
-            <div>
-              <a>{{ formatTime(time) }}</a>
-            </div>
+        <div class="timeCard" v-for="item in fromNow" :key="item.time">
+          <div class="thatDay">
+            <a>{{ formatDate(item.time) }}</a>
+          </div>
+
+          <a>{{ getName(item) }}</a>
+
+          <div>
+            <a>{{ formatTime(item.time) }}</a>
           </div>
         </div>
       </n-card>
@@ -47,37 +41,47 @@
 <script setup lang="ts">
 import {NModal, NButton, NIcon, NCard} from "naive-ui";
 import Clock from "../icons/clock.svg";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import Cancel from "../icons/cancel.svg"
 import {lang} from "@/components/ts/useStoage";
 import fromNowI18 from "../message/fromNowI18n.json"
 import fromNow from "../message/fromNow.json"
-import moment from "moment";
 import {themeColor} from "@/components/ts/useStoage";
 import {formatTime} from "@/components/ts/useStoage";
 
+const langMap = {
+  zh: 'nameZH',
+  en: 'nameEN',
+  ja: 'nameJP',
+  other: 'nameOther'
+} as const;
 
-const boxTitle = ref()
-const clickMemory = () => {
-  showModal.value = true
-  if (lang.value === "zh") {
-    moment.locale("zh")
-    boxTitle.value = fromNowI18.zh.title
-  } else if (lang.value === "en") {
-    moment.locale("en")
-    boxTitle.value = fromNowI18.en.title
-  } else if (lang.value === "ja") {
-    moment.locale("ja")
-    boxTitle.value = fromNowI18.ja.title
-  } else if (lang.value === "other") {
-    boxTitle.value = fromNowI18.other.title
-    moment.locale("en")
-  }
+const formatDate = (t: string) => {
+  return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
+};
+
+const getName = (item: any) => {
+  const key = langMap[lang.value as keyof typeof langMap] || 'nameEN';
+  return item[key];
+};
+
+//模块分割线
+interface LanguageConfig {
+  title: string;
+  button: string;
 }
+const data: Record<string, LanguageConfig> = fromNowI18;
+const boxTitle = computed(() => {
+  return data[lang.value]?.title || data['en'].title;
+});
 
-
+//模块分割线
 const showModal = ref(false)
+const clickMemory = () => {
+  if (showModal.value===false) {showModal.value = true}
+  else {showModal.value = false}
 
+}
 
 </script>
 
