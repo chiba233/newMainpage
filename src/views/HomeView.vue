@@ -44,7 +44,7 @@ themeColor.value = selectedColor;
 
 <style lang="scss">
 .topBar {
-  animation: upToDown 0.5s linear 0s 1;
+  animation: upToDown 0.8s linear 0s 1;
 }
 
 .viewport {
@@ -55,7 +55,7 @@ themeColor.value = selectedColor;
   -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
   .main {
     height: 100dvh;
-    animation: slide-fwd-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-fwd-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     .content {
       width: 100%;
@@ -97,7 +97,7 @@ themeColor.value = selectedColor;
   text-align: center;
   height: 2.2em;
   position: absolute;
-  animation: downToUp 0.5s linear 0s 1;
+  animation: downToUp 0.8s linear 0s 1;
   z-index: 9999;
   bottom: calc(0.4em + env(safe-area-inset-bottom));
 
