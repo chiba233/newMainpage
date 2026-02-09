@@ -1,6 +1,6 @@
 <template>
-  <div>
     <n-modal v-model:show="showCatModel">
+      <!-- catCard -->
       <n-card
           class="catCard"
           :title="catMemoryTitle.catMemory"
@@ -21,7 +21,7 @@
         </div>
       </n-card>
     </n-modal>
-
+  <!-- maiCard -->
     <n-modal v-model:show="showMaiModal">
       <n-card
           class="maiCard"
@@ -96,16 +96,13 @@
         </n-collapse>
       </n-card>
     </n-modal>
-  </div>
+  <!-- 以下是WeCat -->
+  <n-image-preview
+      v-model:show="showWechatModel"   width="1" src="/wechat.webp" class="wechatQR" height="1" >
+  </n-image-preview>
+
+  <!-- 以下是联系人 -->
   <div class="contacts">
-    <n-button round :color="themeColor" class="cButton" @click="openLink('twitter')">
-      <template #icon>
-        <n-icon size="23">
-          <TwitterIcon/>
-        </n-icon>
-      </template>
-      <a>Twitter</a>
-    </n-button>
     <n-button round :color="themeColor" class="cButton" @click="openLink('telegram')">
       <template #icon>
         <n-icon size="23">
@@ -114,13 +111,13 @@
       </template>
       <a>Telegram</a>
     </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('github')">
+    <n-button round :color="themeColor" class="cButton" @click="clickWechat">
       <template #icon>
         <n-icon size="23">
-          <Github></Github>
+          <wechat></wechat>
         </n-icon>
       </template>
-      <a>GitHub</a>
+      <a>WeChat</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="openLink('email')">
       <template #icon>
@@ -129,6 +126,22 @@
         </n-icon>
       </template>
       <a>E-Mail</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="openLink('twitter')">
+      <template #icon>
+        <n-icon size="23">
+          <TwitterIcon/>
+        </n-icon>
+      </template>
+      <a>Twitter</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="openLink('github')">
+      <template #icon>
+        <n-icon size="23">
+          <Github></Github>
+        </n-icon>
+      </template>
+      <a>GitHub</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="openLink('tron')">
       <template #icon>
@@ -198,13 +211,14 @@
 </template>
 
 <script setup lang="ts">
+
 import Solana from "@/icons/solanaLogoMark.svg"
 import catImage from "@/message/catImage.json"
 import commonI18n from "@/message/commonI18n.json"
 import Cat from "@/icons/cat.svg"
 import TwitterIcon from "@/icons/twitter.svg"
 import TelegramIcon from "@/icons/telegram.svg"
-import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem, NCarousel} from "naive-ui";
+import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem, NCarousel,NImagePreview} from "naive-ui";
 import MaiTrans from "@/icons/maitrans.svg"
 import Tron from "@/icons/tron.svg"
 import Eth from "@/icons/eth.svg"
@@ -213,6 +227,7 @@ import Email from "@/icons/Email.svg"
 import Github from "@/icons/LogoGithub.svg"
 import Polygon from "@/icons/polygon-matic-logo.svg"
 import Arbitrum from "@/icons/arb.svg"
+import wechat from "@/icons/wechat.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
 import {maiUrl, UserDataType} from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
@@ -223,6 +238,7 @@ import {useAsyncState} from "@vueuse/core";
 
 const showCatModel = ref<boolean>(false)
 const showMaiModal = ref<boolean>(false)
+const showWechatModel = ref(false)
 const maiError = ref("获取失败")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
@@ -290,6 +306,9 @@ const clickMai = () => {
 
 const clickCatMemory = () => {
   showCatModel.value = true
+}
+const clickWechat = () => {
+  showWechatModel.value = true
 }
 </script>
 

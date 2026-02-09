@@ -3,26 +3,31 @@
     "url": "https://clansty.com/",
     "icon": "/clansty.webp",
     "name": "凌莞",
-    "aliasEN":"Clansty Icaria"
+    "aliasEN": "Clansty Icaria"
   },
   {
     "url": "https://misaka.org/",
     "icon": "/misaka.webp",
     "name": "御坂云见",
-    "aliasEN":"Misaka Kumomi"
+    "aliasEN": "Misaka Kumomi"
   },
   {
     "url": "http://www.shuizilong.com/house/",
     "icon": "/dao.webp",
     "name": "小島みなこ",
     "aliasEN": "Minakokojima"
-
   },
   {
     "url": "https://blog.luoling.moe",
     "icon": "/luoling.webp",
     "name": "小洛灵",
-    "aliasEN":"RainbowBird"
+    "aliasEN": "RainbowBird"
+  },
+  {
+    "url": "https://neko.ayaka.moe",
+    "icon": "/ayaka.webp",
+    "name": "絢香猫",
+    "aliasEN": "Ayaka Neko"
   },
   {
     "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
