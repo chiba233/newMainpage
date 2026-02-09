@@ -39,6 +39,7 @@ watchEffect(() => {
 .buttonI18 {
   margin-right: 1em;
   height: 2.2em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;
@@ -46,6 +47,7 @@ watchEffect(() => {
   }
 
   a {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
     color: #343131;
     @media (max-width: 390px) {
       display: none;

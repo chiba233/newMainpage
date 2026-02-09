@@ -90,6 +90,7 @@ const clickMemory = () => {
 .buttonClock {
   margin-left: 1em;
   height: 2.2em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;
@@ -98,6 +99,7 @@ const clickMemory = () => {
 
   a {
     color: #343131;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
     @media (max-width: 390px) {
       display: none;
     }

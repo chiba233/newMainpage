@@ -61,10 +61,12 @@ function openURL(url: string) {
   background-color: rgba(255, 255, 255, 0.17);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transition: all 3s;
+  transition: all 1s;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   @media (min-width: 420px) {
     width: 7.5em;
     height: 11em;
@@ -93,6 +95,7 @@ function openURL(url: string) {
 
   .friendName {
     color: #343131;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
     white-space: nowrap;
 
   }

@@ -98,7 +98,10 @@
     </n-modal>
   <!-- 以下是WeCat -->
   <n-image-preview
-      v-model:show="showWechatModel"   width="1" src="/wechat.webp" class="wechatQR" height="1" >
+      v-model:show="showWechatModel"   width="1" src="/wechat.webp">
+  </n-image-preview>
+  <n-image-preview
+      v-model:show="showLineModel"   width="1" src="/line.webp">
   </n-image-preview>
 
   <!-- 以下是联系人 -->
@@ -118,6 +121,14 @@
         </n-icon>
       </template>
       <a>WeChat</a>
+    </n-button>
+    <n-button round :color="themeColor" class="cButton" @click="clickLine">
+      <template #icon>
+        <n-icon size="23">
+          <Line></Line>
+        </n-icon>
+      </template>
+      <a>LINE</a>
     </n-button>
     <n-button round :color="themeColor" class="cButton" @click="openLink('email')">
       <template #icon>
@@ -228,6 +239,7 @@ import Github from "@/icons/LogoGithub.svg"
 import Polygon from "@/icons/polygon-matic-logo.svg"
 import Arbitrum from "@/icons/arb.svg"
 import wechat from "@/icons/wechat.svg"
+import Line from "@/icons/line.svg"
 import {lang, themeColor} from "@/components/ts/useStoage";
 import {maiUrl, UserDataType} from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
@@ -239,6 +251,7 @@ import {useAsyncState} from "@vueuse/core";
 const showCatModel = ref<boolean>(false)
 const showMaiModal = ref<boolean>(false)
 const showWechatModel = ref(false)
+const showLineModel = ref(false)
 const maiError = ref("获取失败")
 
 const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
@@ -310,6 +323,9 @@ const clickCatMemory = () => {
 const clickWechat = () => {
   showWechatModel.value = true
 }
+const clickLine = () => {
+  showLineModel.value = true
+}
 </script>
 
 <style lang="scss">
@@ -364,10 +380,13 @@ const clickWechat = () => {
 
   .n-button {
     height: 2.2em;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     a {
       color: #343131;
       margin-left: 4px;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
     }
 
     @media (min-width: 420px) {

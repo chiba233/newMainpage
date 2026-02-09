@@ -85,6 +85,8 @@ themeColor.value = selectedColor;
   left: 0.6em;
   right: 0.6em;
   background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 1.5em;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -103,7 +105,7 @@ themeColor.value = selectedColor;
     position: absolute;
     font-size: 1.1em;
     color: #343131;
-
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
   }
 }
 

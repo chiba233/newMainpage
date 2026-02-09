@@ -27,6 +27,8 @@ import I18n from "@/components/i18n.vue";
   height: 2.2em;
   position: absolute;
   background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   border-radius:1.5em;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

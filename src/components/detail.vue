@@ -36,10 +36,12 @@ let dTextOther: string[] = introduction.introductionMessageOther
 .textBox {
   display: flex;
   background-color: rgba(255, 255, 255, 0.17);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   justify-content: center;
-  transition: all 3s;
+  transition: all 1s;
   padding: 0.9em;
   @media (min-width: 420px) {
     width: 50em;
@@ -53,6 +55,7 @@ let dTextOther: string[] = introduction.introductionMessageOther
 
   .detailText {
     color: #343131;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
     text-align: center;
     display: block;
     word-break: break-word;
