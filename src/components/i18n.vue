@@ -48,7 +48,7 @@ watchEffect(() => {
   }
 
   a {
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     color: #343131;
     @media (max-width: 390px) {
       display: none;

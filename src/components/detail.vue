@@ -55,7 +55,7 @@ let dTextOther: string[] = introduction.introductionMessageOther
 
   .detailText {
     color: #343131;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     text-align: center;
     display: block;
     word-break: break-word;

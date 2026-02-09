@@ -97,7 +97,7 @@ $transition-speed: 0.3s;
 
     .post-meta {
       font-size: 0.9rem;
-      color: lighten($text-color, 15%);
+      color: lighten($text-color, 50%);
       display: flex;
       justify-content: center;
       gap: 0.5rem;
@@ -137,6 +137,7 @@ $transition-speed: 0.3s;
       p {
         margin: 0;
         color: $text-color;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         line-height: 1.6;
         font-size: 1rem;
         display: -webkit-box;

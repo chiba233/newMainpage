@@ -386,7 +386,7 @@ const clickLine = () => {
     a {
       color: #343131;
       margin-left: 4px;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     }
 
     @media (min-width: 420px) {
