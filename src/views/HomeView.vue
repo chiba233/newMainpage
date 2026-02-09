@@ -1,6 +1,6 @@
 <template>
   <top-bar class="topBar"></top-bar>
-  <div class="viewport">
+  <div class="viewport" v-show="cardSelect">
     <div class="main">
       <div class="content">
         <Title></Title>
@@ -15,19 +15,59 @@
     </div>
   </div>
   <div class="copyright">
-    <a class="copyrightText">- 2026 ニャーニャ！ザコザコ！ -</a>
+    <div class="cardButton">
+      <n-button round :color="themeColor" class="cButton" @click="cardChange('b')">
+        <template #icon>
+          <n-icon size="23">
+            <Home12Regular></Home12Regular>
+          </n-icon>
+        </template>
+        <a>{{ home[lang] }}</a>
+      </n-button>
+      <n-button round :color="themeColor" class="cButton" @click="cardChange('a')">
+        <template #icon>
+          <n-icon size="23">
+            <AnimalRabbit28Regular></AnimalRabbit28Regular>
+          </n-icon>
+        </template>
+        <a>{{ blog[lang] }}</a>
+      </n-button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+
 import Title from "@/components/title.vue";
 import Details from "@/components/detail.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
 import colorData from "@/message/colorData.json"
-import {themeColor} from "@/components/ts/useStoage";
+import {themeColor, lang} from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
+import {AnimalRabbit28Regular, Home12Regular} from '@vicons/fluent'
+import {NButton, NIcon} from "naive-ui";
+import {computed, ref} from "vue";
 
+const cardSelect = ref(true)
+
+
+function cardChange(e:string) {
+  if (e === 'a') cardSelect.value = false
+  if (e === 'b') cardSelect.value = true
+}
+const home = {
+  zh: "主页",
+  ja: "ホーム",
+  en: "Home",
+  other: "home"
+} as const;
+const blog = {
+  zh: "博客",
+  ja: "ブログ",
+  en: "blog",
+  other: "blog"
+} as const;
 
 const randomTheme = Math.floor(Math.random() * 7);
 const selectedColor = (colorData as any)[`background${randomTheme}`];
@@ -95,17 +135,30 @@ themeColor.value = selectedColor;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 2.2em;
+  height: 3em;
   position: absolute;
   animation: downToUp 0.8s linear 0s 1;
   z-index: 9999;
   bottom: calc(0.4em + env(safe-area-inset-bottom));
 
-  .copyrightText {
-    position: absolute;
-    font-size: 1.1em;
-    color: #343131;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  .cButton {
+    margin-right: 1em;
+    height: 2.2em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: auto;
+    @media (max-width: 390px) {
+      .n-icon {
+        margin-left: 6px;
+      }
+    }
+
+    a {
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+      color: #343131;
+      @media (max-width: 390px) {
+        display: none;
+      }
+    }
   }
 }
 

@@ -78,9 +78,7 @@ const boxTitle = computed(() => {
 //模块分割线
 const showModal = ref(false)
 const clickMemory = () => {
-  if (showModal.value===false) {showModal.value = true}
-  else {showModal.value = false}
-
+  showModal.value = showModal.value === false;
 }
 
 </script>
@@ -88,6 +86,7 @@ const clickMemory = () => {
 
 <style lang="scss">
 .buttonClock {
+  pointer-events: auto;
   margin-left: 1em;
   height: 2.2em;
   border: 1px solid rgba(255, 255, 255, 0.2);

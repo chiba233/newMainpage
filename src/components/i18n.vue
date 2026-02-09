@@ -40,6 +40,7 @@ watchEffect(() => {
   margin-right: 1em;
   height: 2.2em;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
   @media (max-width: 390px) {
     .n-icon {
       margin-left: 6px;

@@ -36,7 +36,6 @@ import I18n from "@/components/i18n.vue";
     display: flex;
     justify-content: start;
     position: absolute;
-    pointer-events: auto;
     animation: YToolIn 0.5s linear 0s 1;
 
   }
@@ -45,7 +44,6 @@ import I18n from "@/components/i18n.vue";
     display: flex;
     justify-content: flex-end;
     position: absolute;
-    pointer-events: auto;
     animation: YToolIn 0.5s linear 0s 1;
   }
 }
