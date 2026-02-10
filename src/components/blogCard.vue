@@ -11,7 +11,6 @@ const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
 
-
 </script>
 
 <template>
@@ -27,8 +26,12 @@ const formatDate = (t: string) => {
       </div>
 
       <div class="post-body">
-        <div class="post-image" v-if="post.introductionPic">
-          <img :src="post.introductionPic" :alt="post.title" loading="lazy"/>
+        <div class="post-image" v-if="post.blocks?.some((b:any) => b.type === 'image')">
+          <img
+              :src="post.blocks.find((b:any) => b.type === 'image')?.content"
+              :alt="post.title"
+              loading="lazy"
+          />
         </div>
         <div class="post-description">
           <p>

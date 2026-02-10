@@ -63,13 +63,13 @@ function cardChange(e: string) {
   if (e === 'b') cardSelect.value = true;
 }
 
-const home = {
+const home: Record<string, string> = {
   zh: "主页",
   ja: "ホーム",
   en: "Home",
   other: "home"
-} as const;
-const blog = {
+};
+const blog: Record<string, string> = {
   zh: "博客",
   ja: "ブログ",
   en: "blog",

@@ -36,10 +36,10 @@
 <script setup lang="ts">
 import {lang} from "@/components/ts/useStoage"
 import BlogCard from "@/components/blogCard.vue";
-const titleI18N = {
+const titleI18N :Record<string, string>= {
   zh:"欢迎来到我的博客！",
   ja:"ブログをようこそ！",
   en:"Welcome Back to my blog!",
 
-}
+};
 </script>

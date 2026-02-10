@@ -4,7 +4,7 @@ import {ref} from "vue";
 
 interface Post {
     title: string;
-    time: string | number | Date;
+    time: string;
     content?: string;
     [key: string]: any;
 }
@@ -25,7 +25,7 @@ export const loadAllPosts = async () => {
 
             const yamlText = await response.text();
 
-            return yaml.load(yamlText);
+            return yaml.load(yamlText) as any as Post;
         } catch (err) {
             console.error(`处理 ${name} 出错:`, err);
             return null;
