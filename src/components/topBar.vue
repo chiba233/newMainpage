@@ -18,7 +18,7 @@ import I18n from "@/components/i18n.vue";
 .overlay {
   justify-content: center;
   text-align: center;
-  z-index: 9999;
+  z-index: 2;
   left: 0.6em;
   right: 0.6em;
   top: 0.6em;

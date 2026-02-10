@@ -1,8 +1,14 @@
 layout: "common"
-time: "20220116"
-title: "今日もアッツ島は寒くて、サムイ島は暑いな。"
+time: "20220811"
+title: "えええ"
 blocks:
-  - type: "text"
-    content: "鲲鹏920无显卡 升Debian13后设备每次开机重启一次后无响应 随以为如果panic即无限重启 没怀疑到grub-Panic 后把/boot替换为备份/boot发现能开机 确定范围为grub 排查重点在initrd/vmlinuz上 后认真查了时间戳 确定为grub.cfg 对比旧版本与新版本区别 最开始删zz-proxmox-boot但无效遂gemini大功25_bli"
   - type: "image"
-    content: "/ayaka.webp"
+    content:
+    - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/blog1.png
+  - type: "text"
+    content: "her/she/彼女/她 🇹🇭。 ええええ！！ウソ！私はMTFじゃないの？ 母語中文、zh-cn:Rank S/ja-jp:Rank AA/en-##:Rank 鳥A。 全体目光向我看齐，我是个傻逼！"
+  - type: "image"
+    content:
+    - src: "/public/ayaka.webp"
+  - type: "imageDescription"
+    content: "这是图片日志"

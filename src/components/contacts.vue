@@ -333,6 +333,13 @@ const clickLine = () => {
 </script>
 
 <style lang="scss">
+.n-modal-container .maiCard , .n-modal-container .catCard{
+  border-radius: 1.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 .catCard {
   width: 40em;
 

@@ -1,4 +1,3 @@
-import postData from "@/message/list.json";
 import yaml from "js-yaml";
 import { ref } from "vue";
 
@@ -10,15 +9,20 @@ interface Post {
 }
 
 export const posts = ref<Post[]>([]);
+const LIST_URL = "/src/message/list.json";
 
 export const loadAllPosts = async () => {
+  const listRes = await fetch(LIST_URL);
+  if (!listRes.ok) console.log("error request list");
+
+  const postData: string[] = await listRes.json();
   const promises = postData.map(async (name: string) => {
-    const url = `/blog/${name}`;
+    const url = `/public/blog/${name}`;
     try {
       const response = await fetch(url);
 
       if (!response.ok) {
-        console.error(` 请求失败 [${response.status}]: ${url}`);
+        console.log(` 请求失败 [${response.status}]: ${url}`);
         return null;
       }
 
@@ -26,15 +30,14 @@ export const loadAllPosts = async () => {
 
       return yaml.load(yamlText) as any as Post;
     } catch (err) {
-      console.error(`处理 ${name} 出错:`, err);
+      console.log(`处理 ${name} 出错:`, err);
       return null;
     }
   });
   const results = await Promise.all(promises);
-  posts.value = (results.filter((p) => p !== null) as Post[]).sort((a, b) => {
+  posts.value = (results.filter((p) => p !== null)).sort((a, b) => {
     const timeA = new Date(a.time).getTime();
     const timeB = new Date(b.time).getTime();
     return timeB - timeA;
   });
-  console.log("最终 posts 结果:", posts.value);
 };

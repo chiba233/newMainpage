@@ -15,6 +15,7 @@ const titleI18N: Record<string, string> = {
   zh: "欢迎来到我的博客！",
   ja: "ブログをようこそ！",
   en: "Welcome Back to my blog!",
+  other: "Welcome Back to my blog!"
 };
 </script>
 <style lang="scss" scoped>

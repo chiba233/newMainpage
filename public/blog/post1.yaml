@@ -1,6 +1,18 @@
 layout: "common"
-time: "20220816"
-title: "哎 好无聊"
+time: "20260106"
+title: "鲲鹏920解决升级至debian12后panic"
 blocks:
   - type: "text"
-    content: "你好 ，$$bold(这是(加粗)内容)$$我是傻逼曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大...曼谷今天雨很大..."
+    content: "先介绍一下机器型号吧"
+  - type: "center"
+    content: |
+      华为云擎W510
+      24 x HUAWEI Kunpeng 920 2426SK NULL CPU @ 2.6GHz
+      32G DDR4 2400
+
+  - type: "image"
+    content:
+      - src: /public/blog/img/post1/1.png
+      - src: /public/blog/img/post1/1.png
+
+

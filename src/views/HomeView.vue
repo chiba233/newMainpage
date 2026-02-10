@@ -145,7 +145,7 @@ themeColor.value = selectedColor;
   height: 3em;
   position: absolute;
   animation: downToUp 0.8s linear 0s 1;
-  z-index: 9999;
+  z-index: 2;
   bottom: calc(0.4em + env(safe-area-inset-bottom));
 
   .cButton {

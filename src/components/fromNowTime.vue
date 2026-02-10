@@ -82,6 +82,13 @@ const clickMemory = () => {
 </script>
 
 <style lang="scss">
+.n-modal-container .fromTimeCard{
+  border-radius: 1.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 .buttonClock {
   pointer-events: auto;
   margin-left: 1em;

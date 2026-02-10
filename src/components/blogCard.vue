@@ -6,8 +6,8 @@ import { ref } from "vue";
 import Cancel from "@/icons/cancel.svg";
 import { NButton, NCard, NIcon, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
-
-
+import {NImage} from "naive-ui"
+console.log(posts)
 onMounted(async () => {
   await loadAllPosts();
 });
@@ -33,8 +33,8 @@ const closePortal = () => {
 <template>
   <div v-if="posts.length > 0" class="post-container">
     <article
-      v-for="post in posts"
-      :key="post.time"
+      v-for="(post,a) in posts"
+      :key="a"
       class="post-card"
       @click="() => cardClick(post)"
     >
@@ -52,7 +52,7 @@ const closePortal = () => {
       <div class="post-body">
         <div v-if="post.blocks?.some((b: any) => b.type === 'image')" class="post-image">
           <img
-            :src="post.blocks.find((b: any) => b.type === 'image')?.content"
+            :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0]?.src"
             :alt="post.title"
             loading="lazy"
           />
@@ -61,7 +61,7 @@ const closePortal = () => {
           <p>
             {{
               (post.blocks || [])
-                .filter((b: any) => b.type === "text")
+                .filter((b: any) => b.type === "text" || b.type === "center")
                 .map((b: any) => stripRichText(b.content))
                 .join(" ")
             }}
@@ -93,15 +93,20 @@ const closePortal = () => {
           <span>{{ formatTime(selectedPost.time) }}</span>
         </div>
         <div v-for="(block,a) in selectedPost.blocks" :key="a" class="postCardBody">
-          <div class="postCardImage">
-            <img
-            v-if="block.type === 'image'"
-            :src="block.content"
-            class="postCardImg"
-            loading="lazy"
-           alt=""/></div>
+          <div v-if="block.type === 'image'" class="postCardImage">
+            <n-image
+              v-for="img in block.content"
+              :key="img.src"
+              width="120"
+              :src="img.src"
+              class="postCardImg"
+            />
+          </div>
+          <div v-if="block.type === 'imageDescription'" class="postCardImageDesc">
+            <span>{{ block.content }}</span>
+          </div>
 
-          <p v-if="block.type === 'text'" class="post-text">
+          <div v-if="block.type === 'text'" class="postCardText">
             <template v-for="(token, c) in parseRichText(block.content)" :key="c">
               <span v-if="token.type === 'text'">{{ token.value }}</span>
               <strong v-else-if="token.type === 'bold'" class="fw-bold">{{ token.value }}</strong>
@@ -109,7 +114,8 @@ const closePortal = () => {
               <u v-else-if="token.type === 'underline'">{{ token.value }}</u>
               <del v-else-if="token.type === 'strike'">{{ token.value }}</del>
             </template>
-          </p>
+          </div>
+          <a v-if="block.type === 'center'" class="center-text">{{ block.content }}</a>
           <div
             v-else-if="block.type === 'effect'"
             class="post-effect"
@@ -122,43 +128,60 @@ const closePortal = () => {
   </n-modal>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @use "sass:color";
-// 定义变量，方便统一修改
+.n-modal-container .postModel{
+  border-radius: 1.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.postCardImg img {
+  margin: 1em;
+}
 $card-bg: rgba(255, 255, 255, 0.15);
 $text-color: #343131;
 $border-radius: 16px;
 $transition-speed: 0.3s;
 
-.postCardImage{
-  width: 100%;
+.postCardImage {
   display: flex;
   justify-content: center;
-  img{
-    width: 100px;
-    height: 100px;
-  }
 }
 .postModel {
-  margin-bottom: 5em;
-  margin-top: 5em;
+  margin-bottom: 4em;
+  margin-top: 4em;
   max-width: 85%;
   @media (max-width: 600px) {
     max-width: 100%;
   }
 
   .postCardMain {
+    flex-direction: column;
+    display: flex;
     width: 100%;
+    justify-content: center;
 
     .postCardMeta {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: color.adjust($text-color, $lightness: 20%);
     }
   }
+}
+.postCardImageDesc,
+.center-text{
+  display: flex;
+  justify-content: center;
+  white-space: pre-line;
+  text-align: center;
+}
+.center-text {
+  font-size: 1.1rem;
 }
 
 .post-container {
@@ -174,7 +197,7 @@ $transition-speed: 0.3s;
 .post-card {
   display: flex;
   flex-direction: column;
-  width: 15em;
+  width: 20em;
   max-width: 800px;
   background: $card-bg;
   backdrop-filter: blur(12px);
@@ -202,7 +225,7 @@ $transition-speed: 0.3s;
     margin-bottom: 1rem;
 
     .post-title {
-      font-size: 1.75rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: $text-color;
       margin: 0 0 0.5rem 0;
@@ -266,15 +289,20 @@ $transition-speed: 0.3s;
         color: $text-color;
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         line-height: 1.6;
-        font-size: 1rem;
+        font-size: 0.8rem;
         word-break: break-all;
         white-space: normal;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 7;
         overflow: hidden;
       }
     }
+  }
+}
+.postCardText{
+  span,strong,span,u,del{
+    font-size: 1.2rem;
   }
 }
 
