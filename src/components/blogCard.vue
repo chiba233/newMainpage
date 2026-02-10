@@ -10,12 +10,27 @@ onMounted(async () => {
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
+import { ref } from 'vue';
+
+// 用来存储当前被点击的那篇文章的所有数据
+const selectedPost = ref(null);
+
+// 点击卡片时调用的函数
+const handleCardClick = (posts:any) => {
+  selectedPost.value = posts; // 将点击的当前 post 对象赋值给 selectedPost
+  console.log(selectedPost.value);
+};
+
+// 关闭弹窗的函数
+const closePortal = () => {
+  selectedPost.value = null; // 清空数据，弹窗自然消失
+};
 
 </script>
 
 <template>
   <div class="post-container" v-if="posts.length > 0">
-    <article v-for="post in posts" :key="post.time" class="post-card">
+    <article v-for="post in posts" :key="post.time" class="post-card" @click="handleCardClick(post)">
       <div class="post-header">
         <h2 class="post-title">{{ post.title }}</h2>
         <div class="post-meta">
@@ -44,6 +59,7 @@ const formatDate = (t: string) => {
           </p>
         </div>
       </div>
+
     </article>
   </div>
 
@@ -68,7 +84,7 @@ $transition-speed: 0.3s;
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 4rem 1rem;
 }
 
 .post-card {
@@ -88,7 +104,7 @@ $transition-speed: 0.3s;
 
   @media (max-width: 600px) {
     width: 95vw;
-    height: 20em;
+    height: 18.8em;
   }
 
   &:hover {
@@ -106,6 +122,10 @@ $transition-speed: 0.3s;
       color: $text-color;
       margin: 0 0 0.5rem 0;
       line-height: 1.2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
 
     .post-meta {
@@ -139,6 +159,7 @@ $transition-speed: 0.3s;
       justify-content: center;
       align-items: center;
       height: 100%;
+      width: 120px;
 
       img {
         width: 120px;
@@ -150,17 +171,22 @@ $transition-speed: 0.3s;
     }
 
     .post-description {
+      display: flex;
       flex: 1;
+      min-width: 0;
 
       p {
+        max-height: 100%;
         margin: 0;
         color: $text-color;
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         line-height: 1.6;
         font-size: 1rem;
+        word-break: break-all;
+        white-space: normal;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 999;
+        -webkit-line-clamp: 5;
         overflow: hidden;
       }
     }

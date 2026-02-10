@@ -1,8 +1,8 @@
 layout: "common"
 time: "20220116"
-title: "哎 好无聊"
+title: "今日もアッツ島は寒くて、サムイ島は暑いな。"
 blocks:
   - type: "text"
-    content: "曼谷今天雨很大..."
+    content: "鲲鹏920无显卡 升Debian13后设备每次开机重启一次后无响应 随以为如果panic即无限重启 没怀疑到grub-Panic 后把/boot替换为备份/boot发现能开机 确定范围为grub 排查重点在initrd/vmlinuz上 后认真查了时间戳 确定为grub.cfg 对比旧版本与新版本区别 最开始删zz-proxmox-boot但无效遂gemini大功25_bli"
   - type: "image"
     content: "/ayaka.webp"
