@@ -28,10 +28,17 @@ const formatDate = (t: string) => {
 
       <div class="post-body">
         <div class="post-image" v-if="post.introductionPic">
-          <img :src="post.introductionPic" :alt="post.title" loading="lazy" />
+          <img :src="post.introductionPic" :alt="post.title" loading="lazy"/>
         </div>
         <div class="post-description">
-          <p>{{ post.introduction }}</p>
+          <p>
+            {{
+              (post.blocks || [])
+                  .filter((b:any) => b.type === 'text')
+                  .map((b:any)  => b.content)
+                  .join(' ')
+            }}
+          </p>
         </div>
       </div>
     </article>
@@ -44,6 +51,7 @@ const formatDate = (t: string) => {
 </template>
 
 <style scoped lang="scss">
+@use "sass:color";
 // 定义变量，方便统一修改
 $card-bg: rgba(255, 255, 255, 0.15);
 $text-color: #343131;
@@ -61,6 +69,8 @@ $transition-speed: 0.3s;
 }
 
 .post-card {
+  display: flex;
+  flex-direction: column;
   width: 15em;
   max-width: 800px;
   background: $card-bg;
@@ -69,7 +79,7 @@ $transition-speed: 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: $border-radius;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  padding: 0.8rem;
   height: 15em;
   transition: transform $transition-speed ease, box-shadow $transition-speed ease;
 
@@ -97,7 +107,7 @@ $transition-speed: 0.3s;
 
     .post-meta {
       font-size: 0.9rem;
-      color: lighten($text-color, 50%);
+      color: color.adjust($text-color, $lightness: 50%);
       display: flex;
       justify-content: center;
       gap: 0.5rem;
@@ -110,8 +120,10 @@ $transition-speed: 0.3s;
 
   .post-body {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.8rem;
     align-items: flex-start;
+    overflow: hidden;
+    flex: 1;
 
     // 移动端自动转为垂直布局
     @media (max-width: 600px) {
@@ -120,14 +132,17 @@ $transition-speed: 0.3s;
     }
 
     .post-image {
-      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
 
       img {
         width: 120px;
         height: 120px;
         object-fit: cover;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
     }
 
@@ -141,8 +156,8 @@ $transition-speed: 0.3s;
         line-height: 1.6;
         font-size: 1rem;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        -webkit-line-clamp: 999;
         overflow: hidden;
       }
     }
