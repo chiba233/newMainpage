@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-button @click="clickMemory" round :color="themeColor" class="buttonClock">
+    <n-button round :color="themeColor" class="buttonClock" @click="clickMemory">
       <template #icon>
         <n-icon size="20">
           <Clock></Clock>
@@ -9,10 +9,7 @@
       <a>{{ fromNowI18[lang as keyof typeof fromNowI18]?.button || fromNowI18.zh.button }}</a>
     </n-button>
     <n-modal v-model:show="showModal">
-      <n-card
-          class="fromTimeCard"
-          :title="boxTitle"
-          size="huge">
+      <n-card class="fromTimeCard" :title="boxTitle" size="huge">
         <template #header-extra>
           <n-button tertiary circle @click="showModal = false">
             <template #icon>
@@ -22,7 +19,7 @@
             </template>
           </n-button>
         </template>
-        <div class="timeCard" v-for="item in fromNow" :key="item.time">
+        <div v-for="item in fromNow" :key="item.time" class="timeCard">
           <div class="thatDay">
             <a>{{ formatDate(item.time) }}</a>
           </div>
@@ -39,29 +36,36 @@
 </template>
 
 <script setup lang="ts">
-import {NModal, NButton, NIcon, NCard} from "naive-ui";
+import { NModal, NButton, NIcon, NCard } from "naive-ui";
 import Clock from "../icons/clock.svg";
-import {computed, ref} from "vue";
-import Cancel from "../icons/cancel.svg"
-import {lang} from "@/components/ts/useStoage";
-import fromNowI18 from "../message/fromNowI18n.json"
-import fromNow from "../message/fromNow.json"
-import {themeColor} from "@/components/ts/useStoage";
-import {formatTime} from "@/components/ts/useStoage";
+import { computed, ref } from "vue";
+import Cancel from "../icons/cancel.svg";
+import { lang } from "@/components/ts/useStoage";
+import fromNowI18 from "../message/fromNowI18n.json";
+import fromNow from "../message/fromNow.json";
+import { themeColor } from "@/components/ts/useStoage";
+import { formatTime } from "@/components/ts/useStoage";
 
 const langMap = {
-  zh: 'nameZH',
-  en: 'nameEN',
-  ja: 'nameJP',
-  other: 'nameOther'
+  zh: "nameZH",
+  en: "nameEN",
+  ja: "nameJP",
+  other: "nameOther",
 } as const;
 
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
+interface Item {
+  nameEN: string;
+  nameCN: string;
+  nameJP: string;
+  [key: string]: string; // 可选：如果还有别的字段
+}
 
-const getName = (item: any) => {
-  const key = langMap[lang.value as keyof typeof langMap] || 'nameEN';
+
+const getName = (item: Item) => {
+  const key = langMap[lang.value as keyof typeof langMap] || "nameEN";
   return item[key];
 };
 
@@ -70,19 +74,18 @@ interface LanguageConfig {
   title: string;
   button: string;
 }
+
 const data: Record<string, LanguageConfig> = fromNowI18;
 const boxTitle = computed(() => {
-  return data[lang.value]?.title || data['en'].title;
+  return data[lang.value]?.title || data["en"].title;
 });
 
 //模块分割线
-const showModal = ref(false)
+const showModal = ref(false);
 const clickMemory = () => {
   showModal.value = showModal.value === false;
-}
-
+};
 </script>
-
 
 <style lang="scss">
 .buttonClock {
@@ -102,7 +105,6 @@ const clickMemory = () => {
     @media (max-width: 390px) {
       display: none;
     }
-
   }
 }
 

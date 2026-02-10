@@ -2,10 +2,10 @@
   <top-bar class="topBar"></top-bar>
   <div class="viewport">
     <div class="main">
-      <div class="blog" v-show="!cardSelect">
+      <div v-show="!cardSelect" class="blog">
         <BlogView></BlogView>
       </div>
-      <div class="content" v-show="cardSelect">
+      <div v-show="cardSelect" class="content">
         <Title></Title>
         <div class="detailsDIV">
           <Details></Details>
@@ -40,53 +40,53 @@
 </template>
 
 <script setup lang="ts">
-
 import Title from "@/components/title.vue";
 import Details from "@/components/detail.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
-import colorData from "@/message/colorData.json"
-import {themeColor, lang} from "@/components/ts/useStoage";
+import colorData from "@/message/colorData.json";
+import { themeColor, lang } from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
-import {AnimalRabbit28Regular, Home12Regular} from '@vicons/fluent'
-import {NButton, NIcon} from "naive-ui";
-import {ref} from "vue";
+import { AnimalRabbit28Regular, Home12Regular } from "@vicons/fluent";
+import { NButton, NIcon } from "naive-ui";
+import { ref } from "vue";
 import BlogView from "@/views/BlogView.vue";
 
-const cardSelect = ref(false)
-
+const cardSelect = ref(false);
 
 function cardChange(e: string) {
-  if (e === 'a') {
+  if (e === "a") {
     cardSelect.value = false;
   }
-  if (e === 'b') cardSelect.value = true;
+  if (e === "b") cardSelect.value = true;
 }
 
 const home: Record<string, string> = {
   zh: "主页",
   ja: "ホーム",
   en: "Home",
-  other: "home"
+  other: "home",
 };
 const blog: Record<string, string> = {
   zh: "博客",
   ja: "ブログ",
   en: "blog",
-  other: "blog"
+  other: "blog",
 } as const;
 
+type ThemeIndex = 1 | 2 | 3 | 4 | 5 | 6;
+type BackgroundKey = `background${ThemeIndex}`;
+type ColorData = Record<BackgroundKey, string>;
 const randomTheme = Math.floor(Math.random() * 7);
-const selectedColor = (colorData as any)[`background${randomTheme}`];
-
+const selectedColor = (colorData as ColorData)[
+  `background${randomTheme}` as BackgroundKey
+  ];
 
 document.body.style.cssText = `
   background-image: url(background${randomTheme}.webp);
   background-color: ${selectedColor};
 `;
 themeColor.value = selectedColor;
-
-
 </script>
 
 <style lang="scss">
@@ -169,12 +169,10 @@ themeColor.value = selectedColor;
   }
 }
 
-
 @keyframes downToUp {
   from {
     transform: translateY(3em);
   }
-
 
   to {
     transform: none;
@@ -190,7 +188,6 @@ themeColor.value = selectedColor;
   }
 }
 
-
 @keyframes slide-fwd-center {
   0% {
     transform: scale(0.9) translateY(20px);
@@ -199,6 +196,4 @@ themeColor.value = selectedColor;
     transform: scale(1) translateY(0);
   }
 }
-
-
 </style>

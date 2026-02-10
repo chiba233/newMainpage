@@ -5,7 +5,7 @@
   "mainInfoZH": "我的DX主要成绩。",
   "mainInfoEN": "My main info.",
   "mainInfoJP": "主な情報",
-  "otherInfoZH":"来看看更详细的信息。",
+  "otherInfoZH": "来看看更详细的信息。",
   "otherInfoEN": "My other info.",
   "otherInfoJP": "他の情報.",
   "historyInfoZH": "看看以前的最高成绩？",
@@ -47,9 +47,4 @@
   "dxPlayCountZH": "游玩（摆烂）计数",
   "dxPlayCountEN": "DX Play Count",
   "dxPlayCountJP": "DXプレイ回数"
-
-
-
-
-
 }

@@ -1,108 +1,99 @@
 <template>
-    <n-modal v-model:show="showCatModel">
-      <!-- catCard -->
-      <n-card
-          class="catCard"
-          :title="catMemoryTitle.catMemory"
-          size="huge">
-        <template #header-extra>
-          <n-button tertiary circle @click="showCatModel = false">
-            <template #icon>
-              <n-icon size="20">
-                <Cancel></Cancel>
-              </n-icon>
-            </template>
-          </n-button>
-        </template>
-        <div>
-          <n-carousel class="catImgCard" show-arrow mousewheel>
-            <img v-for="{catImg,imgName} in catImage" :src="catImg" :alt="imgName">
-          </n-carousel>
-        </div>
-      </n-card>
-    </n-modal>
+  <n-modal v-model:show="showCatModel">
+    <!-- catCard -->
+    <n-card class="catCard" :title="catMemoryTitle.catMemory" size="huge">
+      <template #header-extra>
+        <n-button tertiary circle @click="showCatModel = false">
+          <template #icon>
+            <n-icon size="20">
+              <Cancel></Cancel>
+            </n-icon>
+          </template>
+        </n-button>
+      </template>
+      <div>
+        <n-carousel class="catImgCard" show-arrow mousewheel>
+          <img v-for="{ catImg, imgName } in catImage" :key="imgName" :src="catImg" :alt="imgName" />
+        </n-carousel>
+      </div>
+    </n-card>
+  </n-modal>
   <!-- maiCard -->
-    <n-modal v-model:show="showMaiModal">
-      <n-card
-          class="maiCard"
-          :title="maiDisplay.title"
-          size="huge">
-        <template #header-extra>
-          <n-button tertiary circle @click="showMaiModal = false">
-            <template #icon>
-              <n-icon size="20">
-                <Cancel></Cancel>
-              </n-icon>
-            </template>
-          </n-button>
-        </template>
-        <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
-          <n-collapse-item :title="maiDisplay.mainInfo" name="1">
+  <n-modal v-model:show="showMaiModal">
+    <n-card class="maiCard" :title="maiDisplay.title" size="huge">
+      <template #header-extra>
+        <n-button tertiary circle @click="showMaiModal = false">
+          <template #icon>
+            <n-icon size="20">
+              <Cancel></Cancel>
+            </n-icon>
+          </template>
+        </n-button>
+      </template>
+      <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
+        <n-collapse-item :title="maiDisplay.mainInfo" name="1">
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.dxName }}</a> <a class="connecter">:</a>
+            <a>{{ data.userName ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.dxRatingName }}</a> <a class="connecter">:</a>
+            <a>{{ data.playerRating ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.dxLastPlay }}</a> <a class="connecter">:</a>
+            <a>{{ data.lastPlayDate ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.playCount }}</a> <a class="connecter">:</a>
+            <a>{{ data.playCount ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.dxVersion }}</a> <a class="connecter">:</a>
+            <a>{{ data.lastDataVersion ?? maiError }}</a>
+          </div>
+        </n-collapse-item>
+        <n-collapse-item :title="maiDisplay.otherInfo" name="2">
+          <div class="maiCardDiv">
             <div class="maiCardDiv">
-              <a>{{ maiDisplay.dxName }}</a> <a class="connecter">:</a> <a>{{ data.userName ?? maiError }}</a>
+              <a>{{ maiDisplay.basicScore }}</a> <a class="connecter">:</a>
+              <a>{{ data.totalBasicDeluxscore ?? maiError }}</a>
             </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.dxRatingName }}</a> <a class="connecter">:</a> <a>{{ data.playerRating ?? maiError }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.dxLastPlay }}</a> <a class="connecter">:</a> <a>{{ data.lastPlayDate ?? maiError }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.playCount }}</a> <a class="connecter">:</a> <a>{{ data.playCount ?? maiError }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.dxVersion }}</a> <a class="connecter">:</a> <a>{{ data.lastDataVersion ?? maiError }}</a>
-            </div>
-          </n-collapse-item>
-          <n-collapse-item :title="maiDisplay.otherInfo" name="2">
-            <div class="maiCardDiv">
-              <div class="maiCardDiv">
-                <a>{{ maiDisplay.basicScore }}</a> <a class="connecter">:</a> <a>{{
-                  data.totalBasicDeluxscore ?? maiError
-                }}</a>
-              </div>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.advancedScore }}</a> <a class="connecter">:</a>
-              <a>{{ data.totalAdvancedDeluxscore ?? maiError }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.expertScore }}</a><a class="connecter">:</a> <a>{{
-                data.totalExpertDeluxscore ?? maiError
-              }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.masterScore }}</a> <a class="connecter">:</a> <a>{{
-                data.totalMasterDeluxscore ?? maiError
-              }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.reMasterScore }}</a><a class="connecter">:</a>
-              <a>{{ data.totalReMasterDeluxscore ?? maiError }}</a>
-            </div>
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.totalScore }}</a> <a class="connecter">:</a> <a>{{
-                data.totalDeluxscore ?? maiError
-              }}</a>
-            </div>
-          </n-collapse-item>
-          <n-collapse-item :title="maiDisplay.historyInfo" name="3">
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.highestRating }}</a> <a class="connecter">:</a> <a>{{
-                data.highestRating ?? maiError
-              }}</a>
-            </div>
-          </n-collapse-item>
-        </n-collapse>
-      </n-card>
-    </n-modal>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.advancedScore }}</a> <a class="connecter">:</a>
+            <a>{{ data.totalAdvancedDeluxscore ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.expertScore }}</a
+            ><a class="connecter">:</a> <a>{{ data.totalExpertDeluxscore ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.masterScore }}</a> <a class="connecter">:</a>
+            <a>{{ data.totalMasterDeluxscore ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.reMasterScore }}</a
+            ><a class="connecter">:</a>
+            <a>{{ data.totalReMasterDeluxscore ?? maiError }}</a>
+          </div>
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.totalScore }}</a> <a class="connecter">:</a>
+            <a>{{ data.totalDeluxscore ?? maiError }}</a>
+          </div>
+        </n-collapse-item>
+        <n-collapse-item :title="maiDisplay.historyInfo" name="3">
+          <div class="maiCardDiv">
+            <a>{{ maiDisplay.highestRating }}</a> <a class="connecter">:</a>
+            <a>{{ data.highestRating ?? maiError }}</a>
+          </div>
+        </n-collapse-item>
+      </n-collapse>
+    </n-card>
+  </n-modal>
   <!-- 以下是WeCat -->
-  <n-image-preview
-      v-model:show="showWechatModel"   width="1" src="/wechat.webp">
-  </n-image-preview>
-  <n-image-preview
-      v-model:show="showLineModel"   width="1" src="/line.webp">
-  </n-image-preview>
+  <n-image-preview v-model:show="showWechatModel" width="1" src="/wechat.webp"></n-image-preview>
+  <n-image-preview v-model:show="showLineModel" width="1" src="/line.webp"></n-image-preview>
 
   <!-- 以下是联系人 -->
   <div class="contacts">
@@ -141,7 +132,7 @@
     <n-button round :color="themeColor" class="cButton" @click="openLink('twitter')">
       <template #icon>
         <n-icon size="23">
-          <TwitterIcon/>
+          <TwitterIcon />
         </n-icon>
       </template>
       <a>Twitter</a>
@@ -222,39 +213,50 @@
 </template>
 
 <script setup lang="ts">
-
-import Solana from "@/icons/solanaLogoMark.svg"
-import catImage from "@/message/catImage.json"
-import commonI18n from "@/message/commonI18n.json"
-import Cat from "@/icons/cat.svg"
-import TwitterIcon from "@/icons/twitter.svg"
-import TelegramIcon from "@/icons/telegram.svg"
-import {NIcon, NButton, NCard, NModal, NCollapse, NCollapseItem, NCarousel,NImagePreview} from "naive-ui";
-import MaiTrans from "@/icons/maitrans.svg"
-import Tron from "@/icons/tron.svg"
-import Eth from "@/icons/eth.svg"
-import Bsc from "@/icons/binance-coin-bnb-seeklogo.svg"
-import Email from "@/icons/Email.svg"
-import Github from "@/icons/LogoGithub.svg"
-import Polygon from "@/icons/polygon-matic-logo.svg"
-import Arbitrum from "@/icons/arb.svg"
-import wechat from "@/icons/wechat.svg"
-import Line from "@/icons/line.svg"
-import {lang, themeColor} from "@/components/ts/useStoage";
-import {maiUrl, UserDataType} from "./ts/maimaiScore";
+import Solana from "@/icons/solanaLogoMark.svg";
+import catImage from "@/message/catImage.json";
+import commonI18n from "@/message/commonI18n.json";
+import Cat from "@/icons/cat.svg";
+import TwitterIcon from "@/icons/twitter.svg";
+import TelegramIcon from "@/icons/telegram.svg";
+import {
+  NIcon,
+  NButton,
+  NCard,
+  NModal,
+  NCollapse,
+  NCollapseItem,
+  NCarousel,
+  NImagePreview,
+} from "naive-ui";
+import MaiTrans from "@/icons/maitrans.svg";
+import Tron from "@/icons/tron.svg";
+import Eth from "@/icons/eth.svg";
+import Bsc from "@/icons/binance-coin-bnb-seeklogo.svg";
+import Email from "@/icons/Email.svg";
+import Github from "@/icons/LogoGithub.svg";
+import Polygon from "@/icons/polygon-matic-logo.svg";
+import Arbitrum from "@/icons/arb.svg";
+import wechat from "@/icons/wechat.svg";
+import Line from "@/icons/line.svg";
+import { lang, themeColor } from "@/components/ts/useStoage";
+import { maiUrl, UserDataType } from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 import maiI18nData from "@/message/maiI18n.json";
 import axios from "axios";
-import {useAsyncState} from "@vueuse/core";
+import { useAsyncState } from "@vueuse/core";
 
-const showCatModel = ref<boolean>(false)
-const showMaiModal = ref<boolean>(false)
-const showWechatModel = ref(false)
-const showLineModel = ref(false)
-const maiError = ref("获取失败")
+const showCatModel = ref<boolean>(false);
+const showMaiModal = ref<boolean>(false);
+const showWechatModel = ref(false);
+const showLineModel = ref(false);
+const maiError = ref("获取失败");
 
-const {state: data} = useAsyncState<Partial<UserDataType>>(() => axios.get(maiUrl).then(res => res.data), {})
+const { state: data } = useAsyncState<Partial<UserDataType>>(
+  () => axios.get(maiUrl).then((res) => res.data),
+  {},
+);
 
 const socialLinks = {
   twitter: "https://x.com/HoshinoYumeka2",
@@ -266,7 +268,7 @@ const socialLinks = {
   solana: "https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V",
   telegram: "https://t.me/chiba2333",
   email: "mailto:qwq@qwwq@org",
-  github: "https://github.com/chiba233"
+  github: "https://github.com/chiba233",
 } as const;
 type SocialType = keyof typeof socialLinks;
 
@@ -280,37 +282,39 @@ function openLink(type: SocialType) {
 }
 
 const catMemoryTitle = computed(() => {
-  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'ja' ? 'JP' : 'JP';
-  const getField = (prefix: string) => (commonI18n as any)[`${prefix}${suffix}`];
+  const suffix =
+    lang.value === "zh" ? "ZH" : lang.value === "en" ? "EN" : lang.value === "ja" ? "JP" : "JP";
+  const getField = (prefix: string) => (commonI18n as Record<string, string>)[`${prefix}${suffix}`];
   return {
-    catMemory: getField('catMemoryTitle'),
-    cat: getField('cat'),
-  }
+    catMemory: getField("catMemoryTitle"),
+    cat: getField("cat"),
+  };
 });
 
 const maiDisplay = computed(() => {
-  const suffix = lang.value === 'zh' ? 'ZH' : lang.value === 'en' ? 'EN' : lang.value === 'ja' ? 'JP' : 'JP';
-  const getField = (prefix: string) => (maiI18nData as any)[`${prefix}${suffix}`];
+  const suffix =
+    lang.value === "zh" ? "ZH" : lang.value === "en" ? "EN" : lang.value === "ja" ? "JP" : "JP";
+  const getField = (prefix: string) =>
+    (maiI18nData as Record<string, string>)[`${prefix}${suffix}`];
 
   return {
-    title: getField('titleName'),
-    mainInfo: getField('mainInfo'),
-    otherInfo: getField('otherInfo'),
-    historyInfo: getField('historyInfo'),
-    dxRatingName: getField('dxRatingName'),
-    dxName: getField('dxName'),
-    dxLastPlay: getField('dxLastPlay'),
-    dxVersion: getField('dxVersion'),
-    basicScore: getField('BasicDeluxscore'),
-    advancedScore: getField('AdvancedDeluxscore'),
-    expertScore: getField('ExpertDeluxscore'),
-    masterScore: getField('MasterDeluxscore'),
-    reMasterScore: getField('ReMasterDeluxscore'),
-    totalScore: getField('totalDeluxscore'),
-    highestRating: getField('highestRating'),
-    playCount: getField('dxPlayCount')
+    title: getField("titleName"),
+    mainInfo: getField("mainInfo"),
+    otherInfo: getField("otherInfo"),
+    historyInfo: getField("historyInfo"),
+    dxRatingName: getField("dxRatingName"),
+    dxName: getField("dxName"),
+    dxLastPlay: getField("dxLastPlay"),
+    dxVersion: getField("dxVersion"),
+    basicScore: getField("BasicDeluxscore"),
+    advancedScore: getField("AdvancedDeluxscore"),
+    expertScore: getField("ExpertDeluxscore"),
+    masterScore: getField("MasterDeluxscore"),
+    reMasterScore: getField("ReMasterDeluxscore"),
+    totalScore: getField("totalDeluxscore"),
+    highestRating: getField("highestRating"),
+    playCount: getField("dxPlayCount"),
   };
-
 });
 
 const clickMai = () => {
@@ -318,14 +322,14 @@ const clickMai = () => {
 };
 
 const clickCatMemory = () => {
-  showCatModel.value = true
-}
+  showCatModel.value = true;
+};
 const clickWechat = () => {
-  showWechatModel.value = true
-}
+  showWechatModel.value = true;
+};
 const clickLine = () => {
-  showLineModel.value = true
-}
+  showLineModel.value = true;
+};
 </script>
 
 <style lang="scss">
@@ -345,7 +349,6 @@ const clickLine = () => {
       width: 100%;
       height: 100%;
     }
-
   }
 }
 
@@ -368,7 +371,6 @@ const clickLine = () => {
     height: auto;
     object-fit: scale-down;
   }
-
 }
 
 .contacts {
@@ -376,7 +378,6 @@ const clickLine = () => {
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-
 
   .n-button {
     height: 2.2em;

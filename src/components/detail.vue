@@ -1,20 +1,20 @@
 <template>
   <div class="textBox">
     <a class="detailText">
-      <a v-if="lang==='zh'">
-        {{ dTextZH[0] }} <br>
+      <a v-if="lang === 'zh'">
+        {{ dTextZH[0] }} <br />
         {{ dTextZH[1] }}
       </a>
-      <a v-if="lang==='en'">
-        {{ dTextEN[0] }}<br>
+      <a v-if="lang === 'en'">
+        {{ dTextEN[0] }}<br />
         {{ dTextEN[1] }}
       </a>
-      <a v-if="lang==='ja'">
-        {{ dTextJP[0] }}<br>
+      <a v-if="lang === 'ja'">
+        {{ dTextJP[0] }}<br />
         {{ dTextJP[1] }}
       </a>
-      <a v-if="lang==='other'">
-        {{ dTextOther[0] }}<br>
+      <a v-if="lang === 'other'">
+        {{ dTextOther[0] }}<br />
         {{ dTextOther[1] }}
       </a>
     </a>
@@ -22,14 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import introduction from '../message/introduction.json'
-import {lang} from "@/components/ts/useStoage";
+import introduction from "../message/introduction.json";
+import { lang } from "@/components/ts/useStoage";
 
-let dTextZH: string[] = introduction.introductionMessageZH
-let dTextEN: string[] = introduction.introductionMessageEN
-let dTextJP: string[] = introduction.introductionMessageJP
-let dTextOther: string[] = introduction.introductionMessageOther
-
+let dTextZH: string[] = introduction.introductionMessageZH;
+let dTextEN: string[] = introduction.introductionMessageEN;
+let dTextJP: string[] = introduction.introductionMessageJP;
+let dTextOther: string[] = introduction.introductionMessageOther;
 </script>
 
 <style lang="scss">
@@ -65,7 +64,6 @@ let dTextOther: string[] = introduction.introductionMessageOther
     }
     @media (max-width: 420px) {
       font-size: 1em;
-
     }
   }
 }

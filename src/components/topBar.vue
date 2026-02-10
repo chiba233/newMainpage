@@ -15,7 +15,7 @@ import I18n from "@/components/i18n.vue";
 </template>
 
 <style scoped lang="scss">
-.overlay{
+.overlay {
   justify-content: center;
   text-align: center;
   z-index: 9999;
@@ -29,7 +29,7 @@ import I18n from "@/components/i18n.vue";
   background-color: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  border-radius:1.5em;
+  border-radius: 1.5em;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   .fromTime {
@@ -37,7 +37,6 @@ import I18n from "@/components/i18n.vue";
     justify-content: start;
     position: absolute;
     animation: YToolIn 0.5s linear 0s 1;
-
   }
   .i18 {
     width: 100%;

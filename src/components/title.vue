@@ -9,23 +9,22 @@
 </template>
 
 <script setup lang="ts">
-import {NAvatar} from "naive-ui";
+import { NAvatar } from "naive-ui";
 import icon from "../icons/icon.webp";
-import titleMessage from "../message/titleMessage.json"
-import {lang} from "@/components/ts/useStoage";
-import {computed} from "vue";
+import titleMessage from "../message/titleMessage.json";
+import { lang } from "@/components/ts/useStoage";
+import { computed } from "vue";
 
 const displayTitle = computed(() => {
   const map: Record<string, string> = {
     zh: titleMessage.titleZH,
     en: titleMessage.titleEN,
     ja: titleMessage.titleJP,
-    other: titleMessage.titleOther
+    other: titleMessage.titleOther,
   };
   // 也可以加一个 fallback，防止 lang 匹配不到时报错
   return map[lang.value] || titleMessage.titleOther;
 });
-
 </script>
 
 <style lang="scss">
@@ -53,7 +52,11 @@ const displayTitle = computed(() => {
     flex-wrap: wrap;
     align-content: center;
     color: white;
-    text-shadow: #383838 1px 0 0, #383838 0 1px 0, #383838 -1px 0 0, #383838 0 -1px 0;
+    text-shadow:
+      #383838 1px 0 0,
+      #383838 0 1px 0,
+      #383838 -1px 0 0,
+      #383838 0 -1px 0;
     font-weight: lighter;
     @media (min-width: 730px) {
       font-size: 1.9em;
@@ -76,7 +79,6 @@ const displayTitle = computed(() => {
       width: 4em;
       height: 4em;
     }
-
   }
 
   .a {
@@ -85,7 +87,6 @@ const displayTitle = computed(() => {
       width: 6em;
       height: 6em;
     }
-
   }
 }
 </style>

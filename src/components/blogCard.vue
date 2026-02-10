@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
-import {loadAllPosts, posts} from "@/components/ts/getBlogYaml"
-import {formatTime} from "@/components/ts/useStoage";
+import { onMounted } from "vue";
+import { loadAllPosts, posts } from "@/components/ts/getBlogYaml";
+import { formatTime } from "@/components/ts/useStoage";
 
 onMounted(async () => {
   await loadAllPosts();
@@ -10,7 +10,7 @@ onMounted(async () => {
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
-import {ref} from 'vue';
+import { ref } from "vue";
 
 // 用来存储当前被点击的那篇文章的所有数据
 const selectedPost = ref(null);
@@ -25,14 +25,10 @@ const cardClick = (posts: any) => {
 const closePortal = () => {
   selectedPost.value = null; // 清空数据，弹窗自然消失
 };
-
 </script>
 
 <template>
-  <div
-    v-if="posts.length > 0"
-    class="post-container"
-  >
+  <div v-if="posts.length > 0" class="post-container">
     <article
       v-for="post in posts"
       :key="post.time"
@@ -51,23 +47,20 @@ const closePortal = () => {
       </div>
 
       <div class="post-body">
-        <div
-          v-if="post.blocks?.some((b:any) => b.type === 'image')"
-          class="post-image"
-        >
+        <div v-if="post.blocks?.some((b: any) => b.type === 'image')" class="post-image">
           <img
-            :src="post.blocks.find((b:any) => b.type === 'image')?.content"
+            :src="post.blocks.find((b: any) => b.type === 'image')?.content"
             :alt="post.title"
             loading="lazy"
-          >
+          />
         </div>
         <div class="post-description">
           <p>
             {{
               (post.blocks || [])
-                .filter((b: any) => b.type === 'text')
+                .filter((b: any) => b.type === "text")
                 .map((b: any) => b.content)
-                .join(' ')
+                .join(" ")
             }}
           </p>
         </div>
@@ -75,10 +68,7 @@ const closePortal = () => {
     </article>
   </div>
 
-  <div
-    v-else
-    class="loading-state"
-  >
+  <div v-else class="loading-state">
     <div class="loader" />
     <p>正在加载文章中...</p>
   </div>
@@ -115,7 +105,9 @@ $transition-speed: 0.3s;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 0.8rem;
   height: 15em;
-  transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+  transition:
+    transform $transition-speed ease,
+    box-shadow $transition-speed ease;
 
   @media (max-width: 600px) {
     width: 95vw;

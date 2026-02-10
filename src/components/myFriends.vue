@@ -1,29 +1,32 @@
 <template>
-  <a class="friendTitle">{{ friendsMessage[`title${lang === 'zh' ? 'ZH' : lang === 'en' ? 'EN' :lang === 'ja' ? 'JP' : 'Other'}`] }}</a>
+  <a class="friendTitle">{{
+      friendsMessage[
+        `title${lang === "zh" ? "ZH" : lang === "en" ? "EN" : lang === "ja" ? "JP" : "Other"}`
+        ]
+    }}</a>
   <div class="allFriends">
-    <div class="friendBox" v-for="{icon,name,url,aliasEN} in friends" @click="openURL(url)">
+    <div v-for="{ icon, name, url, aliasEN } in friends"  :key="aliasEN" class="friendBox" @click="openURL(url)">
       <n-avatar :src="icon" :size="100" round bordered></n-avatar>
-      <a class="friendName" v-if="lang==='zh'">
+      <a v-if="lang === 'zh'" class="friendName">
         {{ name }}
       </a>
-      <a class="friendName" v-if="lang !='zh'">
+      <a v-if="lang != 'zh'" class="friendName">
         {{ aliasEN }}
       </a>
     </div>
   </div>
-</template>)
+</template>
+)
 
 <script setup lang="ts">
-import {NAvatar} from "naive-ui";
-import friends from "@/message/friends.json"
-import friendsMessage from "@/message/friendsMessage.json"
-import {lang} from "@/components/ts/useStoage";
+import { NAvatar } from "naive-ui";
+import friends from "@/message/friends.json";
+import friendsMessage from "@/message/friendsMessage.json";
+import { lang } from "@/components/ts/useStoage";
 
 function openURL(url: string) {
-  window.open(url)
+  window.open(url);
 }
-
-
 </script>
 
 <style lang="scss">
@@ -33,7 +36,10 @@ function openURL(url: string) {
   color: white;
   font-weight: lighter;
   text-align: center;
-  text-shadow: #383838 1px 0 0, #383838 0 1px 0, #383838 -1px 0 0, #383838 0 -1px 0;
+  text-shadow: #383838 1px 0 0,
+  #383838 0 1px 0,
+  #383838 -1px 0 0,
+  #383838 0 -1px 0;
   @media (min-width: 730px) {
     font-size: 1.9em;
     padding-bottom: 1em;
@@ -97,9 +103,6 @@ function openURL(url: string) {
     color: #343131;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     white-space: nowrap;
-
   }
-
 }
-
 </style>

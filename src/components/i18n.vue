@@ -3,7 +3,7 @@
     <n-button round :color="themeColor" class="buttonI18">
       <template #icon>
         <n-icon size="20">
-          <LangIcon/>
+          <LangIcon />
         </n-icon>
       </template>
       <a> {{ i18nLang.find((it: LangItem) => it.value === lang)?.label }}</a>
@@ -12,27 +12,26 @@
 </template>
 
 <script setup lang="ts">
-import LangIcon from '../icons/langIcon.svg'
-import {NButton, NIcon, NPopselect} from "naive-ui"
-import i18nLang from "../message/i18nLang.json"
-import {lang} from "@/components/ts/useStoage";
-import {themeColor} from "@/components/ts/useStoage";
-import {watchEffect} from "vue";
-import webTitle from "../message/webTitle.json"
+import LangIcon from "../icons/langIcon.svg";
+import { NButton, NIcon, NPopselect } from "naive-ui";
+import i18nLang from "../message/i18nLang.json";
+import { lang } from "@/components/ts/useStoage";
+import { themeColor } from "@/components/ts/useStoage";
+import { watchEffect } from "vue";
+import webTitle from "../message/webTitle.json";
 
 const newWebTitle: Record<string, string> = webTitle;
 
 type LangItem = {
-  label: string
-  value: string
-}
+  label: string;
+  value: string;
+};
 
 watchEffect(() => {
   document.documentElement.lang = lang.value;
   // 2. 修改网页标题（同样使用 fallback 逻辑）
-  document.title = newWebTitle[lang.value] || 'Strawberry Pages';
+  document.title = newWebTitle[lang.value] || "Strawberry Pages";
 });
-
 </script>
 
 <style lang="scss">
@@ -54,6 +53,5 @@ watchEffect(() => {
       display: none;
     }
   }
-
 }
 </style>
