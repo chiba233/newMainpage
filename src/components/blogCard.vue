@@ -10,14 +10,14 @@ onMounted(async () => {
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 // 用来存储当前被点击的那篇文章的所有数据
 const selectedPost = ref(null);
 
 // 点击卡片时调用的函数
-const handleCardClick = (posts:any) => {
-  selectedPost.value = posts; // 将点击的当前 post 对象赋值给 selectedPost
+const cardClick = (posts: any) => {
+  selectedPost.value = posts;
   console.log(selectedPost.value);
 };
 
@@ -29,10 +29,20 @@ const closePortal = () => {
 </script>
 
 <template>
-  <div class="post-container" v-if="posts.length > 0">
-    <article v-for="post in posts" :key="post.time" class="post-card" @click="handleCardClick(post)">
+  <div
+    v-if="posts.length > 0"
+    class="post-container"
+  >
+    <article
+      v-for="post in posts"
+      :key="post.time"
+      class="post-card"
+      @click="() => cardClick(post)"
+    >
       <div class="post-header">
-        <h2 class="post-title">{{ post.title }}</h2>
+        <h2 class="post-title">
+          {{ post.title }}
+        </h2>
         <div class="post-meta">
           <time :datetime="post.time">{{ formatDate(post.time) }}</time>
           <span class="time-divider">|</span>
@@ -41,30 +51,35 @@ const closePortal = () => {
       </div>
 
       <div class="post-body">
-        <div class="post-image" v-if="post.blocks?.some((b:any) => b.type === 'image')">
+        <div
+          v-if="post.blocks?.some((b:any) => b.type === 'image')"
+          class="post-image"
+        >
           <img
-              :src="post.blocks.find((b:any) => b.type === 'image')?.content"
-              :alt="post.title"
-              loading="lazy"
-          />
+            :src="post.blocks.find((b:any) => b.type === 'image')?.content"
+            :alt="post.title"
+            loading="lazy"
+          >
         </div>
         <div class="post-description">
           <p>
             {{
               (post.blocks || [])
-                  .filter((b:any) => b.type === 'text')
-                  .map((b:any)  => b.content)
-                  .join(' ')
+                .filter((b: any) => b.type === 'text')
+                .map((b: any) => b.content)
+                .join(' ')
             }}
           </p>
         </div>
       </div>
-
     </article>
   </div>
 
-  <div v-else class="loading-state">
-    <div class="loader"></div>
+  <div
+    v-else
+    class="loading-state"
+  >
+    <div class="loader" />
     <p>正在加载文章中...</p>
   </div>
 </template>
