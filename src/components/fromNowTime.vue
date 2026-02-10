@@ -56,15 +56,9 @@ const langMap = {
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
-interface Item {
-  nameEN: string;
-  nameCN: string;
-  nameJP: string;
-  [key: string]: string; // 可选：如果还有别的字段
-}
 
 
-const getName = (item: Item) => {
+const getName = (item: Record<string, string>) => {
   const key = langMap[lang.value as keyof typeof langMap] || "nameEN";
   return item[key];
 };

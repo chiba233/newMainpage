@@ -2,6 +2,11 @@
 import { onMounted } from "vue";
 import { loadAllPosts, posts } from "@/components/ts/getBlogYaml";
 import { formatTime } from "@/components/ts/useStoage";
+import { ref } from "vue";
+import Cancel from "@/icons/cancel.svg";
+import { NButton, NCard, NIcon, NModal } from "naive-ui";
+import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
+
 
 onMounted(async () => {
   await loadAllPosts();
@@ -10,20 +15,18 @@ onMounted(async () => {
 const formatDate = (t: string) => {
   return `${t.slice(0, 4)} - ${t.slice(4, 6)} - ${t.slice(6, 8)}`;
 };
-import { ref } from "vue";
 
-// 用来存储当前被点击的那篇文章的所有数据
-const selectedPost = ref(null);
 
-// 点击卡片时调用的函数
+const selectedPost = ref();
+const showModal = ref(false);
+
 const cardClick = (posts: any) => {
   selectedPost.value = posts;
-  console.log(selectedPost.value);
+  showModal.value = showModal.value === false;
 };
 
-// 关闭弹窗的函数
 const closePortal = () => {
-  selectedPost.value = null; // 清空数据，弹窗自然消失
+  showModal.value = false;
 };
 </script>
 
@@ -59,7 +62,7 @@ const closePortal = () => {
             {{
               (post.blocks || [])
                 .filter((b: any) => b.type === "text")
-                .map((b: any) => b.content)
+                .map((b: any) => stripRichText(b.content))
                 .join(" ")
             }}
           </p>
@@ -67,11 +70,56 @@ const closePortal = () => {
       </div>
     </article>
   </div>
-
   <div v-else class="loading-state">
     <div class="loader" />
     <p>正在加载文章中...</p>
   </div>
+
+  <n-modal v-show="showModal" v-model:show="showModal">
+    <n-card class="postModel" :title="selectedPost!.title" size="huge">
+      <template #header-extra>
+        <n-button tertiary circle @click="closePortal">
+          <template #icon>
+            <n-icon size="20">
+              <Cancel></Cancel>
+            </n-icon>
+          </template>
+        </n-button>
+      </template>
+      <div class="postCardMain">
+        <div class="postCardMeta">
+          <time :datetime="selectedPost.time">{{ formatDate(selectedPost.time) }}</time>
+          <span class="time-divider">|</span>
+          <span>{{ formatTime(selectedPost.time) }}</span>
+        </div>
+        <div v-for="(block,a) in selectedPost.blocks" :key="a" class="postCardBody">
+          <div class="postCardImage">
+            <img
+            v-if="block.type === 'image'"
+            :src="block.content"
+            class="postCardImg"
+            loading="lazy"
+           alt=""/></div>
+
+          <p v-if="block.type === 'text'" class="post-text">
+            <template v-for="(token, c) in parseRichText(block.content)" :key="c">
+              <span v-if="token.type === 'text'">{{ token.value }}</span>
+              <strong v-else-if="token.type === 'bold'" class="fw-bold">{{ token.value }}</strong>
+              <span v-else-if="token.type === 'thin'" class="fw-thin">{{ token.value }}</span>
+              <u v-else-if="token.type === 'underline'">{{ token.value }}</u>
+              <del v-else-if="token.type === 'strike'">{{ token.value }}</del>
+            </template>
+          </p>
+          <div
+            v-else-if="block.type === 'effect'"
+            class="post-effect"
+          >
+            {{ block.content }}
+          </div>
+        </div>
+      </div>
+    </n-card>
+  </n-modal>
 </template>
 
 <style scoped lang="scss">
@@ -81,6 +129,37 @@ $card-bg: rgba(255, 255, 255, 0.15);
 $text-color: #343131;
 $border-radius: 16px;
 $transition-speed: 0.3s;
+
+.postCardImage{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  img{
+    width: 100px;
+    height: 100px;
+  }
+}
+.postModel {
+  margin-bottom: 5em;
+  margin-top: 5em;
+  max-width: 85%;
+  @media (max-width: 600px) {
+    max-width: 100%;
+  }
+
+  .postCardMain {
+    width: 100%;
+
+    .postCardMeta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: color.adjust($text-color, $lightness: 20%);
+    }
+  }
+}
 
 .post-container {
   display: flex;
@@ -105,9 +184,8 @@ $transition-speed: 0.3s;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 0.8rem;
   height: 15em;
-  transition:
-    transform $transition-speed ease,
-    box-shadow $transition-speed ease;
+  transition: transform $transition-speed ease,
+  box-shadow $transition-speed ease;
 
   @media (max-width: 600px) {
     width: 95vw;
