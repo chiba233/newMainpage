@@ -8,7 +8,6 @@ import { NButton, NCard, NIcon, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
 import { NImage } from "naive-ui";
 
-console.log(posts);
 onMounted(async () => {
   await loadAllPosts();
 });
@@ -142,7 +141,8 @@ const closePortal = () => {
   -webkit-backdrop-filter: blur(20px);
   max-height: 90dvh;
 }
-.n-card__content{
+
+.n-card__content {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -163,25 +163,32 @@ $transition-speed: 0.3s;
   justify-content: center;
   gap: 1.5rem;
   margin: 1rem 0;
+
   .postCardNImage {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: fit-content;
+    justify-content: center;
+    align-content: center;
+
     .postCardImg img {
       margin: 0 !important;
       border-radius: 8px;
     }
   }
+
   .postCardImageDesc {
     margin-top: 0.5rem;
+
     span {
       font-size: 0.9rem;
       color: #666;
       text-align: center;
       display: block;
       word-break: break-all;
-    }}
+    }
+  }
 }
 
 .postModel {

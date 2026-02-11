@@ -9,7 +9,7 @@ interface Post {
 }
 
 export const posts = ref<Post[]>([]);
-const LIST_URL = "/src/message/list.json";
+const LIST_URL = "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/list.json";
 
 export const loadAllPosts = async () => {
   const listRes = await fetch(LIST_URL);
@@ -17,7 +17,7 @@ export const loadAllPosts = async () => {
 
   const postData: string[] = await listRes.json();
   const promises = postData.map(async (name: string) => {
-    const url = `/public/blog/${name}`;
+    const url = `https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/${name}`;
     try {
       const response = await fetch(url);
 

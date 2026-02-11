@@ -52,7 +52,7 @@ import { NButton, NIcon } from "naive-ui";
 import { ref } from "vue";
 import BlogView from "@/views/BlogView.vue";
 
-const cardSelect = ref(false);
+const cardSelect = ref(true);
 
 function cardChange(e: string) {
   if (e === "a") {

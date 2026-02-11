@@ -20,13 +20,22 @@ blocks:
       我的设备因为是纯作为服务器使用所以原本显卡的位置插上了万兆网卡，那么聪明的群友肯定会问，不是还有一个pcie插槽吗，不幸的是也插上了nvme硬盘，因此一次搬家我不小心弄丢了原本的亮机卡，于是就进行这次无屏幕Debug。
       具体症状表现为，开机第一次十几秒后机器重启，再一段时间内键盘是正常工作的。但是重启后再次启动则不会触发重启，因此我没有最初为此怀疑到是grub的问题。
       但是我把硬盘拔下来以后，检查log发现没打印任何log，遂发现没有进入系统，chroot进系统update-grub依旧不工作。后我拿系统备份盘直接cp了原本的/boot发现工作正常，随即却认为grub.cfg有问题的同时update-grub必然存在问题。
-      经过排查发现了一个非常危险的文件位置在 /etc/grub.d/25_bli。
+      经过排查发现了一个非常危险的文件位置在 $$bold(/etc/grub.d/25_bli)$$。
   - type: "image"
     content:
       - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post1/2.jpg
         desc: "/etc/grub.d/25_bli'文件"
-      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post1/2.jpg
-        desc: "/etc/grub.d/25_bli'文件"
   - type: "text"
     content: |
-      我的设备因
+      以下是chatGPT针对此文件为什么导致panic的介绍
+  - type: "image"
+    content:
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post1/2.jpg
+        desc: "GPT介绍1"
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post1/3.jpg
+        desc: "GPT介绍2"
+  - type: "text"
+    content: |
+      解决方案非常简单
+      sudo dpkg-divert --add --rename --divert /etc/grub.d/25_bli.disabled /etc/grub.d/25_bli    //彻底禁用apt更新软件包后添加该文件
+      添加一个占位文件到原本的位置,随后执行 update-grub 重启即可解决问题。
