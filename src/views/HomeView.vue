@@ -74,10 +74,10 @@ const blog: Record<string, string> = {
   other: "blog",
 } as const;
 
-type ThemeIndex = 1 | 2 | 3 | 4 | 5 | 6;
+type ThemeIndex = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type BackgroundKey = `background${ThemeIndex}`;
 type ColorData = Record<BackgroundKey, string>;
-const randomTheme = Math.floor(Math.random() * 7);
+const randomTheme = Math.floor(Math.random() * 9);
 const selectedColor = (colorData as ColorData)[
   `background${randomTheme}` as BackgroundKey
   ];
