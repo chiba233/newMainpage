@@ -36,15 +36,13 @@
 </template>
 
 <script setup lang="ts">
-import { NModal, NButton, NIcon, NCard } from "naive-ui";
+import { NButton, NCard, NIcon, NModal } from "naive-ui";
 import Clock from "../icons/clock.svg";
 import { computed, ref } from "vue";
 import Cancel from "../icons/cancel.svg";
-import { lang } from "@/components/ts/useStoage";
+import { formatTime, lang, themeColor } from "@/components/ts/useStoage";
 import fromNowI18 from "../message/fromNowI18n.json";
 import fromNow from "../message/fromNow.json";
-import { themeColor } from "@/components/ts/useStoage";
-import { formatTime } from "@/components/ts/useStoage";
 
 const langMap = {
   zh: "nameZH",
@@ -119,14 +117,14 @@ const clickMemory = () => {
   }
 
   .timeCard {
-    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     text-align: center;
-    background-color: rgba(89, 89, 89, 0.1);
-    padding: 0.3em;
-    margin-bottom: 0.6em;
+    background-color: rgba(89, 89, 89, 0.3);
+    margin: 0.5rem auto;
+    padding: 0.5rem;
   }
 }
 </style>
