@@ -47,7 +47,7 @@ export const parseRichText = (text: string, depthLimit = 50): TextToken[] => {
       let contentEndIndex = -1;
 
       while (cur < text.length) {
-        // ⚡ 精准定位 $$ 而不是 blind indexOf（优化点 3）
+        // 精准定位 $$
         const nextDollar = text.indexOf(TAG_PREFIX, cur);
         const nextEnd = text.indexOf(TAG_SUFFIX, cur);
 
