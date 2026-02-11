@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { loadAllPosts, posts } from "@/components/ts/getBlogYaml";
 import { formatTime } from "@/components/ts/useStoage";
-import { ref } from "vue";
 import Cancel from "@/icons/cancel.svg";
-import { NButton, NCard, NIcon, NModal } from "naive-ui";
+import { NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
-import { NImage } from "naive-ui";
+import RichTextRenderer from "@/components/RichTextRenderer.vue";
 
 onMounted(async () => {
   await loadAllPosts();
@@ -20,7 +19,7 @@ const formatDate = (t: string) => {
 const selectedPost = ref();
 const showModal = ref(false);
 
-const cardClick = (posts: any) => {
+const cardClick = (posts: Record<string, unknown>) => {
   selectedPost.value = posts;
   showModal.value = showModal.value === false;
 };
@@ -107,17 +106,13 @@ const closePortal = () => {
             </div>
           </div>
 
-
-          <div v-if="block.type === 'text'" class="postCardText">
-            <template v-for="(token, c) in parseRichText(block.content)" :key="c">
-              <span v-if="token.type === 'text'">{{ token.value }}</span>
-              <strong v-else-if="token.type === 'bold'" class="fw-bold">{{ token.value }}</strong>
-              <span v-else-if="token.type === 'thin'" class="fw-thin">{{ token.value }}</span>
-              <u v-else-if="token.type === 'underline'">{{ token.value }}</u>
-              <del v-else-if="token.type === 'strike'">{{ token.value }}</del>
-            </template>
+          <div v-if="block.type === 'text'" class="postCardText" @click="console.log(parseRichText(block.content))">
+            <RichTextRenderer :tokens="parseRichText(block.content)" />
           </div>
-          <a v-if="block.type === 'center'" class="center-text">{{ block.content }}</a>
+
+          <div v-else-if="block.type === 'center'" class="center-text">
+            <RichTextRenderer :tokens="parseRichText(block.content)" />
+          </div>
           <div
             v-else-if="block.type === 'effect'"
             class="post-effect"
@@ -132,6 +127,15 @@ const closePortal = () => {
 
 <style lang="scss">
 @use "sass:color";
+
+.postCardImageDesc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  white-space: pre-line;
+  text-align: center;
+
+}
 
 .n-modal-container .postModel {
   border-radius: 1.5em;
@@ -204,6 +208,7 @@ $transition-speed: 0.3s;
     display: flex;
     width: 100%;
     justify-content: center;
+    font-size: 1.05rem;
 
     .postCardMeta {
       display: flex;
@@ -217,14 +222,7 @@ $transition-speed: 0.3s;
   }
 }
 
-.postCardImageDesc,
-.center-text {
-  display: flex;
-  justify-content: center;
-  white-space: pre-line;
-  text-align: center;
 
-}
 
 .center-text {
   font-size: 1.1rem;

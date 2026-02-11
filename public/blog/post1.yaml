@@ -6,7 +6,7 @@ blocks:
     content: "先介绍一下机器型号吧"
   - type: "text"
     content: |
-      $$center($$bold($$underline(华为云擎W510)$$/underline)$$/bold)$$/center
+      $$center($$bold($$underline(华为擎云W510)$$)$$)$$
       $$center($$bold($$underline(24 x HUAWEI Kunpeng 920 2426SK NULL CPU @ 2.6GHz)$$)$$)$$
       $$center($$bold($$underline(32G DDR4 2400)$$)$$)$$
 
@@ -17,10 +17,10 @@ blocks:
     content: "'neofetch'信息"
   - type: "text"
     content: |
-      我的设备因为是纯作为服务器使用所以原本显卡的位置插上了万兆网卡，那么聪明的群友肯定会问，不是还有一个pcie插槽吗，不幸的是也插上了nvme硬盘，因此一次搬家我不小心弄丢了原本的亮机卡，于是就进行这次无屏幕Debug。
+      我的设备因为是纯作为服务器使用所以原本显卡的位置插上了万兆网卡，那么$$strike(聪明的群友)$$肯定会问，不是还有一个pcie插槽吗，不幸的是也插上了nvme硬盘，因此一次搬家我不小心弄丢了原本的亮机卡，于是就进行这次无屏幕Debug。
       具体症状表现为，开机第一次十几秒后机器重启，再一段时间内键盘是正常工作的。但是重启后再次启动则不会触发重启，因此我没有最初为此怀疑到是grub的问题。
-      但是我把硬盘拔下来以后，检查log发现没打印任何log，遂发现没有进入系统，chroot进系统update-grub依旧不工作。后我拿系统备份盘直接cp了原本的/boot发现工作正常，随即却认为grub.cfg有问题的同时update-grub必然存在问题。
-      经过排查发现了一个非常危险的文件位置在 $$bold(/etc/grub.d/25_bli)$$。
+      但是我把硬盘拔下来以后，检查log发现没打印任何log，遂发现没有进入系统，$$bold(chroot)$$进系统$$bold(update-grub)$$依旧不工作。后我拿系统备份盘直接cp了原本的$$underline(/boot)$$发现工作正常，随即却认为$$bold(grub.cfg)$$有问题的同时$$bold(update-grub)$$必然存在问题。
+      经过排查发现了一个非常危险的文件位置在 $$underline(/etc/grub.d/25_bli)$$。
   - type: "image"
     content:
       - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post1/2.jpg
@@ -37,5 +37,5 @@ blocks:
   - type: "text"
     content: |
       解决方案非常简单
-      sudo dpkg-divert --add --rename --divert /etc/grub.d/25_bli.disabled /etc/grub.d/25_bli    //彻底禁用apt更新软件包后添加该文件
-      添加一个占位文件到原本的位置,随后执行 update-grub 重启即可解决问题。
+      $$underline(sudo dpkg-divert --add --rename --divert /etc/grub.d/25_bli.disabled /etc/grub.d/25_bli)$$    //彻底禁用apt更新软件包后添加该文件
+      $$bold(添加一个占位文件到原本的位置,随后执行 update-grub 重启即可解决问题。)$$

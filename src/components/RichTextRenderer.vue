@@ -58,6 +58,6 @@ defineProps<{
 
 // 如果嵌套在 center-text 里的 span 需要保持居中
 .center-text :deep(.rich-text-content) {
-  display: inline-block;
+  display: inline;
 }
 </style>
