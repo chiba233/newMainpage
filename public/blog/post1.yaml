@@ -4,11 +4,11 @@ title: "鲲鹏920解决升级至debian12后panic"
 blocks:
   - type: "text"
     content: "先介绍一下机器型号吧"
-  - type: "center"
+  - type: "text"
     content: |
-      $$bold($$underline(华为云擎W510)$$)$$
-      $$bold($$underline(24 x HUAWEI Kunpeng 920 2426SK NULL CPU @ 2.6GHz)$$)$$
-      $$bold($$underline(32G DDR4 2400)$$)$$
+      $$center($$bold($$underline(华为云擎W510)$$)$$)$$
+      $$center($$bold($$underline(24 x HUAWEI Kunpeng 920 2426SK NULL CPU @ 2.6GHz)$$)$$)$$
+      $$center($$bold($$underline(32G DDR4 2400)$$)$$)$$
 
   - type: "image"
     content:
