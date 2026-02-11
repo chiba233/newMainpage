@@ -6,23 +6,38 @@ interface TextToken {
 const RICH_TYPES = ["bold", "thin", "underline", "strike", "center"] as const;
 type RichType = (typeof RICH_TYPES)[number];
 
-// 优化 1: 使用全局匹配和 sticky 提升正则性能
+// 常量语义化
+const TAG_PREFIX = "$$";
+const TAG_SUFFIX = ")$$";
+
 const START_TAG_PATTERN = `\\$\\$(${RICH_TYPES.join("|")})\\(`;
-const START_TAG_REGEX = new RegExp(START_TAG_PATTERN, "g");
-const END_TAG_STR = ")$$";
 
-const shouldRenderText = (text: string) => !/^\s*$/.test(text);
+const createStartTagRegex = () => new RegExp(START_TAG_PATTERN, "g");
 
-export const parseRichText = (text: string): TextToken[] => {
+const STRIP_REGEX = new RegExp(
+  `\\$\\$(?:${RICH_TYPES.join("|")})\\((.*?)\\)\\$\\$`,
+  "gs",
+);
+
+// 空白判断
+const shouldRenderText = (text: string) => text.trim().length > 0;
+
+// 主解析器
+export const parseRichText = (text: string, depthLimit = 50): TextToken[] => {
   const tokens: TextToken[] = [];
   let i = 0;
 
+  // 限制递归深度
+  if (depthLimit <= 0) {
+    return [{ type: "text", value: text }];
+  }
+
   while (i < text.length) {
-    // 设置正则从当前索引开始查找
+    const START_TAG_REGEX = createStartTagRegex(); // 局部实例（并发安全）
     START_TAG_REGEX.lastIndex = i;
+
     const startMatch = START_TAG_REGEX.exec(text);
 
-    // 只有当匹配结果就在当前指针位置时，才视为标签开始
     if (startMatch && startMatch.index === i) {
       const type = startMatch[1] as RichType;
       const contentStartIndex = i + startMatch[0].length;
@@ -32,49 +47,53 @@ export const parseRichText = (text: string): TextToken[] => {
       let contentEndIndex = -1;
 
       while (cur < text.length) {
-        // 查找下一个可能的 标签开始 或 标签结束
-        const nextStart = text.indexOf("$$", cur);
-        const nextEnd = text.indexOf(END_TAG_STR, cur);
+        // ⚡ 精准定位 $$ 而不是 blind indexOf（优化点 3）
+        const nextDollar = text.indexOf(TAG_PREFIX, cur);
+        const nextEnd = text.indexOf(TAG_SUFFIX, cur);
 
-        // 如果后面啥都没了就中断
-        if (nextStart === -1 && nextEnd === -1) break;
+        if (nextDollar === -1 && nextEnd === -1) break;
 
-        // 判定哪一个先出现
-        if (nextStart !== -1 && (nextEnd === -1 || nextStart < nextEnd)) {
-          START_TAG_REGEX.lastIndex = nextStart;
-          const subMatch = START_TAG_REGEX.exec(text);
-          if (subMatch && subMatch.index === nextStart) {
+        if (nextDollar !== -1 && (nextEnd === -1 || nextDollar < nextEnd)) {
+          const subRegex = createStartTagRegex();
+          subRegex.lastIndex = nextDollar;
+          const subMatch = subRegex.exec(text);
+
+          if (subMatch && subMatch.index === nextDollar) {
             depth++;
-            cur = nextStart + subMatch[0].length;
+            cur = nextDollar + subMatch[0].length;
             continue;
           }
-          cur = nextStart + 2; // 只是普通的 $$，跳过
+
+          cur = nextDollar + TAG_PREFIX.length;
         } else {
           depth--;
           if (depth === 0) {
             contentEndIndex = nextEnd;
             break;
           }
-          cur = nextEnd + 3;
+          cur = nextEnd + TAG_SUFFIX.length;
         }
       }
 
       if (contentEndIndex !== -1) {
         tokens.push({
-          type: type,
-          value: parseRichText(text.slice(contentStartIndex, contentEndIndex)),
+          type,
+          value: parseRichText(
+            text.slice(contentStartIndex, contentEndIndex),
+            depthLimit - 1,
+          ),
         });
-        i = contentEndIndex + 3;
+        i = contentEndIndex + TAG_SUFFIX.length;
         continue;
       }
     }
 
-    // --- 普通文本处理 ---
-    let nextTagIndex = text.indexOf("$$", i + 1);
+    // 普通文本
+    let nextTagIndex = text.indexOf(TAG_PREFIX, i + 1);
     if (nextTagIndex === -1) nextTagIndex = text.length;
 
     const plainText = text.slice(i, nextTagIndex);
-    if (plainText && shouldRenderText(plainText)) {
+    if (shouldRenderText(plainText)) {
       tokens.push({ type: "text", value: plainText });
     }
     i = nextTagIndex;
@@ -83,12 +102,10 @@ export const parseRichText = (text: string): TextToken[] => {
   return tokens;
 };
 
-
+// strip 版本
 export const stripRichText = (text: string): string => {
-  // 匹配 $$tag(内容)$$ 结构 只保留内容
   let lastText = "";
   let currentText = text;
-  const STRIP_REGEX = new RegExp(`\\$\\$(?:${RICH_TYPES.join("|")})\\((.*?)\\)\\$\\$`, "gs");
 
   while (currentText !== lastText) {
     lastText = currentText;
