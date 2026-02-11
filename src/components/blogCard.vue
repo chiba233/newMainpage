@@ -6,8 +6,9 @@ import { ref } from "vue";
 import Cancel from "@/icons/cancel.svg";
 import { NButton, NCard, NIcon, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
-import {NImage} from "naive-ui"
-console.log(posts)
+import { NImage } from "naive-ui";
+
+console.log(posts);
 onMounted(async () => {
   await loadAllPosts();
 });
@@ -52,7 +53,7 @@ const closePortal = () => {
       <div class="post-body">
         <div v-if="post.blocks?.some((b: any) => b.type === 'image')" class="post-image">
           <img
-            :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0]?.src"
+            :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0].src"
             :alt="post.title"
             loading="lazy"
           />
@@ -94,17 +95,19 @@ const closePortal = () => {
         </div>
         <div v-for="(block,a) in selectedPost.blocks" :key="a" class="postCardBody">
           <div v-if="block.type === 'image'" class="postCardImage">
-            <n-image
-              v-for="img in block.content"
-              :key="img.src"
-              width="120"
-              :src="img.src"
-              class="postCardImg"
-            />
+            <div v-for="img in block.content" :key="img.src" class="postCardNImage">
+              <n-image
+                v-if="img.src"
+                width="120"
+                :src="img.src"
+                class="postCardImg"
+              />
+              <div v-if="img.desc" class="postCardImageDesc">
+                <span>{{ img.desc }}</span>
+              </div>
+            </div>
           </div>
-          <div v-if="block.type === 'imageDescription'" class="postCardImageDesc">
-            <span>{{ block.content }}</span>
-          </div>
+
 
           <div v-if="block.type === 'text'" class="postCardText">
             <template v-for="(token, c) in parseRichText(block.content)" :key="c">
@@ -130,16 +133,24 @@ const closePortal = () => {
 
 <style lang="scss">
 @use "sass:color";
-.n-modal-container .postModel{
+
+.n-modal-container .postModel {
   border-radius: 1.5em;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  max-height: 90dvh;
 }
+.n-card__content{
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .postCardImg img {
   margin: 1em;
 }
+
 $card-bg: rgba(255, 255, 255, 0.15);
 $text-color: #343131;
 $border-radius: 16px;
@@ -147,8 +158,32 @@ $transition-speed: 0.3s;
 
 .postCardImage {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  .postCardNImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    .postCardImg img {
+      margin: 0 !important;
+      border-radius: 8px;
+    }
+  }
+  .postCardImageDesc {
+    margin-top: 0.5rem;
+    span {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      display: block;
+      word-break: break-all;
+    }}
 }
+
 .postModel {
   margin-bottom: 4em;
   margin-top: 4em;
@@ -170,16 +205,20 @@ $transition-speed: 0.3s;
       gap: 0.5rem;
       font-size: 0.92rem;
       color: color.adjust($text-color, $lightness: 20%);
+      margin-bottom: 0.5rem;
     }
   }
 }
+
 .postCardImageDesc,
-.center-text{
+.center-text {
   display: flex;
   justify-content: center;
   white-space: pre-line;
   text-align: center;
+
 }
+
 .center-text {
   font-size: 1.1rem;
 }
@@ -296,13 +335,17 @@ $transition-speed: 0.3s;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 7;
         overflow: hidden;
+        box-orient: vertical; //test values
+        line-clamp: 7;
       }
     }
   }
 }
-.postCardText{
-  span,strong,span,u,del{
+
+.postCardText {
+  span, strong, span, u, del {
     font-size: 1.2rem;
+    white-space: pre-line;
   }
 }
 
