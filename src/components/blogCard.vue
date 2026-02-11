@@ -139,11 +139,11 @@ const closePortal = () => {
 
 .n-modal-container .postModel {
   border-radius: 1.5em;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  max-height: 90dvh;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  max-height: 84.4dvh;
 }
 
 .n-card__content {
@@ -155,8 +155,8 @@ const closePortal = () => {
   margin: 1em;
 }
 
-$card-bg: rgba(255, 255, 255, 0.15);
-$text-color: #343131;
+$card-bg: rgba(255, 255, 255, 0.3);
+$text-color: #191919;
 $border-radius: 16px;
 $transition-speed: 0.3s;
 
@@ -216,7 +216,7 @@ $transition-speed: 0.3s;
       align-items: center;
       gap: 0.5rem;
       font-size: 0.92rem;
-      color: color.adjust($text-color, $lightness: 20%);
+      color: color.adjust($text-color, $lightness: 75%);
       margin-bottom: 0.5rem;
     }
   }
@@ -244,11 +244,11 @@ $transition-speed: 0.3s;
   width: 20em;
   max-width: 800px;
   background: $card-bg;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: $border-radius;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 0.8rem;
   height: 15em;
   transition: transform $transition-speed ease,
@@ -282,7 +282,7 @@ $transition-speed: 0.3s;
 
     .post-meta {
       font-size: 0.9rem;
-      color: color.adjust($text-color, $lightness: 50%);
+      color: color.adjust($text-color, $lightness: 75%);
       display: flex;
       justify-content: center;
       gap: 0.5rem;

@@ -39,6 +39,8 @@ defineProps<{
 .rich-text-content, .fw-bold, .fw-thin, .rich-underline, .rich-strike {
   font-size: inherit;
   white-space: pre-wrap;
+  color: #191919;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .fw-bold {

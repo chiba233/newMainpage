@@ -45,7 +45,7 @@ import Details from "@/components/detail.vue";
 import Contacts from "@/components/contacts.vue";
 import MyFriends from "@/components/myFriends.vue";
 import colorData from "@/message/colorData.json";
-import { themeColor, lang } from "@/components/ts/useStoage";
+import { lang, themeColor } from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
 import { AnimalRabbit28Regular, Home12Regular } from "@vicons/fluent";
 import { NButton, NIcon } from "naive-ui";
@@ -131,13 +131,12 @@ themeColor.value = selectedColor;
 .copyright {
   left: 0.6em;
   right: 0.6em;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   border-radius: 1.5em;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  pointer-events: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,6 +145,7 @@ themeColor.value = selectedColor;
   position: absolute;
   animation: downToUp 0.8s linear 0s 1;
   z-index: 2;
+  pointer-events: auto;
   bottom: calc(0.4em + env(safe-area-inset-bottom));
 
   .cButton {
@@ -161,7 +161,7 @@ themeColor.value = selectedColor;
 
     a {
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-      color: #343131;
+      color: #191919;
       @media (max-width: 390px) {
         display: none;
       }

@@ -219,16 +219,7 @@ import commonI18n from "@/message/commonI18n.json";
 import Cat from "@/icons/cat.svg";
 import TwitterIcon from "@/icons/twitter.svg";
 import TelegramIcon from "@/icons/telegram.svg";
-import {
-  NIcon,
-  NButton,
-  NCard,
-  NModal,
-  NCollapse,
-  NCollapseItem,
-  NCarousel,
-  NImagePreview,
-} from "naive-ui";
+import { NButton, NCard, NCarousel, NCollapse, NCollapseItem, NIcon, NImagePreview, NModal } from "naive-ui";
 import MaiTrans from "@/icons/maitrans.svg";
 import Tron from "@/icons/tron.svg";
 import Eth from "@/icons/eth.svg";
@@ -333,13 +324,15 @@ const clickLine = () => {
 </script>
 
 <style lang="scss">
-.n-modal-container .maiCard , .n-modal-container .catCard{
+.n-modal-container .maiCard, .n-modal-container .catCard {
+  max-height: 84.4dvh;
   border-radius: 1.5em;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
+
 .catCard {
   width: 40em;
 
@@ -377,6 +370,11 @@ const clickLine = () => {
     justify-content: center;
     height: auto;
     object-fit: scale-down;
+
+    a {
+      color: #191919;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    }
   }
 }
 
@@ -386,15 +384,25 @@ const clickLine = () => {
   flex-direction: row;
   flex-wrap: wrap;
 
+  .cButton {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+
   .n-button {
     height: 2.2em;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
 
     a {
-      color: #343131;
-      margin-left: 4px;
+      color: #191919;
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+      margin-left: 4px;
     }
 
     @media (min-width: 420px) {

@@ -64,9 +64,9 @@ function openURL(url: string) {
 
 .friendBox {
   display: flex;
-  background-color: rgba(255, 255, 255, 0.17);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   transition: all 1s;
   flex-direction: column;
   align-items: center;
@@ -100,9 +100,15 @@ function openURL(url: string) {
   }
 
   .friendName {
-    color: #343131;
+    color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+    box-orient: vertical; //test values
+    line-clamp: 7;
   }
 }
 </style>

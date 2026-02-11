@@ -34,11 +34,11 @@ let dTextOther: string[] = introduction.introductionMessageOther;
 <style lang="scss">
 .textBox {
   display: flex;
-  background-color: rgba(255, 255, 255, 0.17);
+  background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   justify-content: center;
   transition: all 1s;
   padding: 0.9em;
@@ -53,7 +53,7 @@ let dTextOther: string[] = introduction.introductionMessageOther;
   }
 
   .detailText {
-    color: #343131;
+    color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     text-align: center;
     display: block;

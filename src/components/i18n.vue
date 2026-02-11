@@ -15,8 +15,7 @@
 import LangIcon from "../icons/langIcon.svg";
 import { NButton, NIcon, NPopselect } from "naive-ui";
 import i18nLang from "../message/i18nLang.json";
-import { lang } from "@/components/ts/useStoage";
-import { themeColor } from "@/components/ts/useStoage";
+import { lang, themeColor } from "@/components/ts/useStoage";
 import { watchEffect } from "vue";
 import webTitle from "../message/webTitle.json";
 
@@ -47,8 +46,8 @@ watchEffect(() => {
   }
 
   a {
+    color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    color: #343131;
     @media (max-width: 390px) {
       display: none;
     }

@@ -81,12 +81,19 @@ const clickMemory = () => {
 
 <style lang="scss">
 .n-modal-container .fromTimeCard{
+  max-height: 84.4dvh;
   border-radius: 1.5em;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
+
+.n-card__content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .buttonClock {
   pointer-events: auto;
   margin-left: 1em;
@@ -99,7 +106,7 @@ const clickMemory = () => {
   }
 
   a {
-    color: #343131;
+    color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     @media (max-width: 390px) {
       display: none;
@@ -122,9 +129,14 @@ const clickMemory = () => {
     flex-direction: column;
     border-radius: 10px;
     text-align: center;
-    background-color: rgba(89, 89, 89, 0.3);
+    background-color: rgba(89, 89, 89, 0.2);
     margin: 0.5rem auto;
     padding: 0.5rem;
+
+    a {
+      color: #191919;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    }
   }
 }
 </style>
