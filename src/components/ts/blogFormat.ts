@@ -1,54 +1,78 @@
 interface TextToken {
   type: RichType | "text";
-  value: string;
+  value: string | TextToken[];
 }
 
-const RICH_TYPES = ["bold", "thin", "underline", "strike"] as const;
+const RICH_TYPES = ["bold", "thin", "underline", "strike", "center"] as const;
 type RichType = (typeof RICH_TYPES)[number];
 
-// 使用 Set 提高查询效率（在类型检查时使用）
-const RICH_TYPE_SET = new Set<RichType>(RICH_TYPES);
+const START_TAG_REGEX = new RegExp(`^\\$\\$(${RICH_TYPES.join("|")})\\(`);
 
-const RICH_REGEX = new RegExp(
-  `\\$\\$(${RICH_TYPES.join("|")})\\(((?:[^()]*|\\([^()]*\\))*)\\)\\$\\$`,
-  "g",
-);
-
-export const stripRichText = (text: string): string => {
-  return text.replace(RICH_REGEX, "$2");
-};
 
 export const parseRichText = (text: string): TextToken[] => {
   const tokens: TextToken[] = [];
-  let lastIndex = 0;
+  let i = 0;
 
-  const matches = text.matchAll(RICH_REGEX);
+  while (i < text.length) {
+    const startMatch = text.slice(i).match(START_TAG_REGEX);
 
-  for (const match of matches) {
-    const [full, type, value] = match;
-    const index = match.index;
+    if (startMatch) {
+      const type = startMatch[1] as RichType;
+      const contentStartIndex = i + startMatch[0].length;
 
-    if (index > lastIndex) {
-      tokens.push({
-        type: "text",
-        value: text.slice(lastIndex, index),
-      });
+      let depth = 1;
+      let cur = contentStartIndex;
+      let contentEndIndex = -1;
+
+      while (cur < text.length) {
+        if (text.slice(cur).match(START_TAG_REGEX)) {
+          depth++;
+          const subMatch = text.slice(cur).match(START_TAG_REGEX);
+          cur += subMatch![0].length;
+        } else if (text.startsWith(")$$", cur)) {
+          depth--;
+          if (depth === 0) {
+            contentEndIndex = cur;
+            break;
+          }
+          cur += 3;
+        } else {
+          cur++;
+        }
+      }
+
+      if (contentEndIndex !== -1) {
+        const innerContent = text.slice(contentStartIndex, contentEndIndex);
+        tokens.push({
+          type: type,
+          value: parseRichText(innerContent),
+        });
+        i = contentEndIndex + 3;
+        continue;
+      }
     }
 
-    tokens.push({
-      type: RICH_TYPE_SET.has(type as RichType) ? (type as RichType) : "text",
-      value: value,
-    });
+    let nextTagIndex = text.indexOf("$$", i + 1);
+    if (nextTagIndex === -1) nextTagIndex = text.length;
 
-    lastIndex = index + full.length;
-  }
+    const plainText = text.slice(i, nextTagIndex);
 
-  if (lastIndex < text.length) {
-    tokens.push({
-      type: "text",
-      value: text.slice(lastIndex),
-    });
+    if (plainText) {
+      if (!/^\s*$/.test(plainText)) {
+        tokens.push({ type: "text", value: plainText });
+      }
+    }
+
+    i = nextTagIndex;
   }
 
   return tokens;
+};
+
+export const stripRichText = (text: string): string => {
+  const tokens = parseRichText(text);
+  const flatten = (tks: TextToken[]): string => {
+    return tks.map(t => typeof t.value === "string" ? t.value : flatten(t.value)).join("");
+  };
+  return flatten(tokens);
 };
