@@ -6,7 +6,7 @@ blocks:
     content: "先介绍一下机器型号吧"
   - type: "text"
     content: |
-      $$center($$bold($$underline(华为云擎W510)$$)$$)$$
+      $$center($$bold($$underline(华为云擎W510)$$/underline)$$/bold)$$/center
       $$center($$bold($$underline(24 x HUAWEI Kunpeng 920 2426SK NULL CPU @ 2.6GHz)$$)$$)$$
       $$center($$bold($$underline(32G DDR4 2400)$$)$$)$$
 
