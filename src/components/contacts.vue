@@ -388,8 +388,16 @@ const clickLine = () => {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-
     &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      background: rgba(255, 255, 255, 0.5);
+      outline: none;
+    }
+
+    &:active {
       background: rgba(255, 255, 255, 0.5);
     }
   }
