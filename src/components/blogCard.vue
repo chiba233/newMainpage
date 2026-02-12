@@ -205,8 +205,8 @@ $transition-speed: 0.3s;
   margin-bottom: 4em;
   margin-top: 4em;
   max-width: 85%;
-  @media (max-width: 600px) {
-    max-width: 100%;
+  @media (max-width: 900px) {
+    max-width: 98%;
   }
 
   .postCardMain {
@@ -240,8 +240,8 @@ $transition-speed: 0.3s;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1rem 1rem 4rem 1rem;
+  gap: 1rem;
+  padding: 1rem 0.5rem 1rem 0.5rem;
 }
 
 .content {
@@ -253,9 +253,7 @@ $transition-speed: 0.3s;
 .post-card {
   display: flex;
   flex-direction: column;
-  width: 28rem;
   cursor: pointer;
-  max-width: 800px;
   background: $card-bg;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -263,7 +261,6 @@ $transition-speed: 0.3s;
   border-radius: $border-radius;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 0.8rem;
-  height: 15em;
 
   // 核心变量
   --mx: -100px;
@@ -273,9 +270,12 @@ $transition-speed: 0.3s;
   overflow: hidden;
   transition: transform 0.2s, background-color 0.3s;
 
-  @media (max-width: 600px) {
-    width: 95vw;
-    height: 19.7em;
+  @media (max-width: 900px) {
+    height: 16.5rem;
+  }
+  @media (min-width: 900px) {
+    width: 25rem;
+    height: 12.9rem;
   }
   // 1. 面光 (Surface Glow) - 柔和的大范围光晕
   &::before {
@@ -372,7 +372,7 @@ $transition-speed: 0.3s;
     flex: 1;
 
     // 移动端自动转为垂直布局
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
       flex-direction: column;
       align-items: center;
     }

@@ -12,9 +12,16 @@
         </n-button>
       </template>
       <div>
-        <n-carousel class="catImgCard" show-arrow mousewheel>
-          <img v-for="{ catImg, imgName } in catImage" :key="imgName" :src="catImg" :alt="imgName" />
-        </n-carousel>
+        <n-image-group class="catImgCard">
+          <div v-for="{ catImg, imgName ,catImgError} in catImage" :key="imgName" class="catImgDIV">
+            <n-image
+              :alt="imgName"
+              :fallback-src="catImgError"
+              :src="catImg" width="140"
+            ></n-image>
+            <a>{{ imgName }}</a>
+          </div>
+        </n-image-group>
       </div>
     </n-card>
   </n-modal>
@@ -219,7 +226,7 @@ import commonI18n from "@/message/commonI18n.json";
 import Cat from "@/icons/cat.svg";
 import TwitterIcon from "@/icons/twitter.svg";
 import TelegramIcon from "@/icons/telegram.svg";
-import { NButton, NCard, NCarousel, NCollapse, NCollapseItem, NIcon, NImagePreview, NModal } from "naive-ui";
+import { NButton, NCard, NCollapse, NCollapseItem, NIcon, NImage, NImageGroup, NImagePreview, NModal } from "naive-ui";
 import MaiTrans from "@/icons/maitrans.svg";
 import Tron from "@/icons/tron.svg";
 import Eth from "@/icons/eth.svg";
@@ -333,28 +340,50 @@ const clickLine = () => {
   -webkit-backdrop-filter: blur(15px);
 }
 
+/* 1. 强制覆盖外层容器，让它变回 row */
+.catCard .n-card__content div:has(> .catImgDIV) {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 0.3em 0.65rem;
+  justify-content: center !important;
+}
+
+/* 2. 让每一组图片和文字纵向排列 (Column) */
+.catImgDIV {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 3. 文字微调 */
+.catImgDIV {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  a {
+    margin-top: 0.3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--n-text-color); /* 使用 Naive UI 的变量保持色调一致 */
+    text-decoration: none;
+  }
+}
+
 .catCard {
   max-width: 40em;
-
-  .catImgCard {
-    @media (min-width: 440px) {
-      height: 20em;
-    }
-    @media (max-width: 440px) {
-      height: 17em;
-    }
-
-    img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
+  @media (max-width: 600px) {
+    max-width: 98%;
   }
 }
 
 .maiCard {
   display: flex;
   width: 42em;
+  @media (max-width: 600px) {
+    max-width: 98%;
+  }
 
   .connecter {
     padding-right: 0.6em;
@@ -388,6 +417,7 @@ const clickLine = () => {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+
     &:hover {
       background: rgba(255, 255, 255, 0.5);
     }
@@ -406,6 +436,7 @@ const clickLine = () => {
     height: 2.2em;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0.5rem;
 
     a {
       color: #191919;
@@ -415,10 +446,8 @@ const clickLine = () => {
 
     @media (min-width: 550px) {
       width: 8.5em;
-      margin: 0.5em;
     }
     @media (max-width: 550px) {
-      margin: 0.6em;
       .n-icon {
         margin-left: 6px;
       }

@@ -65,13 +65,10 @@ const dTextOther: string[] = introduction.introductionMessageOther;
   display: flex;
   justify-content: center;
   align-items: center; // 垂直居中
-  padding: 0.9rem;
+  padding: 0.4rem;
+  margin: 0.5rem;
   @media (min-width: 350px) {
     width: 50rem;
-    margin: 0.6rem;
-  }
-  @media (max-width: 350px) {
-    margin: 0.4rem;
   }
 
   // 1. 面光 (Surface Glow) - 柔和的大范围光晕
@@ -142,7 +139,7 @@ const dTextOther: string[] = introduction.introductionMessageOther;
     line-height: 1.6;
     word-break: break-word;
     white-space: pre-wrap;
-    font-size: 1.15em;
+    font-size: 1.1em;
   }
 }
 </style>

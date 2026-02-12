@@ -48,17 +48,13 @@ $transition-speed: 0.3s;
   #383838 0 1px 0,
   #383838 -1px 0 0,
   #383838 0 -1px 0;
-  @media (min-width: 730px) {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  @media (min-width: 840px) {
     font-size: 1.9em;
-    padding-bottom: 1em;
   }
-  @media (max-width: 730px) {
+  @media (max-width: 840px) {
     font-size: 1.7em;
-    padding-bottom: 0.4em;
-  }
-  @media (max-width: 420px) {
-    font-size: 1.55em;
-    padding-bottom: 0.4em;
   }
 }
 

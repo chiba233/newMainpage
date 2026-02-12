@@ -30,7 +30,7 @@ const displayTitle = computed(() => {
 <style lang="scss">
 .dashboardTitle {
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   margin-top: 4.8em;
   @media (min-width: 840px) {
     flex-direction: row;
@@ -59,11 +59,11 @@ const displayTitle = computed(() => {
       #383838 -1px 0 0,
       #383838 0 -1px 0;
     font-weight: lighter;
-    @media (min-width: 730px) {
+    @media (min-width: 840px) {
       font-size: 1.9em;
       margin-left: 1.5em;
     }
-    @media (max-width: 730px) {
+    @media (max-width: 840px) {
       padding-top: 0.5em;
       font-size: 1.7em;
     }

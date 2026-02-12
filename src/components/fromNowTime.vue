@@ -117,6 +117,9 @@ const clickMemory = () => {
 .fromTimeCard {
   display: flex;
   width: 35em;
+  @media (max-width: 600px) {
+    max-width: 98%;
+  }
 
   .allTimeCard {
     display: flex;
