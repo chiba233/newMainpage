@@ -65,6 +65,7 @@ const selectedColor = (colorData as ColorData)[
   ];
 const bg = document.getElementById("bg")!;
 onMounted(() => {
+  themeColor.value = selectedColor;
   bg.style.backgroundImage = `url(background${randomTheme}.webp)`;
   document.body.style.cssText = `background-color: ${selectedColor}`;
 });
