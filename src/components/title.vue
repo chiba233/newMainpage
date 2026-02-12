@@ -31,7 +31,7 @@ const displayTitle = computed(() => {
 .dashboardTitle {
   display: flex;
   margin-bottom: 0.5em;
-  margin-top: 4.8em;
+  margin-top: 4rem;
   @media (min-width: 840px) {
     flex-direction: row;
     justify-content: center;

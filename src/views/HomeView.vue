@@ -122,9 +122,6 @@ const blog: Record<string, string> = {
         width: 100%;
         display: flex;
         justify-content: center;
-        @media (min-width: 730px) {
-          margin-top: 1em;
-        }
       }
     }
   }

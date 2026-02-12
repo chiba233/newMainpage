@@ -63,7 +63,7 @@ $transition-speed: 0.3s;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 4em;
+  margin-bottom: 4rem;
 }
 
 .content {

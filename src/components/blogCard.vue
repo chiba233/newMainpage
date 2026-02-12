@@ -1,12 +1,53 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { loadAllPosts, posts } from "@/components/ts/getBlogYaml";
-import { formatTime } from "@/components/ts/useStoage";
+import {
+  faultTimes,
+  loadAllPosts,
+  loadError,
+  posts,
+  serverError,
+  yamlLoading,
+  yamlLoadingFault,
+  yamlRetrying,
+} from "@/components/ts/getBlogYaml";
+import { formatTime, lang } from "@/components/ts/useStoage";
 import Cancel from "@/icons/cancel.svg";
-import { NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
+import { NAlert, NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
 import RichTextRenderer from "@/components/RichTextRenderer.vue";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
+
+const serverFaultI18N: Record<string, string> = {
+  zh: "GitHub服务器连接失败。",
+  ja: "github サーバー接続に失敗しました。！",
+  en: "github Server connection failed.",
+  other: "github Server connection failed.",
+};
+const loadErrorI18N: Record<string, string> = {
+  zh: "无法连接，已超过重试次数。",
+  ja: "接続はできません。再試行回数を超過しました。",
+  en: "Unable to connect; the number of retries has been exceeded.",
+  other: "Unable to connect; the number of retries has been exceeded.",
+};
+const yamlRetryingI18N: Record<string, string> = {
+  zh: "连接失败，重试中。请尝试切换互联网或检查代理软件。",
+  ja: "接続に失敗しました。再試行しています。\nネットワーク接続の切り替えやプロキシソフトウェアの確認をお試しください。",
+  en: "Connection failed, retrying.\nPlease try switching your internet connection or check if your proxy software is working properly.",
+  other: "Connection failed, retrying.\nPlease try switching your internet connection or check if your proxy software is working properly.",
+};
+
+const retryI18N: Record<string, string> = {
+  zh: "剩余重试次数为",
+  ja: "残りの再試行回数は",
+  en: "The remaining number of retries is",
+  other: "The remaining number of retries is",
+};
+const loadingI18N: Record<string, string> = {
+  zh: "加载中。",
+  ja: "読み込み。",
+  en: "Loading...",
+  other: "Loading...",
+};
 
 onMounted(async () => {
   await loadAllPosts();
@@ -30,10 +71,11 @@ const closePortal = () => {
 };
 
 const { onMove, onLeave } = useCardGlow();
+
 </script>
 
 <template>
-  <div v-if="posts.length > 0" class="post-container">
+  <div v-if="!yamlLoading" class="post-container">
     <article
       v-for="(post,a) in posts"
       :key="a"
@@ -76,8 +118,23 @@ const { onMove, onLeave } = useCardGlow();
     </article>
   </div>
   <div v-else class="loading-state">
-    <div class="loader" />
-    <p>正在加载文章中...</p>
+    <div class="loader">
+      <n-alert v-if="serverError" title="Error" type="error">
+        {{ serverFaultI18N[lang] }}
+      </n-alert>
+      <n-alert v-else-if="loadError" title="Error" type="error">
+        {{ loadErrorI18N[lang] }}
+      </n-alert>
+      <n-alert v-else-if="yamlLoadingFault" title="Error" type="error">
+        {{ serverFaultI18N[lang] }}
+      </n-alert>
+      <n-alert v-else-if="yamlRetrying " title="Warning" type="warning">
+        {{ yamlRetryingI18N[lang] }} {{ retryI18N[lang] }} {{ faultTimes }}
+      </n-alert>
+      <p v-else>
+        {{ loadingI18N[lang] }}
+      </p>
+  </div>
   </div>
 
   <n-modal v-show="showModal" v-model:show="showModal">
@@ -241,7 +298,7 @@ $transition-speed: 0.3s;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0.5rem 1rem 0.5rem;
+  padding: 1rem 0.5rem 4rem 0.5rem;
 }
 
 .content {

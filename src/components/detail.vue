@@ -65,7 +65,7 @@ const dTextOther: string[] = introduction.introductionMessageOther;
   display: flex;
   justify-content: center;
   align-items: center; // 垂直居中
-  padding: 0.4rem;
+  padding: 0.5rem;
   margin: 0.5rem;
   @media (min-width: 350px) {
     width: 50rem;
