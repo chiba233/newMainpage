@@ -2,19 +2,21 @@
   <top-bar class="topBar"></top-bar>
   <div class="viewport">
     <div class="main">
-      <div v-show="!cardSelect" class="blog">
-        <BlogView></BlogView>
-      </div>
-      <div v-show="cardSelect" class="content">
-        <Title></Title>
-        <div class="detailsDIV">
-          <Details></Details>
+      <Transition mode="out-in" name="page">
+        <div :key="cardSelect ? 'home' : 'blog'" class="page-shell">
+          <BlogView v-if="!cardSelect" />
+          <div v-else class="content">
+            <Title />
+            <div class="detailsDIV">
+              <Details />
+            </div>
+            <div class="contactsDIV">
+              <Contacts />
+            </div>
+            <MyFriends />
+          </div>
         </div>
-        <div class="contactsDIV">
-          <Contacts></Contacts>
-        </div>
-        <MyFriends></MyFriends>
-      </div>
+      </Transition>
     </div>
   </div>
   <div class="copyright">
@@ -195,5 +197,16 @@ themeColor.value = selectedColor;
   100% {
     transform: scale(1) translateY(0);
   }
+}
+
+
+.page-enter-active {
+  animation: slide-fwd-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  will-change: transform;
+}
+
+/* 不要 leave 动画 */
+.page-leave-active {
+  animation: none;
 }
 </style>
