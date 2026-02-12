@@ -72,6 +72,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
+      sass:
+        specifier: ^1.97.3
+        version: 1.97.3
       typescript:
         specifier: ^5.0.0
         version: 5.9.3
@@ -2672,7 +2675,6 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
-    optional: true
 
   color-convert@1.9.3:
     dependencies:
@@ -3508,8 +3510,7 @@ snapshots:
       normalize-package-data: 2.5.0
       path-type: 3.0.0
 
-  readdirp@4.1.2:
-    optional: true
+  readdirp@4.1.2: {}
 
   reflect.getprototypeof@1.0.10:
     dependencies:
@@ -3685,7 +3686,6 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.6
-    optional: true
 
   seemly@0.3.10: {}
 
