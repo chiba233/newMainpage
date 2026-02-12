@@ -334,14 +334,14 @@ const clickLine = () => {
 }
 
 .catCard {
-  width: 40em;
+  max-width: 40em;
 
   .catImgCard {
     @media (min-width: 440px) {
-      height: 275px;
+      height: 20em;
     }
     @media (max-width: 440px) {
-      height: 220px;
+      height: 17em;
     }
 
     img {
@@ -413,23 +413,23 @@ const clickLine = () => {
       margin-left: 4px;
     }
 
-    @media (min-width: 420px) {
-      width: 8.6em;
-      margin: 0.55em;
+    @media (min-width: 550px) {
+      width: 8.5em;
+      margin: 0.5em;
     }
-    @media (max-width: 420px) {
-      margin: 0.68em;
+    @media (max-width: 550px) {
+      margin: 0.6em;
       .n-icon {
         margin-left: 6px;
       }
-      width: 4em;
+      width: 3.9em;
       display: flex;
       justify-content: center;
       align-content: center;
     }
 
     a {
-      @media (max-width: 420px) {
+      @media (max-width: 550px) {
         display: none;
       }
     }

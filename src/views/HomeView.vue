@@ -51,10 +51,23 @@ import { lang, themeColor } from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
 import { AnimalRabbit28Regular, Home12Regular } from "@vicons/fluent";
 import { NButton, NIcon } from "naive-ui";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import BlogView from "@/views/BlogView.vue";
 
 const cardSelect = ref(true);
+
+type ThemeIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type BackgroundKey = `background${ThemeIndex}`;
+type ColorData = Record<BackgroundKey, string>;
+const randomTheme = Math.floor(Math.random() * 9);
+const selectedColor = (colorData as ColorData)[
+  `background${randomTheme}` as BackgroundKey
+  ];
+const bg = document.getElementById("bg")!;
+onMounted(() => {
+  bg.style.backgroundImage = `url(background${randomTheme}.webp)`;
+  document.body.style.cssText = `background-color: ${selectedColor}`;
+});
 
 function cardChange(e: string) {
   if (e === "a") {
@@ -76,24 +89,11 @@ const blog: Record<string, string> = {
   other: "blog",
 } as const;
 
-type ThemeIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-type BackgroundKey = `background${ThemeIndex}`;
-type ColorData = Record<BackgroundKey, string>;
-const randomTheme = Math.floor(Math.random() * 9);
-const selectedColor = (colorData as ColorData)[
-  `background${randomTheme}` as BackgroundKey
-  ];
-
-document.body.style.cssText = `
-  background-image: url(background${randomTheme}.webp);
-  background-color: ${selectedColor};
-`;
-themeColor.value = selectedColor;
 </script>
 
 <style lang="scss">
 .topBar {
-  animation: upToDown 0.8s linear 0s 1;
+  animation: upToDown 0.7s linear 0s 1;
 }
 
 .viewport {
@@ -104,7 +104,7 @@ themeColor.value = selectedColor;
   -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
   .main {
     height: 100dvh;
-    animation: slide-fwd-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-fwd-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
     .content {
       width: 100%;
@@ -145,7 +145,7 @@ themeColor.value = selectedColor;
   text-align: center;
   height: 3em;
   position: absolute;
-  animation: downToUp 0.8s linear 0s 1;
+  animation: downToUp 0.7s linear 0s 1;
   z-index: 2;
   pointer-events: auto;
   bottom: calc(0.4em + env(safe-area-inset-bottom));
@@ -155,7 +155,7 @@ themeColor.value = selectedColor;
     height: 2.2em;
     border: 1px solid rgba(255, 255, 255, 0.2);
     pointer-events: auto;
-    @media (max-width: 390px) {
+    @media (max-width: 300px) {
       .n-icon {
         margin-left: 6px;
       }
@@ -164,7 +164,7 @@ themeColor.value = selectedColor;
     a {
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
       color: #191919;
-      @media (max-width: 390px) {
+      @media (max-width: 300px) {
         display: none;
       }
     }
@@ -201,7 +201,7 @@ themeColor.value = selectedColor;
 
 
 .page-enter-active {
-  animation: slide-fwd-center 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-fwd-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   will-change: transform;
 }
 

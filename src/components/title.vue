@@ -52,6 +52,7 @@ const displayTitle = computed(() => {
     flex-wrap: wrap;
     align-content: center;
     color: white;
+    text-align: center;
     text-shadow:
       #383838 1px 0 0,
       #383838 0 1px 0,

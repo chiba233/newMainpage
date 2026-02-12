@@ -6,6 +6,7 @@ import Cancel from "@/icons/cancel.svg";
 import { NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
 import RichTextRenderer from "@/components/RichTextRenderer.vue";
+import { useCardGlow } from "@/components/ts/animationCalculate.ts";
 
 onMounted(async () => {
   await loadAllPosts();
@@ -27,6 +28,8 @@ const cardClick = (posts: Record<string, unknown>) => {
 const closePortal = () => {
   showModal.value = false;
 };
+
+const { onMove, onLeave } = useCardGlow();
 </script>
 
 <template>
@@ -35,8 +38,10 @@ const closePortal = () => {
       v-for="(post,a) in posts"
       :key="a"
       class="post-card"
+      @mouseleave="onLeave" @mousemove="onMove"
       @click="() => cardClick(post)"
     >
+      <div class="content">
       <div class="post-header">
         <h2 class="post-title">
           {{ post.title }}
@@ -66,6 +71,7 @@ const closePortal = () => {
             }}
           </p>
         </div>
+      </div>
       </div>
     </article>
   </div>
@@ -216,7 +222,7 @@ $transition-speed: 0.3s;
       align-items: center;
       gap: 0.5rem;
       font-size: 0.92rem;
-      color: color.adjust($text-color, $lightness: 75%);
+      color: color.adjust($text-color, $lightness: 90%);
       margin-bottom: 0.5rem;
     }
   }
@@ -238,6 +244,12 @@ $transition-speed: 0.3s;
   padding: 1rem 1rem 4rem 1rem;
 }
 
+.content {
+  position: relative;
+  z-index: 10; // 必须高于伪元素
+  width: 100%;
+}
+
 .post-card {
   display: flex;
   flex-direction: column;
@@ -252,22 +264,80 @@ $transition-speed: 0.3s;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 0.8rem;
   height: 15em;
-  transition: transform $transition-speed ease,
-  box-shadow $transition-speed ease;
+
+  // 核心变量
+  --mx: -100px;
+  --my: -100px;
+  --opacity: 0; // 默认光是隐藏的
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, background-color 0.3s;
 
   @media (max-width: 600px) {
     width: 95vw;
-    height: 18.8em;
+    height: 19.7em;
+  }
+  // 1. 面光 (Surface Glow) - 柔和的大范围光晕
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+        800px circle at var(--mx) var(--my),
+        rgba(255, 255, 255, 0.15),
+        transparent 40%
+    );
+    opacity: var(--opacity);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  // 2. 边框光 (Border Glow)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px; // 边框粗细
+
+    // 1. 定义遮罩源（IDE 现在能理解 mask-image 接受渐变了）
+    // noinspection CssInvalidPropertyValue
+    -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+
+    // 2. 分别指定裁剪区域
+    // 第一层对应 content-box，第二层对应 border-box
+    // noinspection CssInvalidPropertyValue
+    -webkit-mask-clip: content-box, border-box;
+    mask-clip: content-box, border-box;
+
+    // 3. 核心：排除操作
+    // Webkit 使用 xor，标准使用 exclude
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    // 4. 背景光斑逻辑（保持不变）
+    background: radial-gradient(
+        150px circle at var(--mx) var(--my),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.3) 30%,
+        transparent 70%
+    );
+
+    z-index: 2;
+    opacity: var(--opacity);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
   }
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   }
-
   .post-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     .post-title {
       font-size: 1.25rem;
@@ -283,10 +353,10 @@ $transition-speed: 0.3s;
 
     .post-meta {
       font-size: 0.9rem;
-      color: color.adjust($text-color, $lightness: 75%);
+      color: color.adjust($text-color, $lightness: 90%);
       display: flex;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.3rem;
 
       .time-divider {
         opacity: 0.5;
@@ -296,7 +366,7 @@ $transition-speed: 0.3s;
 
   .post-body {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.5rem;
     align-items: flex-start;
     overflow: hidden;
     flex: 1;
@@ -358,6 +428,8 @@ $transition-speed: 0.3s;
 .loading-state {
   text-align: center;
   padding: 4rem;
-  color: #666;
+  color: $text-color;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  font-size: 2em;
 }
 </style>

@@ -39,7 +39,7 @@ watchEffect(() => {
   height: 2.2em;
   border: 1px solid rgba(255, 255, 255, 0.2);
   pointer-events: auto;
-  @media (max-width: 390px) {
+  @media (max-width: 300px) {
     .n-icon {
       margin-left: 6px;
     }
@@ -48,7 +48,7 @@ watchEffect(() => {
   a {
     color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-    @media (max-width: 390px) {
+    @media (max-width: 300px) {
       display: none;
     }
   }

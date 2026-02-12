@@ -1,70 +1,148 @@
 <template>
-  <div class="textBox">
-    <a class="detailText">
-      <a v-if="lang === 'zh'">
-        {{ dTextZH[0] }} <br />
-        {{ dTextZH[1] }}
-      </a>
-      <a v-if="lang === 'en'">
-        {{ dTextEN[0] }}<br />
-        {{ dTextEN[1] }}
-      </a>
-      <a v-if="lang === 'ja'">
-        {{ dTextJP[0] }}<br />
-        {{ dTextJP[1] }}
-      </a>
-      <a v-if="lang === 'other'">
-        {{ dTextOther[0] }}<br />
-        {{ dTextOther[1] }}
-      </a>
-    </a>
+  <div class="textBox" @mouseleave="onLeave" @mousemove="onMove">
+    <div class="content">
+      <div class="detailText">
+        <template v-if="lang === 'zh'">
+          {{ dTextZH[0] }} <br />
+          {{ dTextZH[1] }}
+        </template>
+        <template v-else-if="lang === 'en'">
+          {{ dTextEN[0] }}<br />
+          {{ dTextEN[1] }}
+        </template>
+        <template v-else-if="lang === 'ja'">
+          {{ dTextJP[0] }}<br />
+          {{ dTextJP[1] }}
+        </template>
+        <template v-else>
+          {{ dTextOther[0] }}<br />
+          {{ dTextOther[1] }}
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import introduction from "../message/introduction.json";
 import { lang } from "@/components/ts/useStoage";
+import { useCardGlow } from "@/components/ts/animationCalculate.ts";
 
-let dTextZH: string[] = introduction.introductionMessageZH;
-let dTextEN: string[] = introduction.introductionMessageEN;
-let dTextJP: string[] = introduction.introductionMessageJP;
-let dTextOther: string[] = introduction.introductionMessageOther;
+const { onMove, onLeave } = useCardGlow();
+
+
+// 模拟数据 (你的原始数据)
+const dTextZH: string[] = introduction.introductionMessageZH;
+const dTextEN: string[] = introduction.introductionMessageEN;
+const dTextJP: string[] = introduction.introductionMessageJP;
+const dTextOther: string[] = introduction.introductionMessageOther;
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .textBox {
-  display: flex;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  // 核心变量
+  --mx: -100px;
+  --my: -100px;
+  --opacity: 0; // 默认光是隐藏的
+
+  position: relative;
+  // 基础磨砂玻璃背景
+  background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
+
+  // 基础边框 (未被照亮时)
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s, background-color 0.3s;
+
+  // 给一个极淡的静态边框，保证没有光的时候也有轮廓感
+
+  // 布局样式
+  display: flex;
   justify-content: center;
-  transition: all 1s;
-  padding: 0.9em;
-  @media (min-width: 420px) {
-    width: 50em;
-    border-radius: 15px;
-    margin: 1em;
+  align-items: center; // 垂直居中
+  padding: 0.9rem;
+  @media (min-width: 350px) {
+    width: 50rem;
+    margin: 0.6rem;
   }
-  @media (max-width: 420px) {
-    border-radius: 10px;
-    margin: 0.3em;
+  @media (max-width: 350px) {
+    margin: 0.4rem;
+  }
+
+  // 1. 面光 (Surface Glow) - 柔和的大范围光晕
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+        800px circle at var(--mx) var(--my),
+        rgba(255, 255, 255, 0.15),
+        transparent 40%
+    );
+    opacity: var(--opacity);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  // 2. 边框光 (Border Glow)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px; // 边框粗细
+
+    // 1. 定义遮罩源（IDE 现在能理解 mask-image 接受渐变了）
+    // noinspection CssInvalidPropertyValue
+    -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+    mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+
+    // 2. 分别指定裁剪区域
+    // 第一层对应 content-box，第二层对应 border-box
+    // noinspection CssInvalidPropertyValue
+    -webkit-mask-clip: content-box, border-box;
+    mask-clip: content-box, border-box;
+
+    // 3. 核心：排除操作
+    // Webkit 使用 xor，标准使用 exclude
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    // 4. 背景光斑逻辑（保持不变）
+    background: radial-gradient(
+        200px circle at var(--mx) var(--my),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.3) 30%,
+        transparent 70%
+    );
+
+    z-index: 2;
+    opacity: var(--opacity);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  // 文本容器
+  .content {
+    position: relative;
+    z-index: 10; // 必须高于伪元素
+    width: 100%;
   }
 
   .detailText {
     color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     text-align: center;
-    display: block;
+    line-height: 1.6;
     word-break: break-word;
     white-space: pre-wrap;
-    @media (min-width: 420px) {
-      font-size: 1.1em;
-    }
-    @media (max-width: 420px) {
-      font-size: 1em;
-    }
+    font-size: 1.15em;
   }
 }
 </style>
