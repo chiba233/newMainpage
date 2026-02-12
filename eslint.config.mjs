@@ -6,7 +6,14 @@ import prettierConfig from "eslint-config-prettier";
 
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", ".vscode/**",".idea/**", "public/**"],
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      ".vscode/**",
+      ".idea/**",
+      "public/**",
+      "eslint.config.mjs",
+    ],
   },
 
   ...tseslint.configs.recommendedTypeChecked,
@@ -22,12 +29,14 @@ export default [
       parserOptions: {
         parser: tseslint.parser,
         project: "./tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
         extraFileExtensions: [".vue"],
       },
     },
     plugins: {
       prettier: prettierPlugin,
     },
+
     rules: {
       "vue/multi-word-component-names": "warn",
       "@typescript-eslint/no-explicit-any": "warn",

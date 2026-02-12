@@ -27,7 +27,14 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts",
-    "env.d.ts"
+    "env.d.ts",
+    "src",
+    "eslint.config.mjs"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".idea",
+    ".vscode"
+  ]
 }
