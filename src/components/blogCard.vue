@@ -328,7 +328,7 @@ $transition-speed: 0.3s;
   transition: transform 0.2s, background-color 0.3s;
 
   @media (max-width: 900px) {
-    height: 16.5rem;
+    height: 16.45rem;
   }
   @media (min-width: 900px) {
     width: 25rem;
@@ -460,16 +460,22 @@ $transition-speed: 0.3s;
         margin: 0;
         color: $text-color;
         text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
-        line-height: 1.6;
+        line-height: 1.4;
         font-size: 0.8rem;
         word-break: break-all;
         white-space: normal;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 7;
         overflow: hidden;
         box-orient: vertical; //test values
-        line-clamp: 7;
+        @media (max-width: 900px) {
+          -webkit-line-clamp: 4;
+          line-clamp: 4;
+      }
+        @media (min-width: 900px) {
+          -webkit-line-clamp: 8;
+          line-clamp: 8;
+        }
       }
     }
   }
