@@ -241,14 +241,15 @@ $transition-speed: 0.3s;
 .post-card {
   display: flex;
   flex-direction: column;
-  width: 20em;
+  width: 28rem;
+  cursor: pointer;
   max-width: 800px;
   background: $card-bg;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: $border-radius;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 0.8rem;
   height: 15em;
   transition: transform $transition-speed ease,

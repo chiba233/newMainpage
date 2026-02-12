@@ -404,7 +404,7 @@ const clickLine = () => {
 
   .n-button {
     height: 2.2em;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.2);
 
     a {

@@ -30,6 +30,7 @@ function openURL(url: string) {
 </script>
 
 <style lang="scss">
+$transition-speed: 0.3s;
 .friendTitle {
   left: 0;
   right: 0;
@@ -67,12 +68,18 @@ function openURL(url: string) {
   background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  transition: all 1s;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform $transition-speed ease,
+  box-shadow $transition-speed ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
   @media (min-width: 420px) {
     width: 7.5em;
     height: 11em;
@@ -105,10 +112,10 @@ function openURL(url: string) {
     white-space: nowrap;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     box-orient: vertical; //test values
-    line-clamp: 7;
+    line-clamp: 1;
   }
 }
 </style>

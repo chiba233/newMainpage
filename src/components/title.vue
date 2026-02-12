@@ -69,6 +69,7 @@ const displayTitle = computed(() => {
   }
 
   .titleIcon {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     @media (min-width: 380px) {
       display: flex;
       width: 6em;
