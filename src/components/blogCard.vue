@@ -84,36 +84,36 @@ const { onMove, onLeave } = useCardGlow();
       @click="() => cardClick(post)"
     >
       <div class="content">
-      <div class="post-header">
-        <h2 class="post-title">
-          {{ post.title }}
-        </h2>
-        <div class="post-meta">
-          <time :datetime="post.time">{{ formatDate(post.time) }}</time>
-          <span class="time-divider">|</span>
-          <span>{{ formatTime(post.time) }}</span>
+        <div class="post-header">
+          <h2 class="post-title">
+            {{ post.title }}
+          </h2>
+          <div class="post-meta">
+            <time :datetime="post.time">{{ formatDate(post.time) }}</time>
+            <span class="time-divider">|</span>
+            <span>{{ formatTime(post.time) }}</span>
+          </div>
         </div>
-      </div>
 
-      <div class="post-body">
-        <div v-if="post.blocks?.some((b: any) => b.type === 'image')" class="post-image">
-          <img
-            :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0].src"
-            :alt="post.title"
-            loading="lazy"
-          />
+        <div class="post-body">
+          <div v-if="post.blocks?.some((b: any) => b.type === 'image')" class="post-image">
+            <img
+              :alt="post.title"
+              :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0].src"
+              loading="lazy"
+            />
+          </div>
+          <div class="post-description">
+            <p>
+              {{
+                (post.blocks || [])
+                  .filter((b: any) => b.type === "text" || b.type === "center")
+                  .map((b: any) => stripRichText(b.content))
+                  .join(" ")
+              }}
+            </p>
+          </div>
         </div>
-        <div class="post-description">
-          <p>
-            {{
-              (post.blocks || [])
-                .filter((b: any) => b.type === "text" || b.type === "center")
-                .map((b: any) => stripRichText(b.content))
-                .join(" ")
-            }}
-          </p>
-        </div>
-      </div>
       </div>
     </article>
   </div>
@@ -134,7 +134,7 @@ const { onMove, onLeave } = useCardGlow();
       <p v-else>
         {{ loadingI18N[lang] }}
       </p>
-  </div>
+    </div>
   </div>
 
   <n-modal v-show="showModal" v-model:show="showModal">
@@ -168,19 +168,8 @@ const { onMove, onLeave } = useCardGlow();
               </div>
             </div>
           </div>
-
-          <div v-if="block.type === 'text'" class="postCardText" @click="console.log(parseRichText(block.content))">
+          <div v-if="block.type === 'text'" class="postCardText">
             <RichTextRenderer :tokens="parseRichText(block.content)" />
-          </div>
-
-          <div v-else-if="block.type === 'center'" class="center-text">
-            <RichTextRenderer :tokens="parseRichText(block.content)" />
-          </div>
-          <div
-            v-else-if="block.type === 'effect'"
-            class="post-effect"
-          >
-            {{ block.content }}
           </div>
         </div>
       </div>
@@ -286,11 +275,6 @@ $transition-speed: 0.3s;
 }
 
 
-
-.center-text {
-  font-size: 1.1rem;
-}
-
 .post-container {
   display: flex;
   flex-direction: row;
@@ -392,6 +376,7 @@ $transition-speed: 0.3s;
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   }
+
   .post-header {
     text-align: center;
     margin-bottom: 0.5rem;
@@ -467,11 +452,12 @@ $transition-speed: 0.3s;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        letter-spacing: 0.02em;
         box-orient: vertical; //test values
         @media (max-width: 900px) {
           -webkit-line-clamp: 4;
           line-clamp: 4;
-      }
+        }
         @media (min-width: 900px) {
           -webkit-line-clamp: 8;
           line-clamp: 8;
@@ -482,10 +468,9 @@ $transition-speed: 0.3s;
 }
 
 .postCardText {
-  span, strong, span, u, del {
-    font-size: 1.2rem;
-    white-space: pre-line;
-  }
+  font-size: 1.1rem;
+  white-space: pre-line;
+  color: $text-color;
 }
 
 .loading-state {

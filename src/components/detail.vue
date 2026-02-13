@@ -3,20 +3,16 @@
     <div class="content">
       <div class="detailText">
         <template v-if="lang === 'zh'">
-          {{ dTextZH[0] }} <br />
-          {{ dTextZH[1] }}
+          {{ dTextZH }}
         </template>
         <template v-else-if="lang === 'en'">
-          {{ dTextEN[0] }}<br />
-          {{ dTextEN[1] }}
+          {{ dTextEN }}
         </template>
         <template v-else-if="lang === 'ja'">
-          {{ dTextJP[0] }}<br />
-          {{ dTextJP[1] }}
+          {{ dTextJP }}
         </template>
         <template v-else>
-          {{ dTextOther[0] }}<br />
-          {{ dTextOther[1] }}
+          {{ dTextOther }}
         </template>
       </div>
     </div>
@@ -32,10 +28,10 @@ const { onMove, onLeave } = useCardGlow();
 
 
 // 模拟数据 (你的原始数据)
-const dTextZH: string[] = introduction.introductionMessageZH;
-const dTextEN: string[] = introduction.introductionMessageEN;
-const dTextJP: string[] = introduction.introductionMessageJP;
-const dTextOther: string[] = introduction.introductionMessageOther;
+const dTextZH: string = introduction.introductionMessageZH;
+const dTextEN: string = introduction.introductionMessageEN;
+const dTextJP: string = introduction.introductionMessageJP;
+const dTextOther: string = introduction.introductionMessageOther;
 </script>
 
 <style lang="scss" scoped>
@@ -136,10 +132,11 @@ const dTextOther: string[] = introduction.introductionMessageOther;
     color: #191919;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
     text-align: center;
-    line-height: 1.6;
     word-break: break-word;
     white-space: pre-wrap;
-    font-size: 1.1em;
+    font-size: 1.15em;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
   }
 }
 </style>

@@ -15,7 +15,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: "modern-compiler",
-        implementation: "sass-embedded",
+        implementation: "sass",
         silenceDeprecations: ["legacy-js-api"],
       } as any,
     },
