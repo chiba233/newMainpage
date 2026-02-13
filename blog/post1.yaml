@@ -12,7 +12,7 @@ blocks:
 
   - type: "image"
     content:
-      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master//blog/img/post1/1.png
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/blog/img/post1/1.png
   - type: "imageDescription"
     content: "'neofetch'信息"
   - type: "text"
