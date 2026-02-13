@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { Component, defineAsyncComponent, onMounted, ref } from "vue";
 import {
   faultTimes,
   loadAllPosts,
@@ -14,9 +14,12 @@ import { formatTime, lang } from "@/components/ts/useStoage";
 import Cancel from "@/icons/cancel.svg";
 import { NAlert, NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
-import RichTextRenderer from "@/components/RichTextRenderer.vue";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const RichTextRenderer: Component = defineAsyncComponent(() =>
+  import("@/components/RichTextRenderer.vue"),
+);
 const serverFaultI18N: Record<string, string> = {
   zh: "GitHub服务器连接失败。",
   ja: "github サーバー接続に失敗しました。！",

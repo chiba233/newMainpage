@@ -51,8 +51,10 @@ import { lang, themeColor } from "@/components/ts/useStoage";
 import TopBar from "@/components/topBar.vue";
 import { AnimalRabbit28Regular, Home12Regular } from "@vicons/fluent";
 import { NButton, NIcon } from "naive-ui";
-import { onMounted, ref } from "vue";
-import BlogView from "@/views/BlogView.vue";
+import { Component, defineAsyncComponent, onMounted, ref } from "vue";
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const BlogView: Component = defineAsyncComponent(() => import("@/views/BlogView.vue"));
 
 const cardSelect = ref(true);
 
