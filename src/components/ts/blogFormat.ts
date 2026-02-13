@@ -13,10 +13,6 @@ const BLOCK_TYPES = ["center"];
 const START_TAG_PATTERN = `\\$\\$(${RICH_TYPES.join("|")})\\(`;
 const createStartTagRegex = () => new RegExp(START_TAG_PATTERN, "g");
 
-const STRIP_REGEX = new RegExp(
-  `\\$\\$(?:${RICH_TYPES.join("|")})\\((.*?)\\)\\$\\$`,
-  "gs",
-);
 // 空白判断
 const shouldRenderText = (text: string) => text.length > 0;
 
@@ -26,7 +22,9 @@ export const parseRichText = (text: string, depthLimit = 50): TextToken[] => {
   let i = 0;
 
   // 限制递归深度
-  if (depthLimit <= 0) return [{ type: "text", value: text }];
+  if (depthLimit <= 0) {
+    return [{ type: "text", value: text }];
+  }
   const KNOWN_REGEX = createStartTagRegex();
   while (i < text.length) {
     KNOWN_REGEX.lastIndex = i;
@@ -108,13 +106,11 @@ export const parseRichText = (text: string, depthLimit = 50): TextToken[] => {
 };
 // strip 版本
 export const stripRichText = (text: string): string => {
-  let lastText = "";
-  let currentText = text;
+  const tokens = parseRichText(text);
 
-  while (currentText !== lastText) {
-    lastText = currentText;
-    currentText = currentText.replace(STRIP_REGEX, "$1");
-  }
+  const flatten = (ts: TextToken[]): string => {
+    return ts.map(t => typeof t.value === "string" ? t.value : flatten(t.value)).join("");
+  };
 
-  return currentText.trim();
+  return flatten(tokens).trim();
 };
