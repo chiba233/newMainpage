@@ -41,8 +41,8 @@ import Clock from "../icons/clock.svg";
 import { computed, ref } from "vue";
 import Cancel from "../icons/cancel.svg";
 import { formatTime, lang, themeColor } from "@/components/ts/useStoage";
-import fromNowI18 from "../message/fromNowI18n.json";
-import fromNow from "../message/fromNow.json";
+import fromNowI18 from "@/data/I18N/fromNowI18n.json";
+import fromNow from "@/data/components/fromNow.json";
 
 const langMap = {
   zh: "nameZH",

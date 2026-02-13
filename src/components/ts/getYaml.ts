@@ -1,10 +1,19 @@
 import yaml from "js-yaml";
 import { ref } from "vue";
+// 1. 引入配置文件 (或者直接在这里定义 const yamlUrl = { ... })
+import yamlUrl from "@/data/components/yamlUrl.json";
+
+interface BaseContent {
+  time?: string;
+
+  [key: string]: any;
+}
 
 interface Post {
-  title: string;
-  time: string;
+  time?: string;
+  title?: string;
   content?: string;
+
   [key: string]: any;
 }
 
@@ -26,45 +35,39 @@ async function fetchWithRetry(
     yamlRetrying.value = false;
     const res = await fetch(url, options);
     if (!res.ok) {
-      // 服务器响应但失败（404 / 500 等）
       yamlRetrying.value = false;
       serverError.value = true;
     }
-
     return res;
   } catch (err) {
     if (retry <= 0) {
-      yamlRetrying.value = false; // retry 结束
+      yamlRetrying.value = false;
       loadError.value = true;
       throw err;
     }
     yamlRetrying.value = true;
     faultTimes.value = retry;
     await sleep(delay);
-
     return fetchWithRetry(url, options, retry - 1, delay * 2);
   }
 }
 
 export const posts = ref<Post[]>([]);
-const LIST_URL = "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/list.json";
-
-
-export const loadAllPosts = async () => {
-  yamlLoading.value = true;        // ⬅ 开始加载
+export const loadAllPosts = async <T extends BaseContent>(type: keyof typeof yamlUrl) => {
+  yamlLoading.value = true;
   yamlLoadingFault.value = false;
   faultTimes.value = 0;
-
-  const listRes = await fetchWithRetry(LIST_URL, undefined, 3, 800);
-  const postData: string[] = await listRes.json();
+  const { listUrl, url: baseUrl } = yamlUrl[type];
+  const listRes = await fetchWithRetry(listUrl, undefined, 3, 800);
+  const postData = (await listRes.json()) as string[];
 
   const promises = postData.map(async (name: string) => {
-    const url = `https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/${name}`;
+    const url = `${baseUrl}${name}`;
 
     try {
       const response = await fetchWithRetry(url, undefined, 3, 800);
       const yamlText = await response.text();
-      return yaml.load(yamlText) as Post;
+      return yaml.load(yamlText) as T;
     } catch {
       yamlLoadingFault.value = true;
       return null;
@@ -72,18 +75,21 @@ export const loadAllPosts = async () => {
   });
 
   const results = await Promise.all(promises);
+  const validData = results.filter((p): p is NonNullable<typeof p> => p !== null);
+  validData.sort((a, b) => {
+    const timeA = (a as BaseContent).time;
+    const timeB = (b as BaseContent).time;
 
-  const validPosts = results.filter((p): p is Post => p !== null);
-
-  posts.value = validPosts.sort((a, b) => {
-    const timeA = new Date(a.time).getTime();
-    const timeB = new Date(b.time).getTime();
-    return timeB - timeA;
+    if (timeA && timeB) {
+      return new Date(timeB).getTime() - new Date(timeA).getTime();
+    }
+    return 0;
   });
 
+
+  (posts.value as T[]) = validData;
   if (posts.value.length === 0) {
   } else {
-    yamlLoading.value = false;  // ✅ 有数据 = 正常结束
-
+    yamlLoading.value = false;
   }
 };

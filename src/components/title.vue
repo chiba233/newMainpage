@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { NAvatar } from "naive-ui";
 import icon from "../icons/icon.webp";
-import titleMessage from "../message/titleMessage.json";
+import titleMessage from "@/data/I18N/titleMessage.json";
 import { lang } from "@/components/ts/useStoage";
 import { computed } from "vue";
 

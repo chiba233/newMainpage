@@ -24,8 +24,8 @@
 
 <script setup lang="ts">
 import { NAvatar } from "naive-ui";
-import friends from "@/message/friends.json";
-import friendsMessage from "@/message/friendsMessage.json";
+import friends from "@/data/components/friends.json";
+import friendsMessage from "@/data/I18N/friendsMessage.json";
 import { lang } from "@/components/ts/useStoage";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
 

@@ -221,8 +221,8 @@
 
 <script setup lang="ts">
 import Solana from "@/icons/solanaLogoMark.svg";
-import catImage from "@/message/catImage.json";
-import commonI18n from "@/message/commonI18n.json";
+import catImage from "@/data/components/catImage.json";
+import commonI18n from "@/data/I18N/commonI18n.json";
 import Cat from "@/icons/cat.svg";
 import TwitterIcon from "@/icons/twitter.svg";
 import TelegramIcon from "@/icons/telegram.svg";
@@ -241,7 +241,7 @@ import { lang, themeColor } from "@/components/ts/useStoage";
 import { maiUrl, UserDataType } from "./ts/maimaiScore";
 import Cancel from "@/icons/cancel.svg";
 import { computed, ref } from "vue";
-import maiI18nData from "@/message/maiI18n.json";
+import maiI18nData from "@/data/I18N/maiI18n.json";
 import axios from "axios";
 import { useAsyncState } from "@vueuse/core";
 

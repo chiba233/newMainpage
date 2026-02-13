@@ -1,0 +1,86 @@
+{
+  "socialLinks": {
+    "twitter": "https://x.com/HoshinoYumeka2",
+    "tron": "https://tronscan.org/#/address/TVB16jV3Jx2HTn9U1KjyBSN1u9MQ29FArs",
+    "areth": "https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
+    "eth": "https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
+    "polygon": "https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
+    "bsc": "https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
+    "solana": "https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V",
+    "telegram": "https://t.me/chiba2333",
+    "email": "mailto:qwq@qwwq@org",
+    "github": "https://github.com/chiba233"
+  },
+  "platforms": [
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "type": "link"
+    },
+    {
+      "id": "wechat",
+      "label": "WeChat",
+      "type": "modal"
+    },
+    {
+      "id": "line",
+      "label": "LINE",
+      "type": "modal"
+    },
+    {
+      "id": "email",
+      "label": "E-Mail",
+      "type": "link"
+    },
+    {
+      "id": "twitter",
+      "label": "Twitter",
+      "type": "link"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "type": "link"
+    },
+    {
+      "id": "tron",
+      "label": "Tron",
+      "type": "link"
+    },
+    {
+      "id": "eth",
+      "label": "Ethereum",
+      "type": "link"
+    },
+    {
+      "id": "areth",
+      "label": "Arbitrum",
+      "type": "link"
+    },
+    {
+      "id": "bsc",
+      "label": "BSC-BNB",
+      "type": "link"
+    },
+    {
+      "id": "polygon",
+      "label": "Polygon",
+      "type": "link"
+    },
+    {
+      "id": "solana",
+      "label": "Solana",
+      "type": "link"
+    },
+    {
+      "id": "maimai",
+      "label": "maimai",
+      "type": "func"
+    },
+    {
+      "id": "cat",
+      "label": "cat",
+      "type": "func"
+    }
+  ]
+}

@@ -14,10 +14,10 @@
 <script setup lang="ts">
 import LangIcon from "../icons/langIcon.svg";
 import { NButton, NIcon, NPopselect } from "naive-ui";
-import i18nLang from "../message/i18nLang.json";
+import i18nLang from "@/data/I18N/i18nLang.json";
 import { lang, themeColor } from "@/components/ts/useStoage";
 import { watchEffect } from "vue";
-import webTitle from "../message/webTitle.json";
+import webTitle from "@/data/I18N/webTitle.json";
 
 const newWebTitle: Record<string, string> = webTitle;
 

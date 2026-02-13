@@ -1,0 +1,30 @@
+layout: "common"
+time: "20251225"
+title: "针对来咨询SRS的一些回答"
+blocks:
+  - type: "text"
+    content: |
+      如果是$$link($$underline(mtf.wiki)$$)$$来咨询的话，我自我介绍一下，我是蓝莓，以下是我的$$bold(milada授权书)$$。
+  - type: "image"
+    content:
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post2/Certification.jpg
+        desc: Milada米兰达整形医院授权书
+  - type:
+  - type: "text"
+    content: |
+      我里同时接待$$bold(Kamol,Pai,Milada,NUT,YANHEE,APS)$$医院的服务，包括不限于SRS及医疗美容。支持陪护或预约手术。$$underline($$bold(注意:不同的医院可能会存在不同的中介费用。)$$)$$
+      接下来我们来讲解如何预约，以及具体需要你必须知道的一些内容。
+      首先你需要保证你$$bold(必须满18周岁)$$，满足基本条件后，如果你没有家长同意书，你的可手术年龄为$$bold(20周岁)$$,这是因为泰国成年年龄为20周岁。如果你有家长同意书，那么你需要提供$$bold(家长签署的授权书)$$以支持你进行手术。
+      预约手术前，你必须知道：$$bold(手术是不可逆的)$$，因此我们推荐手术前 $$bold(HRT满1年)$$。赴泰手术如果你拥有中国诊断证书，建议$$bold(携带翻译好的诊断书原件)$$。
+      关于价格，目前各家医院大致都在$$bold(35万泰铢上下)$$，推荐额外携带$$bold(2万泰铢现金)$$以及$$bold(万事达和visa卡片)$$以保证生活费可以cover，你大致需要留在泰国$$bold(20天)$$。
+      请注意，入境前请填写泰国入境卡片：$$link($$bold($$underline(https://tdac.immigration.go.th/arrival-card/#/home)$$)$$)$$。
+      $$center($$bold( ⚠ 本卡片为入境必要手续，请务必提前填写，否则将被拒绝入境处理 ⚠ )$$)$$
+      具体内容你可以联系微信:$$underline(@strawberry960)$$及QQ$$underline(1584996409)$$及Telegram$$underline(@chiba2333)$$，感谢！
+  - type: "image"
+    content:
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post2/line.webp
+        desc: LINE QR
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post2/wechat.webp
+        desc: WeChat QR
+      - src: https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/public/blog/img/post2/qq.jpg
+        desc: QQ QR

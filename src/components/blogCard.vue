@@ -9,7 +9,7 @@ import {
   yamlLoading,
   yamlLoadingFault,
   yamlRetrying,
-} from "@/components/ts/getBlogYaml";
+} from "@/components/ts/getYaml.ts";
 import { formatTime, lang } from "@/components/ts/useStoage";
 import Cancel from "@/icons/cancel.svg";
 import { NAlert, NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
@@ -53,7 +53,7 @@ const loadingI18N: Record<string, string> = {
 };
 
 onMounted(async () => {
-  await loadAllPosts();
+  await loadAllPosts("blog");
 });
 
 const formatDate = (t: string) => {
@@ -92,7 +92,7 @@ const { onMove, onLeave } = useCardGlow();
             {{ post.title }}
           </h2>
           <div class="post-meta">
-            <time :datetime="post.time">{{ formatDate(post.time) }}</time>
+            <time :datetime="post.time">{{ formatDate(post.time!) }}</time>
             <span class="time-divider">|</span>
             <span>{{ formatTime(post.time) }}</span>
           </div>

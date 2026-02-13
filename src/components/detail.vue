@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import introduction from "../message/introduction.json";
+import introduction from "@/data/I18N/introduction.json";
 import { lang } from "@/components/ts/useStoage";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
 
