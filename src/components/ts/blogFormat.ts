@@ -4,102 +4,97 @@ interface TextToken {
 }
 
 const RICH_TYPES = ["bold", "thin", "underline", "strike", "center", "link"] as const;
+const BLOCK_TYPES = ["center"];
 export type RichType = (typeof RICH_TYPES)[number];
 
 const TAG_PREFIX = "$$";
-const TAG_SUFFIX = ")$$";
-const BLOCK_TYPES = ["center"];
-
-const START_TAG_PATTERN = `\\$\\$(${RICH_TYPES.join("|")})\\(`;
-const createStartTagRegex = () => new RegExp(START_TAG_PATTERN, "g");
-
-// 空白判断
-const shouldRenderText = (text: string) => text.length > 0;
+const END_TAG = ")$$";
+const START_TAG_PATTERN = `\\$\\$([a-z]+)\\(`;
+const makeTagRegex = () => new RegExp(`${START_TAG_PATTERN}`, "gy");
 
 // 主解析器
 export const parseRichText = (text: string, depthLimit = 50): TextToken[] => {
+  const TAG_REGEX = makeTagRegex();
   const tokens: TextToken[] = [];
   let i = 0;
 
-  // 限制递归深度
-  if (depthLimit <= 0) {
-    return [{ type: "text", value: text }];
-  }
-  const KNOWN_REGEX = createStartTagRegex();
+  if (depthLimit <= 0) return [{ type: "text", value: text }];
+
   while (i < text.length) {
-    KNOWN_REGEX.lastIndex = i;
-    const knownMatch = KNOWN_REGEX.exec(text);
-    const genericMatch = text.slice(i).match(/^\$\$([a-z]+)\(/);
+    const startIdx = text.indexOf(TAG_PREFIX, i);
 
-    if (genericMatch) {
-      const tagName = genericMatch[1];
-      const isKnown = knownMatch && knownMatch.index === i;
-      const contentStartIndex = i + genericMatch[0].length;
+    if (startIdx === -1) {
+      const remaining = text.slice(i);
+      if (remaining) tokens.push({ type: "text", value: remaining });
+      break;
+    }
 
+    if (startIdx > i) {
+      tokens.push({ type: "text", value: text.slice(i, startIdx) });
+    }
+
+    TAG_REGEX.lastIndex = startIdx;
+    const match = TAG_REGEX.exec(text);
+
+    if (match) {
+      const tagName = match[1];
+      const contentStartIndex = TAG_REGEX.lastIndex;
+
+      // 寻找对应的结束标签
       let depth = 1;
       let cur = contentStartIndex;
       let contentEndIndex = -1;
 
       while (cur < text.length) {
-        const nextDollar = text.indexOf(TAG_PREFIX, cur);
-        const nextEnd = text.indexOf(TAG_SUFFIX, cur);
+        const nextStart = text.indexOf(TAG_PREFIX, cur);
+        const nextEnd = text.indexOf(END_TAG, cur);
 
-        if (nextDollar === -1 && nextEnd === -1) break;
+        if (nextEnd === -1) break;
 
-        if (nextDollar !== -1 && (nextEnd === -1 || nextDollar < nextEnd)) {
-          // 只要符合 $$any( 结构就视作嵌套
-          const subMatch = text.slice(nextDollar).match(/^\$\$[a-z]+\(/);
-          if (subMatch) {
+        if (nextStart !== -1 && nextStart < nextEnd) {
+          // 进一步确认是否是有效的起始标签 $$name(
+          TAG_REGEX.lastIndex = nextStart;
+          if (TAG_REGEX.test(text)) {
             depth++;
-            cur = nextDollar + subMatch[0].length;
+            cur = TAG_REGEX.lastIndex;
             continue;
           }
-          cur = nextDollar + TAG_PREFIX.length;
+          cur = nextStart + 2;
         } else {
           depth--;
           if (depth === 0) {
             contentEndIndex = nextEnd;
             break;
           }
-          cur = nextEnd + TAG_SUFFIX.length;
+          cur = nextEnd + END_TAG.length;
         }
       }
 
       if (contentEndIndex !== -1) {
         const innerText = text.slice(contentStartIndex, contentEndIndex);
         const parsedInner = parseRichText(innerText, depthLimit - 1);
-        if (isKnown) {
-          // 赋予 RichType 样式
-          tokens.push({
-            type: tagName as RichType,
-            value: parsedInner,
-          });
+
+        // 只有在 RICH_TYPES 里的才作为 tag，否则打平
+        if ((RICH_TYPES as readonly string[]).includes(tagName)) {
+          tokens.push({ type: tagName as RichType, value: parsedInner });
         } else {
-          // 未知标签
           tokens.push(...parsedInner);
         }
 
-        i = contentEndIndex + TAG_SUFFIX.length;
+        i = contentEndIndex + END_TAG.length;
 
-        // 换行修复逻辑
-        if (BLOCK_TYPES.includes(tagName) && i < text.length) {
-          const char = text[i];
-          if (char === "\n") i++;
+        // 块级元素换行处理
+        if (BLOCK_TYPES.includes(tagName)) {
+          if (text[i] === "\n") i++;
           else if (text.startsWith("\r\n", i)) i += 2;
         }
         continue;
       }
     }
 
-    // 普通文本处理
-    let nextTagIndex = text.indexOf(TAG_PREFIX, i + 1);
-    if (nextTagIndex === -1) nextTagIndex = text.length;
-
-    const plainText = text.slice(i, nextTagIndex);
-    if (shouldRenderText(plainText)) {
-      tokens.push({ type: "text", value: plainText });
-    }
-    i = nextTagIndex;
+    // 如果虽然有 $$ 但不是合法标签，当作普通文本跳过
+    tokens.push({ type: "text", value: TAG_PREFIX });
+    i = startIdx + TAG_PREFIX.length;
   }
 
   return tokens;
