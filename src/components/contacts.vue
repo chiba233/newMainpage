@@ -27,72 +27,28 @@
   </n-modal>
   <!-- maiCard -->
   <n-modal v-model:show="showMaiModal">
-    <n-card class="maiCard" :title="maiDisplay.title" size="huge">
+    <n-card :title="maiDisplay.titleName" class="maiCard" size="huge">
       <template #header-extra>
         <n-button tertiary circle @click="showMaiModal = false">
           <template #icon>
             <n-icon size="20">
-              <Cancel></Cancel>
+              <Cancel />
             </n-icon>
           </template>
         </n-button>
       </template>
-      <n-collapse class="maiCollapse" default-expanded-names="1" accordion>
-        <n-collapse-item :title="maiDisplay.mainInfo" name="1">
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.dxName }}</a> <a class="connecter">:</a>
-            <a>{{ data.userName ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.dxRatingName }}</a> <a class="connecter">:</a>
-            <a>{{ data.playerRating ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.dxLastPlay }}</a> <a class="connecter">:</a>
-            <a>{{ data.lastPlayDate ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.playCount }}</a> <a class="connecter">:</a>
-            <a>{{ data.playCount ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.dxVersion }}</a> <a class="connecter">:</a>
-            <a>{{ data.lastDataVersion ?? maiError }}</a>
-          </div>
-        </n-collapse-item>
-        <n-collapse-item :title="maiDisplay.otherInfo" name="2">
-          <div class="maiCardDiv">
-            <div class="maiCardDiv">
-              <a>{{ maiDisplay.basicScore }}</a> <a class="connecter">:</a>
-              <a>{{ data.totalBasicDeluxscore ?? maiError }}</a>
-            </div>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.advancedScore }}</a> <a class="connecter">:</a>
-            <a>{{ data.totalAdvancedDeluxscore ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.expertScore }}</a
-            ><a class="connecter">:</a> <a>{{ data.totalExpertDeluxscore ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.masterScore }}</a> <a class="connecter">:</a>
-            <a>{{ data.totalMasterDeluxscore ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.reMasterScore }}</a
-            ><a class="connecter">:</a>
-            <a>{{ data.totalReMasterDeluxscore ?? maiError }}</a>
-          </div>
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.totalScore }}</a> <a class="connecter">:</a>
-            <a>{{ data.totalDeluxscore ?? maiError }}</a>
-          </div>
-        </n-collapse-item>
-        <n-collapse-item :title="maiDisplay.historyInfo" name="3">
-          <div class="maiCardDiv">
-            <a>{{ maiDisplay.highestRating }}</a> <a class="connecter">:</a>
-            <a>{{ data.highestRating ?? maiError }}</a>
+
+      <n-collapse :default-expanded-names="['1']" accordion class="maiCollapse">
+        <n-collapse-item
+          v-for="section in maiSections"
+          :key="section.name"
+          :name="section.name"
+          :title="maiDisplay[section.titleKey]"
+        >
+          <div v-for="item in section.items" :key="item.label" class="maiCardDiv">
+            <a>{{ maiDisplay[item.label] }}</a>
+            <a class="connecter">:</a>
+            <a>{{ getStatValue(item.value) }}</a>
           </div>
         </n-collapse-item>
       </n-collapse>
@@ -104,117 +60,20 @@
 
   <!-- 以下是联系人 -->
   <div class="contacts">
-    <n-button round :color="themeColor" class="cButton" @click="openLink('telegram')">
+    <n-button
+      v-for="item in platforms"
+      :key="item.id"
+      :color="themeColor"
+      class="cButton"
+      round
+      @click="handleContactClick(item)"
+    >
       <template #icon>
         <n-icon size="23">
-          <TelegramIcon></TelegramIcon>
+          <component :is="iconMap[item.id]" />
         </n-icon>
       </template>
-      <a>Telegram</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="clickWechat">
-      <template #icon>
-        <n-icon size="23">
-          <wechat></wechat>
-        </n-icon>
-      </template>
-      <a>WeChat</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="clickLine">
-      <template #icon>
-        <n-icon size="23">
-          <Line></Line>
-        </n-icon>
-      </template>
-      <a>LINE</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('email')">
-      <template #icon>
-        <n-icon size="23">
-          <Email></Email>
-        </n-icon>
-      </template>
-      <a>E-Mail</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('twitter')">
-      <template #icon>
-        <n-icon size="23">
-          <TwitterIcon />
-        </n-icon>
-      </template>
-      <a>Twitter</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('github')">
-      <template #icon>
-        <n-icon size="23">
-          <Github></Github>
-        </n-icon>
-      </template>
-      <a>GitHub</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('tron')">
-      <template #icon>
-        <n-icon size="23">
-          <Tron></Tron>
-        </n-icon>
-      </template>
-      <a>Tron</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('eth')">
-      <template #icon>
-        <n-icon size="23">
-          <Eth></Eth>
-        </n-icon>
-      </template>
-      <a>Ethereum</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('areth')">
-      <template #icon>
-        <n-icon size="23">
-          <Arbitrum></Arbitrum>
-        </n-icon>
-      </template>
-      <a>Arbitrum</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('bsc')">
-      <template #icon>
-        <n-icon size="23">
-          <Bsc></Bsc>
-        </n-icon>
-      </template>
-      <a>BSC-BNB</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('polygon')">
-      <template #icon>
-        <n-icon size="23">
-          <Polygon></Polygon>
-        </n-icon>
-      </template>
-      <a>Polygon</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="openLink('solana')">
-      <template #icon>
-        <n-icon size="23">
-          <Solana></Solana>
-        </n-icon>
-      </template>
-      <a>Solana</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="clickMai">
-      <template #icon>
-        <n-icon size="23">
-          <MaiTrans></MaiTrans>
-        </n-icon>
-      </template>
-      <a> DX {{ data.playerRating ?? maiError }}</a>
-    </n-button>
-    <n-button round :color="themeColor" class="cButton" @click="clickCatMemory">
-      <template #icon>
-        <n-icon size="23">
-          <Cat></Cat>
-        </n-icon>
-      </template>
-      <a>{{ catMemoryTitle.cat }}</a>
+      <a>{{ getLabel(item) }}</a>
     </n-button>
   </div>
 </template>
@@ -244,89 +103,171 @@ import { computed, ref } from "vue";
 import maiI18nData from "@/data/I18N/maiI18n.json";
 import axios from "axios";
 import { useAsyncState } from "@vueuse/core";
+import platformRawData from "@/data/components/socialLinks.json";
+
+
+type PlatformId =
+  | "telegram" | "wechat" | "line" | "email" | "twitter"
+  | "github" | "tron" | "eth" | "areth" | "bsc"
+  | "polygon" | "solana" | "maimai" | "cat";
+
+type InteractionType = "link" | "modal" | "func";
+
+interface PlatformConfig {
+  id: PlatformId;
+  label: string;
+  type: InteractionType;
+}
+
+interface I18nSource {
+  [key: string]: string;
+}
+
+// --- 2. 状态与异步数据 ---
 
 const showCatModel = ref<boolean>(false);
 const showMaiModal = ref<boolean>(false);
-const showWechatModel = ref(false);
-const showLineModel = ref(false);
-const maiError = ref("获取失败");
+const showWechatModel = ref<boolean>(false);
+const showLineModel = ref<boolean>(false);
+const maiError = ref<string>("获取失败");
 
 const { state: data } = useAsyncState<Partial<UserDataType>>(
   () => axios.get(maiUrl).then((res) => res.data),
   {},
 );
 
-const socialLinks = {
-  twitter: "https://x.com/HoshinoYumeka2",
-  tron: "https://tronscan.org/#/address/TVB16jV3Jx2HTn9U1KjyBSN1u9MQ29FArs",
-  areth: "https://arbiscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
-  eth: "https://etherscan.io/address/0x3eb232c80307961795C1310374368834c25A41e6",
-  polygon: "https://polygonscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
-  bsc: "https://bscscan.com/address/0x3eb232c80307961795C1310374368834c25A41e6",
-  solana: "https://solscan.io/account/CwmEwePc5TxyQG57e3f4WBufTvGFv264KAGfVRoSZd7V",
-  telegram: "https://t.me/chiba2333",
-  email: "mailto:qwq@qwwq@org",
-  github: "https://github.com/chiba233",
-} as const;
-type SocialType = keyof typeof socialLinks;
+const iconMap: Record<PlatformId, string> = {
+  telegram: TelegramIcon,
+  wechat: wechat,
+  line: Line,
+  email: Email,
+  twitter: TwitterIcon,
+  github: Github,
+  tron: Tron,
+  eth: Eth,
+  areth: Arbitrum,
+  bsc: Bsc,
+  polygon: Polygon,
+  solana: Solana,
+  maimai: MaiTrans,
+  cat: Cat,
+};
 
-function openLink(type: SocialType) {
-  const url = socialLinks[type];
-  if (url) {
-    window.open(url);
-  } else {
-    console.error("未定义的跳转类型:", type);
-  }
-}
+const platforms = platformRawData.platforms as PlatformConfig[];
+const socialLinks = platformRawData.socialLinks as Record<string, string>;
+
+
+const getI18nSuffix = (): string => {
+  const currentLang = lang.value;
+  if (currentLang === "zh") return "ZH";
+  if (currentLang === "en") return "EN";
+  if (currentLang === "ja") return "JP";
+  if (currentLang === "other") return "Other";
+  return "en";
+};
 
 const catMemoryTitle = computed(() => {
-  const suffix =
-    lang.value === "zh" ? "ZH" : lang.value === "en" ? "EN" : lang.value === "ja" ? "JP" : "JP";
-  const getField = (prefix: string) => (commonI18n as Record<string, string>)[`${prefix}${suffix}`];
+  const suffix = getI18nSuffix();
+  const source = commonI18n as I18nSource;
   return {
-    catMemory: getField("catMemoryTitle"),
-    cat: getField("cat"),
+    catMemory: source[`catMemoryTitle${suffix}`] || source[`catMemoryTitleJP`],
+    cat: source[`cat${suffix}`] || source[`catJP`],
   };
 });
+
+const maiSections = [
+  {
+    titleKey: "mainInfo",
+    name: "1",
+    items: [
+      { label: "dxName", value: "userName" },
+      { label: "dxRatingName", value: "playerRating" },
+      { label: "dxLastPlay", value: "lastPlayDate" },
+      { label: "dxPlayCount", value: "playCount" },
+      { label: "dxVersion", value: "lastDataVersion" },
+    ],
+  },
+  {
+    titleKey: "otherInfo",
+    name: "2",
+    items: [
+      { label: "BasicDeluxscore", value: "totalBasicDeluxscore" },
+      { label: "AdvancedDeluxscore", value: "totalAdvancedDeluxscore" },
+      { label: "ExpertDeluxscore", value: "totalExpertDeluxscore" },
+      { label: "MasterDeluxscore", value: "totalMasterDeluxscore" },
+      { label: "ReMasterDeluxscore", value: "totalReMasterDeluxscore" },
+      { label: "totalDeluxscore", value: "totalDeluxscore" },
+    ],
+  },
+  {
+    titleKey: "historyInfo",
+    name: "3",
+    items: [
+      { label: "highestRating", value: "highestRating" },
+    ],
+  },
+];
 
 const maiDisplay = computed(() => {
-  const suffix =
-    lang.value === "zh" ? "ZH" : lang.value === "en" ? "EN" : lang.value === "ja" ? "JP" : "JP";
-  const getField = (prefix: string) =>
-    (maiI18nData as Record<string, string>)[`${prefix}${suffix}`];
+  const suffix = getI18nSuffix();
+  const source = maiI18nData as Record<string, string>;
 
-  return {
-    title: getField("titleName"),
-    mainInfo: getField("mainInfo"),
-    otherInfo: getField("otherInfo"),
-    historyInfo: getField("historyInfo"),
-    dxRatingName: getField("dxRatingName"),
-    dxName: getField("dxName"),
-    dxLastPlay: getField("dxLastPlay"),
-    dxVersion: getField("dxVersion"),
-    basicScore: getField("BasicDeluxscore"),
-    advancedScore: getField("AdvancedDeluxscore"),
-    expertScore: getField("ExpertDeluxscore"),
-    masterScore: getField("MasterDeluxscore"),
-    reMasterScore: getField("ReMasterDeluxscore"),
-    totalScore: getField("totalDeluxscore"),
-    highestRating: getField("highestRating"),
-    playCount: getField("dxPlayCount"),
-  };
+  const displayObj: Record<string, string> = {};
+
+  Object.keys(source).forEach(fullKey => {
+    if (fullKey.endsWith(suffix)) {
+      const baseKey = fullKey.replace(suffix, "");
+      displayObj[baseKey] = source[fullKey];
+    }
+  });
+
+  // 兜底策略
+  if (suffix !== "JP") {
+    Object.keys(source).forEach(fullKey => {
+      if (fullKey.endsWith("JP")) {
+        const baseKey = fullKey.replace("JP", "");
+        if (!displayObj[baseKey]) {
+          displayObj[baseKey] = source[fullKey];
+        }
+      }
+    });
+  }
+
+  return displayObj;
 });
-
-const clickMai = () => {
-  showMaiModal.value = true;
+const getStatValue = (key: string): string | number => {
+  const stats = data.value as Record<string, string | number | undefined>;
+  const result = stats[key];
+  return (result !== null && result !== undefined && result !== "")
+    ? result
+    : maiError.value;
 };
 
-const clickCatMemory = () => {
-  showCatModel.value = true;
+
+const handleContactClick = (item: PlatformConfig): void => {
+  const actions: Record<InteractionType, () => void> = {
+    link: () => {
+      const url = socialLinks[item.id];
+      if (url) window.open(url);
+    },
+    modal: () => {
+      if (item.id === "wechat") showWechatModel.value = true;
+      if (item.id === "line") showLineModel.value = true;
+    },
+    func: () => {
+      if (item.id === "maimai") showMaiModal.value = true;
+      if (item.id === "cat") showCatModel.value = true;
+    },
+  };
+
+  const action = actions[item.type];
+  if (action) action();
 };
-const clickWechat = () => {
-  showWechatModel.value = true;
-};
-const clickLine = () => {
-  showLineModel.value = true;
+
+const getLabel = (item: PlatformConfig): string => {
+  if (item.id === "maimai") return `DX ${data.value?.playerRating ?? maiError.value}`;
+  if (item.id === "cat") return catMemoryTitle.value.cat;
+  return item.label;
 };
 </script>
 

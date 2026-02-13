@@ -4,7 +4,7 @@
     "url": "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/blog/"
   },
   "main": {
-    "listUrl": "xxx",
-    "url": "xxx"
+    "listUrl": "/data/main/list.json",
+    "url": "/data/main/"
   }
 }

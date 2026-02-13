@@ -9,7 +9,7 @@ interface BaseContent {
   [key: string]: any;
 }
 
-interface Post {
+export interface Post {
   time?: string;
   title?: string;
   content?: string;
@@ -52,15 +52,14 @@ async function fetchWithRetry(
   }
 }
 
-export const posts = ref<Post[]>([]);
 export const loadAllPosts = async <T extends BaseContent>(type: keyof typeof yamlUrl) => {
   yamlLoading.value = true;
   yamlLoadingFault.value = false;
   faultTimes.value = 0;
   const { listUrl, url: baseUrl } = yamlUrl[type];
   const listRes = await fetchWithRetry(listUrl, undefined, 3, 800);
+  console.log(listUrl, baseUrl);
   const postData = (await listRes.json()) as string[];
-
   const promises = postData.map(async (name: string) => {
     const url = `${baseUrl}${name}`;
 
@@ -86,10 +85,6 @@ export const loadAllPosts = async <T extends BaseContent>(type: keyof typeof yam
     return 0;
   });
 
-
-  (posts.value as T[]) = validData;
-  if (posts.value.length === 0) {
-  } else {
     yamlLoading.value = false;
-  }
+  return validData;
 };

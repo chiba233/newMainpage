@@ -2,36 +2,59 @@
   <div class="textBox" @mouseleave="onLeave" @mousemove="onMove">
     <div class="content">
       <div class="detailText">
-        <template v-if="lang === 'zh'">
-          {{ dTextZH }}
-        </template>
-        <template v-else-if="lang === 'en'">
-          {{ dTextEN }}
-        </template>
-        <template v-else-if="lang === 'ja'">
-          {{ dTextJP }}
-        </template>
-        <template v-else>
-          {{ dTextOther }}
-        </template>
+        {{ displayContent }}
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import introduction from "@/data/I18N/introduction.json";
 import { lang } from "@/components/ts/useStoage";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
+import { computed, onMounted, ref } from "vue";
+import { loadAllPosts } from "@/components/ts/getYaml.ts";
 
+interface IntroductionBlock {
+  type: string;
+  content: string;
+}
+
+interface Introduction {
+  blocks?: IntroductionBlock[];
+  content?: string;
+
+  [key: string]: unknown;
+}
+
+const introduction = ref<Introduction[]>([]);
 const { onMove, onLeave } = useCardGlow();
 
+onMounted(async () => {
+  introduction.value = await loadAllPosts<Introduction>("main");
+});
 
-// 模拟数据 (你的原始数据)
-const dTextZH: string = introduction.introductionMessageZH;
-const dTextEN: string = introduction.introductionMessageEN;
-const dTextJP: string = introduction.introductionMessageJP;
-const dTextOther: string = introduction.introductionMessageOther;
+const displayContent = computed(() => {
+  if (!introduction.value || introduction.value.length === 0) return "Loading...";
+
+  const langMap: Record<string, string> = {
+    zh: "zh",
+    en: "en",
+    ja: "JP",
+    other: "Other",
+  };
+
+  const targetType = langMap[lang.value] || "EN";
+  const mainIntroduction = introduction.value[0];
+
+  if (!mainIntroduction || !mainIntroduction.blocks) return "";
+
+  const block = mainIntroduction.blocks.find((b) => b.type === targetType);
+
+  if (block) return block.content;
+
+  const fallback = mainIntroduction.blocks.find((b) => b.type === "EN");
+  return fallback ? fallback.content : "";
+});
 </script>
 
 <style lang="scss" scoped>
