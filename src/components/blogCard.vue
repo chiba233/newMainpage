@@ -75,7 +75,6 @@ const closePortal = () => {
 };
 
 const { onMove, onLeave } = useCardGlow();
-
 </script>
 
 <template>
@@ -105,6 +104,7 @@ const { onMove, onLeave } = useCardGlow();
               :alt="post.title"
               :src="post.blocks.find((b: any) => b.type === 'image')?.content?.[0].src"
               loading="lazy"
+              @error="(e) => { (e.target as HTMLImageElement).src = post.blocks.find((b: any) => b.type === 'image')?.content?.[0].spareUrl }"
             />
           </div>
           <div class="post-description">
@@ -165,6 +165,7 @@ const { onMove, onLeave } = useCardGlow();
                 v-if="img.src"
                 width="120"
                 :src="img.src"
+                :fallback-src="img.spareUrl"
                 class="postCardImg"
               />
               <div v-if="img.desc" class="postCardImageDesc">

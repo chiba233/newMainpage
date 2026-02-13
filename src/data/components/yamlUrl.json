@@ -1,7 +1,9 @@
 {
   "blog": {
     "listUrl": "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/blog/list.json",
-    "url": "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/blog/"
+    "url": "https://raw.githubusercontent.com/chiba233/newMainpage/refs/heads/master/blog/",
+    "spareUrl": "/blog/",
+    "spareListUrl": "/blog/list.json"
   },
   "main": {
     "listUrl": "/data/main/list.json",

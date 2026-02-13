@@ -1,7 +1,7 @@
 import yaml from "js-yaml";
 import { ref } from "vue";
-// 1. 引入配置文件 (或者直接在这里定义 const yamlUrl = { ... })
 import yamlUrl from "@/data/components/yamlUrl.json";
+import axios from "axios";
 
 interface BaseContent {
   time?: string;
@@ -9,6 +9,12 @@ interface BaseContent {
   [key: string]: any;
 }
 
+interface YamlConfigItem {
+  listUrl: string;
+  url: string;
+  spareUrl?: string;
+  spareListUrl?: string;
+}
 export interface Post {
   time?: string;
   title?: string;
@@ -52,11 +58,23 @@ async function fetchWithRetry(
   }
 }
 
+const typedYamlUrl = yamlUrl as Record<string, YamlConfigItem>;
+
 export const loadAllPosts = async <T extends BaseContent>(type: keyof typeof yamlUrl) => {
+
+  const { spareUrl, spareListUrl } = typedYamlUrl[type];
+  let { listUrl, url: baseUrl } = typedYamlUrl[type];
   yamlLoading.value = true;
   yamlLoadingFault.value = false;
   faultTimes.value = 0;
-  const { listUrl, url: baseUrl } = yamlUrl[type];
+  try {
+    await axios.get(listUrl);
+  } catch {
+    if (spareListUrl && spareUrl) {
+      listUrl = spareListUrl;
+      baseUrl = spareUrl;
+    }
+  }
   const listRes = await fetchWithRetry(listUrl, undefined, 3, 800);
   console.log(listUrl, baseUrl);
   const postData = (await listRes.json()) as string[];
