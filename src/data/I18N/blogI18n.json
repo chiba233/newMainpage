@@ -18,5 +18,9 @@
   "loadingZH": "加载中。",
   "loadingJA": "読み込み。",
   "loadingEN": "Loading...",
-  "loadingOther": "Loading..."
+  "loadingOther": "Loading...",
+  "changeToSpareUrlZH": "网络连接不稳定，已为你自动切换到备用数据源。",
+  "changeToSpareUrlJA": "ネットワークの影響により、GitHubに接続できないため、代替ソースを使用しています。",
+  "changeToSpareUrlEN": "Network issue detected. We've automatically switched to a backup source for you.",
+  "changeToSpareUrlOther": "Network issue detected. We've automatically switched to a backup source for you."
 }

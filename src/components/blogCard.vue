@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Component, computed, defineAsyncComponent, onMounted, ref } from "vue";
+import { Component, computed, defineAsyncComponent, onMounted, ref, watch } from "vue";
 import {
+  changeSpareUrl,
   faultTimes,
   loadAllPosts,
   loadError,
@@ -15,10 +16,11 @@ import Cancel from "@/icons/cancel.svg";
 import { NAlert, NButton, NCard, NIcon, NImage, NModal } from "naive-ui";
 import { parseRichText, stripRichText } from "@/components/ts/blogFormat.ts";
 import { useCardGlow } from "@/components/ts/animationCalculate.ts";
-import blogI18nData from "@/data/components/blogI18n.json";
+import blogI18nData from "@/data/I18N/blogI18n.json";
+import { $message } from "@/components/ts/msgUtils.ts";
 
 const posts = ref<Post[]>([]);
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const RichTextRenderer: Component = defineAsyncComponent(() =>
   import("@/components/RichTextRenderer.vue"),
 );
@@ -75,6 +77,15 @@ const closePortal = () => {
 };
 
 const { onMove, onLeave } = useCardGlow();
+watch(
+  () => changeSpareUrl.value,
+  (v: boolean) => {
+    if (v) {
+      $message.warning(blogDisplay.value.changeToSpareUrl, true, 4000);
+      changeSpareUrl.value = false;
+    }
+  },
+);
 </script>
 
 <template>

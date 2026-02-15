@@ -24,19 +24,16 @@ export interface Post {
 }
 
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
-export const serverError = ref(false);
-export const faultTimes = ref(0);
+export const serverError = ref<boolean>(false);
+export const faultTimes = ref<number>(0);
 export const loadError = ref<boolean>(false);
-export const yamlLoadingFault = ref(false);
-export const yamlLoading = ref(false);
-export const yamlRetrying = ref(false);
+export const yamlLoadingFault = ref<boolean>(false);
+export const yamlLoading = ref<boolean>(false);
+export const yamlRetrying = ref<boolean>(false);
+export const changeSpareUrl = ref<boolean>(false);
 
-async function fetchWithRetry(
-  url: string,
-  options?: RequestInit,
-  retry = 5,
-  delay = 800,
-): Promise<Response> {
+const fetchWithRetry = async (url: string, options?: RequestInit, retry = 3, delay = 800) => {
+  loadError.value = false;
   try {
     yamlRetrying.value = false;
     const res = await fetch(url, options);
@@ -73,10 +70,10 @@ export const loadAllPosts = async <T extends BaseContent>(type: keyof typeof yam
     if (spareListUrl && spareUrl) {
       listUrl = spareListUrl;
       baseUrl = spareUrl;
+      changeSpareUrl.value = true;
     }
   }
   const listRes = await fetchWithRetry(listUrl, undefined, 3, 800);
-  console.log(listUrl, baseUrl);
   const postData = (await listRes.json()) as string[];
   const promises = postData.map(async (name: string) => {
     const url = `${baseUrl}${name}`;

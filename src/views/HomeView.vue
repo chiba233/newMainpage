@@ -53,7 +53,7 @@ import { AnimalRabbit28Regular, Home12Regular } from "@vicons/fluent";
 import { NButton, NIcon } from "naive-ui";
 import { Component, defineAsyncComponent, onMounted, ref } from "vue";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 const BlogView: Component = defineAsyncComponent(() => import("@/views/BlogView.vue"));
 
 const cardSelect = ref(true);
